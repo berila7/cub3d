@@ -3,15 +3,13 @@ NAME			=	cub3D
 CC			=	cc
 CFLAGS			=	-Wall -Wextra -Werror -Iincludes
 
-LIBFT_DIR		=	lib/libft
-LIBFT			=	$(LIBFT_DIR)/libft.a
-
 SRC_DIR			=	src
 PARSING_DIR		=	$(SRC_DIR)/parsing
 HELPERS_DIR		=	$(SRC_DIR)/helpers
-LIB_DIR			=	$(SRC_DIR)/lib
+LIBFT_DIR		=	$(SRC_DIR)/lib/libft
 
-SRCS			=	main.c $(PARSING_DIR)/parser.c
+SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(LIBFT_DIR)/ft_strrchr.c \
+				$(LIBFT_DIR)/ft_strcmp.c
 OBJS			=	$(SRCS:.c=.o)
 
 all: $(NAME)
