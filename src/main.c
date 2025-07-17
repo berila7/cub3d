@@ -5,10 +5,7 @@ int	main(int ac, char **av)
 	(void)ac;
 	if (ac == 2)
 	{
-		if (!valid_extension(av[1]))
-			printf("invalid filename");
-		else
-			printf("valid filename");
+		printf("%d", count_lines(av[1]));
 	}
 	else
 		printf("invalid args");

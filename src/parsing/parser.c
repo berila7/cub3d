@@ -12,8 +12,8 @@ int	valid_extension(char *filename)
 	return (1);
 }
 
-int	vertical_walls(t_data *data)
-{
+// int	vertical_walls(t_data *data)
+// {
 	
-}
+// }
 
