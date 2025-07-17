@@ -31,11 +31,48 @@ int	init_map(t_data *data, char *filename)
 	if (!valid_extension(filename))
 		return (0);
 	data->height = count_lines(filename);
+	if (data->height == 0)
+		return (0);
+	data->map = malloc(sizeof(char *) * data->height + 1);
+	if (!data->map)
+		return (0);
 	return (1);
 }
+
+int	read_lines(t_data *data, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->height)
+	{
+ 		data->map[i] = get_next_line(fd);
+		if (!data->map[i])
+		{
+			free_map(data->map, i);
+			return (0);
+		}
+		i++;
+	}
+	data->map[i] = NULL;
+	return (1);
+}
+
 int	read_map(t_data *data, char *filename)
 {
+	int fd;
+
 	if (!init_map(data, filename))
 		return (0);
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	if (!read_lines(data, fd))
+	{
+		close (fd);
+		return (0);
+	}
+	close(fd);
 	return (1);
 }

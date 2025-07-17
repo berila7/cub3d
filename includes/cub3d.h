@@ -2,6 +2,7 @@
 # define CUB3D_H
 
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include "../src/lib/gnl/get_next_line.h"
@@ -17,9 +18,11 @@ struct s_data
 
 
 char	*ft_strrchr(const char *str, int c);
+int	read_map(t_data *data, char *filename);
 int	ft_strcmp(const char *s1, const char *s2);
 int	valid_extension(char *filename);
 char	*get_next_line(int fd);
 int	count_lines(char *filename);
+void	free_map(char **map, int height);
 
 #endif
