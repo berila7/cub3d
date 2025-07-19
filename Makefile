@@ -6,11 +6,13 @@ CFLAGS			=	-Wall -Wextra -Werror -Iincludes
 SRC_DIR			=	src
 PARSING_DIR		=	$(SRC_DIR)/parsing
 HELPERS_DIR		=	$(SRC_DIR)/helpers
-LIBFT_DIR		=	$(SRC_DIR)/lib/libft
+UTILS_DIR		=	$(SRC_DIR)/lib/utils
 GNL_DIR			=	$(SRC_DIR)/lib/gnl
 
-SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(LIBFT_DIR)/ft_strrchr.c \
-					$(LIBFT_DIR)/ft_strcmp.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
+SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
+					$(UTILS_DIR)/ft_strrchr.c \
+					$(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
+					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
 					$(PARSING_DIR)/free.c
 OBJS			=	$(SRCS:.c=.o)
 

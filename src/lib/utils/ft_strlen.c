@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 16:43:00 by mberila           #+#    #+#             */
-/*   Updated: 2025/06/13 16:09:06 by mberila          ###   ########.fr       */
+/*   Created: 2025/07/19 13:13:52 by mberila           #+#    #+#             */
+/*   Updated: 2025/07/19 13:13:53 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while ((s1[i] && s2[i]) && (s1[i] == s2[i]))
+	while (str[i])
 		i++;
-	return (s1[i] - s2[i]);
+	return (i);
 }

@@ -39,14 +39,34 @@ int	init_map(t_data *data, char *filename)
 	return (1);
 }
 
-int	read_lines(t_data *data, int fd)
+char	*parse_line(char *line)
 {
+	char *result;
 	int	i;
+	int	len;
 
 	i = 0;
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	result = ft_strdup(line);
+	return (result);
+}
+
+int	read_lines(t_data *data, int fd)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	data->width = 0;
 	while (i < data->height)
 	{
- 		data->map[i] = get_next_line(fd);
+		line = parse_line(get_next_line(fd));
+ 		data->map[i] = line;
+		if (data->width < (int)ft_strlen(line))
+			data->width = ft_strlen(line);
+		printf("len: [%d]\n", data->width);
 		if (!data->map[i])
 		{
 			free_map(data->map, i);
@@ -61,10 +81,8 @@ int	read_lines(t_data *data, int fd)
 int	read_map(t_data *data, char *filename)
 {
 	int fd;
-
 	if (!init_map(data, filename))
 		return (0);
-
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:03:25 by mberila           #+#    #+#             */
-/*   Updated: 2024/12/08 17:19:25 by mberila          ###   ########.fr       */
+/*   Updated: 2025/07/19 13:09:38 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "cub3d.h"
 
 int	find_new_line(char *str)
 {
@@ -24,34 +24,6 @@ int	find_new_line(char *str)
 		i++;
 	}
 	return (-1);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char			*dest;
-	unsigned int	i;
-
-	dest = (char *) malloc(ft_strlen(s1) + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)

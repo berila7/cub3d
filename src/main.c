@@ -14,9 +14,17 @@ int	main(int ac, char **av)
 		int i = 0;
 		while (i < data->height)
 		{
-			printf("line [%d]: %s", i, data->map[i]);
+			printf("line [%d]: %s\n", i, data->map[i]);
 			i++;
 		}
+		if (!map_validation(data))
+			printf("\nInvalid map\n");
+		else
+			printf("\nValid map\n");
+		if (!check_map(data))
+			printf("\nInvalid walls\n");
+		else
+			printf("\nvalid walls\n");
 	}
 	else
 		printf("invalid args");
