@@ -53,9 +53,3 @@ int	map_validation(t_data *data)
 		return (0);
 	return (1);
 }
-
-// int	vertical_walls(t_data *data)
-// {
-	
-// }
-

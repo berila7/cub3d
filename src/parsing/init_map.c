@@ -65,10 +65,11 @@ int	read_lines(t_data *data, int fd)
 		line = parse_line(get_next_line(fd));
  		data->map[i] = line;
 		if (data->width < (int)ft_strlen(line))
-			data->width = ft_strlen(line);
-		printf("len: [%d]\n", data->width);
+			data->width = ft_strlen(data->map[i]);
 		if (!data->map[i])
 		{
+			printf("Here [%s]\n", data->map[i]);
+
 			free_map(data->map, i);
 			return (0);
 		}
