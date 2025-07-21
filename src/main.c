@@ -3,8 +3,10 @@
 int	main(int ac, char **av)
 {
 	t_data	*data;
+	t_texture	*current;
 
 	data = malloc(sizeof(t_data));
+	data->texture = NULL;
 	if (!data)
 		return (1);
 	if (ac == 2)
@@ -17,14 +19,23 @@ int	main(int ac, char **av)
 			printf("line [%d]: %s\n", i, data->map[i]);
 			i++;
 		}
-		if (!map_validation(data))
-			printf("\nInvalid map\n");
-		else
-			printf("\nValid map\n");
-		if (!check_map(data))
-			printf("\nInvalid walls\n");
-		else
-			printf("\nvalid walls\n");
+		current = data->texture;
+		while (current)
+		{
+			printf("direction: [%s]\n", current->direction);
+			printf("path: [%s]\n", current->path);
+			current = current->next;
+		}
+		
+		// if (!map_validation(data))
+		// 	printf("\nInvalid map\n");
+		// else
+		// 	printf("\nValid map\n");
+		
+		// if (!check_map(data))
+		// 	printf("\nInvalid walls\n");
+		// else
+		// 	printf("\nvalid walls\n");
 	}
 	else
 		printf("invalid args");

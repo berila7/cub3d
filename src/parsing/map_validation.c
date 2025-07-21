@@ -74,8 +74,8 @@ int	check_walls(t_data *data, char **map)
 	{
 		if (map[0][i] != '1' && map[0][i] != ' ')
 		{
-			printf("top line: [%c]\n", map[0][i]);
-			printf("the problem at top [%d][%d]\nor\n",0, i);
+			// printf("top line: [%c]\n", map[0][i]);
+			// printf("the problem at top [%d][%d]\nor\n",0, i);
 			return (0);
 		}
 		i++;
@@ -85,8 +85,8 @@ int	check_walls(t_data *data, char **map)
 	{
 		if (map[data->height - 1][i] != '1' && map[data->height - 1][i] != ' ')
 		{
-			printf("bottom line: [%c]\n", map[data->height - 1][i]);
-			printf("the problem at bottom [%d][%d]\nor\n",data->height - 1, i);
+			// printf("bottom line: [%c]\n", map[data->height - 1][i]);
+			// printf("the problem at bottom [%d][%d]\nor\n",data->height - 1, i);
 			return (0);
 		}
 		i++;
@@ -96,14 +96,14 @@ int	check_walls(t_data *data, char **map)
 	{
 		if (map[i][0] != '1' && map[i][0] != ' ' && map[i][0] != '\0')
 		{
-			printf("left line: [%c]\n", map[i][0]);
-			printf("the problem at left [%d][%d]\n",i, 0);
+			// printf("left line: [%c]\n", map[i][0]);
+			// printf("the problem at left [%d][%d]\n",i, 0);
 			return (0);
 		}
 		else if (map[i][ft_strlen(map[i]) - 1] != '1')
 		{
-			printf("right line: [%c]\n", map[i][ft_strlen(map[i]) - 1]);
-			printf("the problem at right [%d][%lu]\n",i, ft_strlen(map[i]) - 1);
+			// printf("right line: [%c]\n", map[i][ft_strlen(map[i]) - 1]);
+			// printf("the problem at right [%d][%lu]\n",i, ft_strlen(map[i]) - 1);
 			return (0);
 		}
 		i++;
@@ -122,12 +122,12 @@ int	check_map(t_data *data)
 		return (0);
 	find_char_pos(data, &player_x, &player_y);
 	flood_fill(temp_map, player_x, player_y, data);
-	int i = 0;
-	while (i < data->height)
-	{
-		printf("tmp map: %s\n", temp_map[i]);
-		i++;
-	}
+	// int i = 0;
+	// while (i < data->height)
+	// {
+	// 	printf("tmp map: %s\n", temp_map[i]);
+	// 	i++;
+	// }
 	if (!check_walls(data, temp_map))
 		return (0);
 	return (1);

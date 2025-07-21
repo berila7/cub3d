@@ -8,6 +8,8 @@
 # include "../src/lib/gnl/get_next_line.h"
 
 typedef struct s_data t_data;
+typedef struct s_texture t_texture;
+typedef struct s_gcnode	t_gcnode;
 
 # define P_NORTH 'N'
 # define P_SOUTH 'S'
@@ -16,12 +18,33 @@ typedef struct s_data t_data;
 # define EMPTY '0'
 # define WALL '1'
 
+struct s_texture
+{
+	char		*direction;
+	char		*path;
+	t_texture	*next;
+};
+
+struct s_gcnode
+{
+	void			*ptr;
+	t_gcnode		*next;
+};
+
 struct s_data
 {
-	int	height;
-	int	player_count;
-	int	width;
-	char	**map;
+	int			height;
+	int			width;
+	int			player_count;
+	// char	*no_path;
+	// char	*so_path;
+	// char	*we_path;
+	// char	*ea_path;
+	// char	*floor;
+	// char	*ceiling;
+	t_texture	*texture;
+	t_gcnode	*gc;
+	char		**map;
 };
 
 char	*ft_strrchr(const char *str, int c);
@@ -39,5 +62,15 @@ void	ft_bzero(void *s, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	find_char_pos(t_data *data, int *pos_x, int *pos_y);
 int		check_map(t_data *data);
+char	**gc_split(t_gcnode **gc, char *s);
+char	*gc_strdup(t_gcnode **gc, char *src);
+int		gc_word_count(char *s);
+void	handle_quote_char(char c, char *in_quote_char);
+int		find_word_end(char *s, int start, char *in_quote_char);
+int		skip_word_end(char *s, int start, char *in_quote_char);
+char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len);
+void	*gc_malloc(t_gcnode **gc, size_t size);
+void	add_txt(t_texture **texutre, t_texture *new_texutre);
+t_texture	*new_txt(char *direction, char *path);
 
 #endif

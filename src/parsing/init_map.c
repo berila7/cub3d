@@ -26,6 +26,11 @@ int	count_lines(char *filename)
 	return (lines);
 }
 
+// void	map_elements(t_data *data)
+// {
+
+// }
+
 int	init_map(t_data *data, char *filename)
 {	
 	if (!valid_extension(filename))
@@ -39,13 +44,15 @@ int	init_map(t_data *data, char *filename)
 	return (1);
 }
 
-char	*parse_line(char *line)
+char	*parse_line(t_data *data, char *line, int *count)
 {
-	char *result;
-	int	i;
-	int	len;
+	char	*result;
+	int		i;
+	int		len;
 
 	i = 0;
+	(void)data;
+	(*count)++;
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
@@ -57,19 +64,19 @@ int	read_lines(t_data *data, int fd)
 {
 	int		i;
 	char	*line;
+	int		count;
 
 	i = 0;
 	data->width = 0;
+	count = 0;
 	while (i < data->height)
 	{
-		line = parse_line(get_next_line(fd));
- 		data->map[i] = line;
-		if (data->width < (int)ft_strlen(line))
-			data->width = ft_strlen(data->map[i]);
+		line = parse_line(data, get_next_line(fd), &count);
+		if (!line)
+			return (0);
+		data->map[i] = line;
 		if (!data->map[i])
 		{
-			printf("Here [%s]\n", data->map[i]);
-
 			free_map(data->map, i);
 			return (0);
 		}
@@ -83,7 +90,7 @@ int	read_map(t_data *data, char *filename)
 {
 	int fd;
 	if (!init_map(data, filename))
-		return (0);
+		return (0);	
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
