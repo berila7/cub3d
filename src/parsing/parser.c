@@ -38,13 +38,10 @@ int	map_validation(t_data *data)
 	while (i < data->height)
 	{
 		j = 0;
-		printf("map line: [%s]\n", data->map[i]);
 		while (j < ft_strlen(data->map[i]))
 		{
 			if (!valid_char(data->map[i][j]))
-			{
 				return (0);
-			}
 			count_elements(data, data->map[i][j]);
 			j++;
 		}

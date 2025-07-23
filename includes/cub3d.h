@@ -72,5 +72,7 @@ char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len);
 void	*gc_malloc(t_gcnode **gc, size_t size);
 void	add_txt(t_texture **texutre, t_texture *new_texutre);
 t_texture	*new_txt(char *direction, char *path);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		is_map_line(char *line);
 
 #endif
