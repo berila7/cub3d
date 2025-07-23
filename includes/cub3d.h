@@ -52,7 +52,7 @@ int		read_map(t_data *data, char *filename);
 int		ft_strcmp(const char *s1, const char *s2);
 int		valid_extension(char *filename);
 char	*get_next_line(int fd);
-int		count_lines(char *filename);
+int		count_lines(t_data *data, char *filename);
 void	free_map(char **map, int height);
 int		map_validation(t_data *data);
 size_t	ft_strlen(const char *str);
@@ -73,6 +73,7 @@ void	*gc_malloc(t_gcnode **gc, size_t size);
 void	add_txt(t_texture **texutre, t_texture *new_texutre);
 t_texture	*new_txt(char *direction, char *path);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		is_map_line(char *line);
+int		is_map_line(t_data *data, char *line);
+int		is_config(t_data *data, char *line);
 
 #endif

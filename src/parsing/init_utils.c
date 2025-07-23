@@ -4,7 +4,7 @@ t_texture	*new_txt(char *direction, char *path)
 {
 	t_texture	*texture;
 
-	texture = malloc(sizeof(texture) + 1);
+	texture = malloc(sizeof(t_texture) + 1);
 	if (!texture)
 		return (NULL);
 	texture->direction = ft_strdup(direction);
@@ -14,10 +14,10 @@ t_texture	*new_txt(char *direction, char *path)
 		return (NULL);
 	}
 	texture->path = ft_strdup(path);
-	if (!texture->direction)
+	if (!texture->path)
 	{
-		free(texture);
 		free(texture->direction);
+		free(texture);
 		return (NULL);
 	}
 	texture->next = NULL;
@@ -36,7 +36,7 @@ void	add_txt(t_texture **texutre, t_texture *new_texutre)
 		return ;
 	}
 	current = *texutre;
-	while (current)
+	while (current->next)
 		current = current->next;
 	current->next = new_texutre;
 }

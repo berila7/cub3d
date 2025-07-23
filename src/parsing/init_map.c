@@ -1,19 +1,23 @@
 #include "cub3d.h"
 
-int	count_lines(char *filename)
+int	count_lines(t_data *data, char *filename)
 {
 	int		fd;
 	int		lines;
 	char	*line;
+	int		map_started;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	lines = 0;
+	map_started = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (is_map_line(line))
+		if (is_map_line(data, line) && !map_started)
+			map_started = 1;
+		if (map_started)
 			lines++;
 		free(line);
 		line = get_next_line(fd);
@@ -31,7 +35,7 @@ int	init_map(t_data *data, char *filename)
 {	
 	if (!valid_extension(filename))
 		return (0);
-	data->height = count_lines(filename);
+	data->height = count_lines(data, filename);
 	if (data->height == 0)
 		return (0);
 	data->map = malloc(sizeof(char *) * data->height + 1);
@@ -40,15 +44,12 @@ int	init_map(t_data *data, char *filename)
 	return (1);
 }
 
-char	*parse_line(t_data *data, char *line, int *count)
+char	*parse_line(t_data *data, char *line)
 {
 	char	*result;
-	int		i;
 	int		len;
 
-	i = 0;
 	(void)data;
-	(*count)++;
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
@@ -56,73 +57,97 @@ char	*parse_line(t_data *data, char *line, int *count)
 	return (result);
 }
 
-int	is_config(char *line)
+int	is_config(t_data *data, char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0
-		|| ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+	int		i;
+
+	i = 0;
+	(void)data;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	if (line[i] == '\0' || line[i] == '\n')
+		return (0);
+	if (ft_strncmp(&line[i], "NO ", 3) == 0 || ft_strncmp(&line[i], "SO ", 3) == 0
+		|| ft_strncmp(&line[i], "WE ", 3) == 0 || ft_strncmp(&line[i], "EA ", 3) == 0
+		|| ft_strncmp(&line[i], "F ", 2) == 0 || ft_strncmp(&line[i], "C ", 2) == 0)
 	{
 		return (1);
 	}
 	return (0);
 }
 
-int	is_map_line(char *line)
+int	is_map_line(t_data *data, char *line)
 {
 	int	i;
 
 	i = 0;
-	while (line[i])
+	(void)data;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	if (line[i] == '\0' || line[i] == '\n')
+		return (0);
+	while (line[i] && line[i] != '\n')
 	{
-		if ((line[i] >= 9 && line[i] <= 13) || line[i] == 32)
+		if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || 
+			line[i] == 'S' || line[i] == 'E' || line[i] == 'W' || 
+			line[i] == ' ')
 		{
 			i++;
-			if (line[i] == '1')
-				return (1);
 		}
-		else if (line[0] == '1')
-			return (1);
-		i++;
+		else
+			return (0);
 	}
-	return (0);
+    return (1);
 }
 
 int	read_lines(t_data *data, int fd)
 {
-	int		i;
-	char	*line;
-	char	*raw_line;
+    int		i;
+    char	*line;
+    char	*raw_line;
 	int		map_started;
-	int 	count;
+	// int		count;
+	char	**splited;
+	t_texture	*texture;
 
-	i = 0;
-	data->width = 0;
+    i = 0;
+    data->width = 0;
+	// count = 0;
 	map_started = 0;
-	count = 0;
-	raw_line = get_next_line(fd);
-	while (raw_line)
-	{
-		line = parse_line(data, raw_line, &count);
-		if (!line)
-			return (0);
-		if (is_map_line(line))
+	texture = NULL;
+    raw_line = get_next_line(fd);
+    while (raw_line)
+    {
+		if (is_map_line(data, raw_line) && !map_started)
 			map_started = 1;
-		if (map_started)
-		{
-			if (data->width < (int)ft_strlen(line))
-				data->width = ft_strlen(line);
-			data->map[i] = line;
-			if (!data->map[i])
+        if (!map_started)
+        {
+			// count = gc_word_count(line);
+			splited = gc_split(&data->gc, raw_line);
+			if (is_config(data, parse_line(data, raw_line)))
 			{
-				free_map(data->map, i);
-				return (0);
+				printf("Direction: %s\n", splited[0]);
+				printf("Path: %s\n", splited[1]);
+				add_txt(&texture, new_txt(splited[0], splited[1]));
 			}
-			i++;
+            free(raw_line);
+            raw_line = get_next_line(fd);
+            continue;
+        }
+		line = parse_line(data, raw_line);
+		if (!line)
+		{
+			free(raw_line);
+			return (0);
 		}
-		raw_line = get_next_line(fd);
-	}
-	data->map[i] = NULL;
-	return (1);
+		if (data->width < (int)ft_strlen(line))
+			data->width = ft_strlen(line);
+		data->map[i] = line;
+		i++;
+        raw_line = get_next_line(fd);
+    }
+    data->map[i] = NULL;
+    return (1);
 }
 
 int	read_map(t_data *data, char *filename)
