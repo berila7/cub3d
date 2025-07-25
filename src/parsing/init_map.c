@@ -23,10 +23,7 @@ int	count_lines(t_data *data, char *filename)
 		line = get_next_line(fd);
 	}
 	if (lines == 0)
-	{
-		close(fd);
-		return (0);
-	}
+		return (close(fd), 0);
 	close(fd);
 	return (lines);
 }
@@ -36,6 +33,7 @@ int	init_map(t_data *data, char *filename)
 	if (!valid_extension(filename))
 		return (0);
 	data->height = count_lines(data, filename);
+	data->width = 0;
 	if (data->height == 0)
 		return (0);
 	data->map = malloc(sizeof(char *) * data->height + 1);
@@ -51,7 +49,7 @@ char	*parse_line(t_data *data, char *line)
 
 	(void)data;
 	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
+	if (len > 0 && line[len - 1] == '\n' && line[0] != '\n')
 		line[len - 1] = '\0';
 	result = ft_strdup(line);
 	return (result);
@@ -97,43 +95,53 @@ int	is_map_line(t_data *data, char *line)
 		else
 			return (0);
 	}
-    return (1);
+	return (1);
+}
+
+int	handle_configs(t_data *data, t_texture **texture, char *line)
+{
+	int		fd;
+	char	**splited;
+	char	*parsed_line; 
+
+	parsed_line = parse_line(data, line);
+	if (!is_config(data, line) && ft_strcmp(line, "\n"))
+		return (0);
+	if (gc_word_count(parsed_line) > 2)
+		return (0);
+	if (ft_strcmp(parsed_line, "\n"))
+	{
+		splited = gc_split(&data->gc, parsed_line);
+		fd = open(splited[1], O_RDONLY);
+		add_txt(texture, new_txt(splited[0], splited[1], fd));
+	}
+	return (1);
 }
 
 int	read_lines(t_data *data, int fd)
 {
-    int		i;
-    char	*line;
-    char	*raw_line;
+	int		i;
+	char	*line;
+	char	*raw_line;
 	int		map_started;
-	// int		count;
-	char	**splited;
 	t_texture	*texture;
 
-    i = 0;
-    data->width = 0;
-	// count = 0;
+	i = 0;
 	map_started = 0;
 	texture = NULL;
-    raw_line = get_next_line(fd);
-    while (raw_line)
-    {
+	raw_line = get_next_line(fd);
+	while (raw_line)
+	{
 		if (is_map_line(data, raw_line) && !map_started)
 			map_started = 1;
-        if (!map_started)
-        {
-			// count = gc_word_count(line);
-			splited = gc_split(&data->gc, raw_line);
-			if (is_config(data, parse_line(data, raw_line)))
-			{
-				printf("Direction: %s\n", splited[0]);
-				printf("Path: %s\n", splited[1]);
-				add_txt(&texture, new_txt(splited[0], splited[1]));
-			}
-            free(raw_line);
-            raw_line = get_next_line(fd);
-            continue;
-        }
+		if (!map_started)
+		{
+			if (!handle_configs(data, &texture, raw_line))
+				return (0);
+			free(raw_line);
+			raw_line = get_next_line(fd);
+			continue;
+		}
 		line = parse_line(data, raw_line);
 		if (!line)
 		{
@@ -144,11 +152,13 @@ int	read_lines(t_data *data, int fd)
 			data->width = ft_strlen(line);
 		data->map[i] = line;
 		i++;
-        raw_line = get_next_line(fd);
-    }
-    data->map[i] = NULL;
-    return (1);
+		raw_line = get_next_line(fd);
+	}
+	data->map[i] = NULL;
+	data->texture = texture;
+	return (1);
 }
+
 
 int	read_map(t_data *data, char *filename)
 {
@@ -164,6 +174,7 @@ int	read_map(t_data *data, char *filename)
 		close (fd);
 		return (0);
 	}
-	close(fd);
-	return (1);
+	// if (!check_configs(data))
+	// 	return (0);
+	return (close(fd), 1);
 }

@@ -20,6 +20,7 @@ typedef struct s_gcnode	t_gcnode;
 
 struct s_texture
 {
+	int			fd;
 	char		*direction;
 	char		*path;
 	t_texture	*next;
@@ -71,7 +72,7 @@ int		skip_word_end(char *s, int start, char *in_quote_char);
 char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len);
 void	*gc_malloc(t_gcnode **gc, size_t size);
 void	add_txt(t_texture **texutre, t_texture *new_texutre);
-t_texture	*new_txt(char *direction, char *path);
+t_texture	*new_txt(char *direction, char *path, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		is_map_line(t_data *data, char *line);
 int		is_config(t_data *data, char *line);

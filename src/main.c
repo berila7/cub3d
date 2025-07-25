@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 		{
 			printf("Direction: %s\n", current->direction);
 			printf("path: %s\n", current->path);
+			printf("fd: %d\n", current->fd);
 			current = current->next;
 		}
 		if (!map_validation(data))

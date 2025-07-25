@@ -65,6 +65,30 @@ void	flood_fill(char **map, int x, int y, t_data *data)
 	flood_fill(map, x, y - 1, data);
 }
 
+int	check_holes(t_data *data, char **filled_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(data->map[i]))
+		{
+			if (filled_map[i][j] == 'F' && data->map[i][j] == ' ')
+			{
+				printf("Pos of hole: [%d][%d]\n",i, j);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	
+	return (1);
+}
+
 int	check_walls(t_data *data, char **map)
 {
 	int	i;
@@ -128,7 +152,7 @@ int	check_map(t_data *data)
 	// 	printf("tmp map: %s\n", temp_map[i]);
 	// 	i++;
 	// }
-	if (!check_walls(data, temp_map))
+	if (!check_walls(data, temp_map) || !check_holes(data, temp_map))
 		return (0);
 	return (1);
 }

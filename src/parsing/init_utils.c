@@ -1,16 +1,18 @@
 #include "cub3d.h"
 
-t_texture	*new_txt(char *direction, char *path)
+t_texture	*new_txt(char *direction, char *path, int fd)
 {
 	t_texture	*texture;
 
 	texture = malloc(sizeof(t_texture) + 1);
 	if (!texture)
 		return (NULL);
+	texture->fd = fd;
 	texture->direction = ft_strdup(direction);
 	if (!texture->direction)
 	{
 		free(texture);
+		close(fd);
 		return (NULL);
 	}
 	texture->path = ft_strdup(path);
@@ -18,6 +20,7 @@ t_texture	*new_txt(char *direction, char *path)
 	{
 		free(texture->direction);
 		free(texture);
+		close(fd);
 		return (NULL);
 	}
 	texture->next = NULL;
