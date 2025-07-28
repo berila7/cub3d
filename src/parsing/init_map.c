@@ -16,7 +16,6 @@ bool	valid_map(t_data *data)
 			if (!valid_line(data, parse_line(data, line)))
 				return (false);
 		}
-		free(line);
 		line = get_next_line(data->map_fd);
 	}
 	if (!data->height || data->player_count != 1)
@@ -26,13 +25,14 @@ bool	valid_map(t_data *data)
 
 int	init_map(t_data *data, char *filename)
 {	
+	data->map = NULL;
 	if (!valid_extension(filename))
 		return (0);
 	data->height = 0;
 	data->width = 0;
 	if (!valid_map(data))
 		return (0);
-	data->map = malloc(sizeof(char *) * data->height + 1);
+	data->map = gc_malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map)
 		return (0);
 	return (1);
@@ -47,7 +47,7 @@ char	*parse_line(t_data *data, char *line)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n' && line[0] != '\n')
 		line[len - 1] = '\0';
-	result = ft_strdup(line);
+	result = gc_strdup(line);
 	return (result);
 }
 
@@ -107,7 +107,7 @@ int	handle_configs(t_data *data, t_texture **texture, char *line)
 		return (0);
 	if (ft_strcmp(parsed_line, "\n"))
 	{
-		splited = gc_split(&data->gc, parsed_line);
+		splited = gc_split(parsed_line);
 		fd = open(splited[1], O_RDONLY);
 		add_txt(texture, new_txt(splited[0], splited[1], fd));
 	}

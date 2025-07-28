@@ -4,22 +4,19 @@ t_texture	*new_txt(char *direction, char *path, int fd)
 {
 	t_texture	*texture;
 
-	texture = malloc(sizeof(t_texture) + 1);
+	texture = gc_malloc(sizeof(t_texture) + 1);
 	if (!texture)
 		return (NULL);
 	texture->fd = fd;
-	texture->direction = ft_strdup(direction);
+	texture->direction = gc_strdup(direction);
 	if (!texture->direction)
 	{
-		free(texture);
 		close(fd);
 		return (NULL);
 	}
-	texture->path = ft_strdup(path);
+	texture->path = gc_strdup(path);
 	if (!texture->path)
 	{
-		free(texture->direction);
-		free(texture);
 		close(fd);
 		return (NULL);
 	}

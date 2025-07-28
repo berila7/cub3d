@@ -6,13 +6,13 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:13:47 by mberila           #+#    #+#             */
-/*   Updated: 2025/07/21 10:38:17 by mberila          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:17:57 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len)
+char	*gc_substr(const char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*str;
@@ -20,10 +20,10 @@ char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (gc_strdup(gc, ""));
+		return (gc_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	str = gc_malloc(gc, sizeof(char) * len + 1);
+	str = gc_malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	i = 0;

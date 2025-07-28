@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:07:55 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/21 10:49:24 by mberila          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:17:28 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	gc_word_count(char *s)
 	return (count);
 }
 
-static char	**gc_init_split_quoted(t_gcnode **gc, char *s, char **result_array)
+static char	**gc_init_split_quoted(char *s, char **result_array)
 {
 	int		i;
 	int		j;
@@ -52,13 +52,13 @@ static char	**gc_init_split_quoted(t_gcnode **gc, char *s, char **result_array)
 		{
 			word_start = i;
 			i = find_word_end(s, word_start, &in_quote_char);
-			result_array[j++] = gc_substr(gc, s, word_start, i - word_start);
+			result_array[j++] = gc_substr(s, word_start, i - word_start);
 		}
 	}
 	return (result_array);
 }
 
-char	**gc_split(t_gcnode **gc, char *s)
+char	**gc_split(char *s)
 {
 	char	**res;
 	int		num_words;
@@ -66,8 +66,8 @@ char	**gc_split(t_gcnode **gc, char *s)
 	if (!s)
 		return (NULL);
 	num_words = gc_word_count(s);
-	res = gc_malloc(gc, (num_words + 1) * sizeof(char *));
+	res = gc_malloc((num_words + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
-	return (gc_init_split_quoted(gc, s, res));
+	return (gc_init_split_quoted(s, res));
 }

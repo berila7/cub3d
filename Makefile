@@ -1,7 +1,7 @@
 NAME			=	cub3D
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -Iincludes
+CFLAGS			=	-Wall -Wextra -Werror -Iincludes -fsanitize=address -g
 
 SRC_DIR			=	src
 PARSING_DIR		=	$(SRC_DIR)/parsing

@@ -6,11 +6,18 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/21 10:39:47 by mberila          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:57:05 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	t_gcnode *gc = NULL;
+
+static t_gcnode **get_gc(void)
+{
+    return (&gc);
+}
 
 void	gc_free(t_gcnode **gc, void *ptr)
 {
@@ -38,14 +45,14 @@ void	gc_free(t_gcnode **gc, void *ptr)
 	free(ptr);
 }
 
-void	gc_free_all(t_gcnode **gc)
+void	gc_free_all(void)
 {
 	t_gcnode	*curr;
 	t_gcnode	*next;
 
-	if (!gc || !*gc)
+	if (!gc)
 		return ;
-	curr = *gc;
+	curr = gc;
 	while (curr)
 	{
 		next = curr->next;
@@ -54,6 +61,7 @@ void	gc_free_all(t_gcnode **gc)
 		free(curr);
 		curr = next;
 	}
+	gc = NULL;
 }
 
 static void	append_gc(t_gcnode **gc, void *ptr)
@@ -65,7 +73,7 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 	if (!node)
 	{
 		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));
-		gc_free_all(gc);
+		gc_free_all();
 		exit(1);
 	}
 	node->ptr = ptr;
@@ -81,7 +89,7 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 	}
 }
 
-void	*gc_malloc(t_gcnode **gc, size_t size)
+void	*gc_malloc(size_t size)
 {
 	void	*ptr;
 
@@ -89,10 +97,10 @@ void	*gc_malloc(t_gcnode **gc, size_t size)
 	if (!ptr)
 	{
 		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));
-		gc_free_all(gc);
+		gc_free_all();
 		exit(1);
 	}
 	ft_bzero(ptr, size);
-	append_gc(gc, ptr);
+	append_gc(get_gc(), ptr);
 	return (ptr);
 }

@@ -67,14 +67,14 @@ void	ft_bzero(void *s, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	find_char_pos(t_data *data, int *pos_x, int *pos_y);
 int		check_map(t_data *data);
-char	**gc_split(t_gcnode **gc, char *s);
-char	*gc_strdup(t_gcnode **gc, char *src);
+char	**gc_split(char *s);
+char	*gc_strdup(char *src);
 int		gc_word_count(char *s);
 void	handle_quote_char(char c, char *in_quote_char);
 int		find_word_end(char *s, int start, char *in_quote_char);
 int		skip_word_end(char *s, int start, char *in_quote_char);
-char	*gc_substr(t_gcnode **gc, const char *s, unsigned int start, size_t len);
-void	*gc_malloc(t_gcnode **gc, size_t size);
+char	*gc_substr(const char *s, unsigned int start, size_t len);
+void	*gc_malloc(size_t size);
 void	add_txt(t_texture **texutre, t_texture *new_texutre);
 t_texture	*new_txt(char *direction, char *path, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -84,5 +84,6 @@ bool	player_char(char element);
 int		valid_char(char element);
 void	count_elements(t_data *data, char element);
 char	*parse_line(t_data *data, char *line);
+void	gc_free_all(void);
 
 #endif

@@ -5,18 +5,15 @@ char	**copy_map(t_data *data)
 	int			i;
 	char	**copy;
 
-	copy = malloc(sizeof(char *) * data->height + 1);
+	copy = gc_malloc(sizeof(char *) * (data->height + 1));
 	if (!copy)
 		return (NULL);
 	i = 0;
 	while (i < data->height)
 	{
-		copy[i] = ft_strdup(data->map[i]);
+		copy[i] = gc_strdup(data->map[i]);
 		if (!copy[i])
-		{
-			free_map(copy, i);
 			return (NULL);
-		}
 		i++;
 	}
 	copy[i] = NULL;

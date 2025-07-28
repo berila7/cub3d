@@ -3,15 +3,12 @@
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	t_gcnode	*gc;
 	// t_texture	*current;
-
-	data = malloc(sizeof(t_data));
-	data->texture = NULL;
-	gc = NULL;
-	data->gc = gc;
+	data = NULL;
+	data = gc_malloc(sizeof(t_data));
 	if (!data)
 		return (1);
+	data->texture = NULL;
 	if (ac == 2)
 	{
 		if (!read_map(data, av[1]))
@@ -37,5 +34,6 @@ int	main(int ac, char **av)
 	}
 	else
 		printf("invalid args");
+	gc_free_all();
 	return (0);
 }
