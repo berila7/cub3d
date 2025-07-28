@@ -3,29 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/28 17:36:52 by mberila          ###   ########.fr       */
+/*   Updated: 2025/07/28 18:37:00 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	t_gcnode *gc = NULL;
-
 static t_gcnode **get_gc(void)
 {
+	static	t_gcnode *gc;
+
     return (&gc);
 }
 
-void	gc_free(t_gcnode **gc, void *ptr)
+void	gc_free(void *ptr)
 {
+	t_gcnode	**gc;
 	t_gcnode	*curr;
 	t_gcnode	*prev;
 
-	curr = *gc;
-	prev = NULL;
+	gc = get_gc();
+	if (!gc || !*gc)
+		return ;
+	(1) && (curr = *gc, prev = NULL);
 	while (curr)
 	{
 		if (curr->ptr == ptr)
@@ -49,10 +52,12 @@ void	gc_free_all(void)
 {
 	t_gcnode	*curr;
 	t_gcnode	*next;
+	t_gcnode	**gc;
 
-	if (!gc)
+	gc = get_gc();
+	if (!gc || !*gc)
 		return ;
-	curr = gc;
+	curr = *gc;
 	while (curr)
 	{
 		next = curr->next;
@@ -61,7 +66,7 @@ void	gc_free_all(void)
 		free(curr);
 		curr = next;
 	}
-	gc = NULL;
+	*gc = NULL;
 }
 
 static void	append_gc(t_gcnode **gc, void *ptr)
