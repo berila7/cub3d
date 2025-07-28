@@ -23,10 +23,12 @@ char	**copy_map(t_data *data)
 	return (copy);
 }
 
-int	player_char(char element)
+bool	player_char(char element)
 {
-	return ( element == P_NORTH|| element == P_WEST 
-	|| element == P_EAST || element == P_SOUTH);
+	if ( element == P_NORTH|| element == P_WEST 
+	|| element == P_EAST || element == P_SOUTH)
+		return (true);
+	return (false);
 }
 
 void	find_char_pos(t_data *data, int *pos_x, int *pos_y)
@@ -53,84 +55,29 @@ void	find_char_pos(t_data *data, int *pos_x, int *pos_y)
 	
 }
 
-void	flood_fill(char **map, int x, int y, t_data *data)
-{
-	if (x < 0 || x >= data->width || y < 0 || y >= data->height
-		|| map[y][x] == WALL || map[y][x] == 'F')
-		return ;
-	map[y][x] = 'F';
-	flood_fill(map, x + 1, y, data);
-	flood_fill(map, x - 1, y, data);
-	flood_fill(map, x, y + 1, data);
-	flood_fill(map, x, y - 1, data);
-}
-
 int	check_holes(t_data *data, char **filled_map)
 {
-	int	i;
-	int	j;
+	int	height;
+	int	width;
 
-	i = 0;
-	while (i < data->height)
+	height = 0;
+	(void)filled_map;
+	while (height < data->height)
 	{
-		j = 0;
-		while (j < (int)ft_strlen(data->map[i]))
+		width = -1;
+		while (++width < (int)ft_strlen(data->map[height]))
 		{
-			if (filled_map[i][j] == 'F' && data->map[i][j] == ' ')
-			{
-				printf("Pos of hole: [%d][%d]\n",i, j);
+			if (!player_char(data->map[height][width]) 
+				&& data->map[height][width] != '0')
+				continue ;
+			if (!width || !height || !data->map[height + 1]
+				|| width == ((int)ft_strlen(data->map[height]) - 1)
+				|| data->map[height][width + 1] == ' ' || data->map[height][width - 1] == ' '
+				|| data->map[height + 1][width] == ' ' || data->map[height - 1][width] == ' '
+			)
 				return (0);
-			}
-			j++;
 		}
-		i++;
-	}
-	
-	return (1);
-}
-
-int	check_walls(t_data *data, char **map)
-{
-	int	i;
-
-	i = 0;
-	while (i < (int)ft_strlen(map[0]) - 1)
-	{
-		if (map[0][i] != '1' && map[0][i] != ' ')
-		{
-			// printf("top line: [%c]\n", map[0][i]);
-			// printf("the problem at top [%d][%d]\nor\n",0, i);
-			return (0);
-		}
-		i++;
-	}
-	i = 0;
-	while (i < (int)ft_strlen(map[data->height - 1]))
-	{
-		if (map[data->height - 1][i] != '1' && map[data->height - 1][i] != ' ')
-		{
-			// printf("bottom line: [%c]\n", map[data->height - 1][i]);
-			// printf("the problem at bottom [%d][%d]\nor\n",data->height - 1, i);
-			return (0);
-		}
-		i++;
-	}
-	i = 0;
-	while (i < data->height)
-	{
-		if (map[i][0] != '1' && map[i][0] != ' ' && map[i][0] != '\0')
-		{
-			// printf("left line: [%c]\n", map[i][0]);
-			// printf("the problem at left [%d][%d]\n",i, 0);
-			return (0);
-		}
-		else if (map[i][ft_strlen(map[i]) - 1] != '1')
-		{
-			// printf("right line: [%c]\n", map[i][ft_strlen(map[i]) - 1]);
-			// printf("the problem at right [%d][%lu]\n",i, ft_strlen(map[i]) - 1);
-			return (0);
-		}
-		i++;
+		height++;
 	}
 	return (1);
 }
@@ -145,14 +92,7 @@ int	check_map(t_data *data)
 	if (!temp_map)
 		return (0);
 	find_char_pos(data, &player_x, &player_y);
-	flood_fill(temp_map, player_x, player_y, data);
-	// int i = 0;
-	// while (i < data->height)
-	// {
-	// 	printf("tmp map: %s\n", temp_map[i]);
-	// 	i++;
-	// }
-	if (!check_walls(data, temp_map) || !check_holes(data, temp_map))
+	if (!check_holes(data, temp_map))
 		return (0);
 	return (1);
 }

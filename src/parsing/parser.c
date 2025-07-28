@@ -14,40 +14,28 @@ int	valid_extension(char *filename)
 
 int	valid_char(char element)
 {
-	return (element == WALL || element == EMPTY || element == P_NORTH
-		|| element == P_WEST || element == P_EAST || element == P_SOUTH
-		|| element == ' ');
+	return (element == WALL || element == EMPTY 
+		|| player_char(element)	|| element == ' ');
 }
 
 void	count_elements(t_data *data, char element)
 {
-	if (element == P_NORTH || element == P_WEST
-		|| element == P_SOUTH || element == P_EAST)
-	{
+	if (player_char(element))
 		data->player_count++;
-	}
 }
 
-int	map_validation(t_data *data)
+bool	valid_line(t_data *data, char *line)
 {
 	int		i;
-	size_t	j;
 
 	i = 0;
-	data->player_count = 0;
-	while (i < data->height)
+	data->height++;
+	while (line[i])
 	{
-		j = 0;
-		while (j < ft_strlen(data->map[i]))
-		{
-			if (!valid_char(data->map[i][j]))
-				return (0);
-			count_elements(data, data->map[i][j]);
-			j++;
-		}
+		if (!valid_char(line[i]))
+			return (false);
+		count_elements(data, line[i]);
 		i++;
 	}
-	if (data->player_count > 1)
-		return (0);
-	return (1);
+	return (true);
 }

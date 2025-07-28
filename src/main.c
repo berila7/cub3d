@@ -4,7 +4,7 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 	t_gcnode	*gc;
-	t_texture	*current;
+	// t_texture	*current;
 
 	data = malloc(sizeof(t_data));
 	data->texture = NULL;
@@ -22,23 +22,18 @@ int	main(int ac, char **av)
 			printf("line [%d]: %s\n", i, data->map[i]);
 			i++;
 		}
-		current = data->texture;
-		while (current)
-		{
-			printf("Direction: %s\n", current->direction);
-			printf("path: %s\n", current->path);
-			printf("fd: %d\n", current->fd);
-			current = current->next;
-		}
-		if (!map_validation(data))
-			printf("\nInvalid map\n");
-		else
-			printf("\nValid map\n");
-		
+		// current = data->texture;
+		// while (current)
+		// {
+		// 	printf("Direction: %s\n", current->direction);
+		// 	printf("path: %s\n", current->path);
+		// 	printf("fd: %d\n", current->fd);
+		// 	current = current->next;
+		// }
 		if (!check_map(data))
 			printf("\nInvalid walls\n");
 		else
-			printf("\nvalid walls\n");
+			printf("\nvalid walls\n");		
 	}
 	else
 		printf("invalid args");

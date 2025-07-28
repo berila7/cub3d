@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include "../src/lib/gnl/get_next_line.h"
 
 typedef struct s_data t_data;
@@ -36,7 +37,10 @@ struct s_data
 {
 	int			height;
 	int			width;
+	int			map_fd;
 	int			player_count;
+	int			player_x;
+	int			player_y;
 	// char	*no_path;
 	// char	*so_path;
 	// char	*we_path;
@@ -53,9 +57,9 @@ int		read_map(t_data *data, char *filename);
 int		ft_strcmp(const char *s1, const char *s2);
 int		valid_extension(char *filename);
 char	*get_next_line(int fd);
-int		count_lines(t_data *data, char *filename);
+bool	valid_line(t_data *data, char *line);
 void	free_map(char **map, int height);
-int		map_validation(t_data *data);
+bool	valid_map(t_data *data);
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char *src);
 void	*ft_calloc(size_t count, size_t size);
@@ -76,5 +80,9 @@ t_texture	*new_txt(char *direction, char *path, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		is_map_line(t_data *data, char *line);
 int		is_config(t_data *data, char *line);
+bool	player_char(char element);
+int		valid_char(char element);
+void	count_elements(t_data *data, char element);
+char	*parse_line(t_data *data, char *line);
 
 #endif

@@ -1,40 +1,36 @@
 #include "cub3d.h"
 
-int	count_lines(t_data *data, char *filename)
+bool	valid_map(t_data *data)
 {
-	int		fd;
-	int		lines;
 	char	*line;
 	int		map_started;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	lines = 0;
 	map_started = 0;
-	line = get_next_line(fd);
+	line = get_next_line(data->map_fd);
 	while (line)
 	{
 		if (is_map_line(data, line) && !map_started)
 			map_started = 1;
 		if (map_started)
-			lines++;
+		{
+			if (!valid_line(data, parse_line(data, line)))
+				return (false);
+		}
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(data->map_fd);
 	}
-	if (lines == 0)
-		return (close(fd), 0);
-	close(fd);
-	return (lines);
+	if (!data->height || data->player_count != 1)
+		return (false);
+	return (true);
 }
 
 int	init_map(t_data *data, char *filename)
 {	
 	if (!valid_extension(filename))
 		return (0);
-	data->height = count_lines(data, filename);
+	data->height = 0;
 	data->width = 0;
-	if (data->height == 0)
+	if (!valid_map(data))
 		return (0);
 	data->map = malloc(sizeof(char *) * data->height + 1);
 	if (!data->map)
@@ -118,7 +114,7 @@ int	handle_configs(t_data *data, t_texture **texture, char *line)
 	return (1);
 }
 
-int	read_lines(t_data *data, int fd)
+int	read_lines(t_data *data)
 {
 	int		i;
 	char	*line;
@@ -129,7 +125,7 @@ int	read_lines(t_data *data, int fd)
 	i = 0;
 	map_started = 0;
 	texture = NULL;
-	raw_line = get_next_line(fd);
+	raw_line = get_next_line(data->map_fd);
 	while (raw_line)
 	{
 		if (is_map_line(data, raw_line) && !map_started)
@@ -139,7 +135,7 @@ int	read_lines(t_data *data, int fd)
 			if (!handle_configs(data, &texture, raw_line))
 				return (0);
 			free(raw_line);
-			raw_line = get_next_line(fd);
+			raw_line = get_next_line(data->map_fd);
 			continue;
 		}
 		line = parse_line(data, raw_line);
@@ -152,7 +148,7 @@ int	read_lines(t_data *data, int fd)
 			data->width = ft_strlen(line);
 		data->map[i] = line;
 		i++;
-		raw_line = get_next_line(fd);
+		raw_line = get_next_line(data->map_fd);
 	}
 	data->map[i] = NULL;
 	data->texture = texture;
@@ -162,19 +158,19 @@ int	read_lines(t_data *data, int fd)
 
 int	read_map(t_data *data, char *filename)
 {
-	int fd;
+	data->map_fd = open(filename, O_RDONLY);
+	if (data->map_fd < 0)
+		return (0);
 	if (!init_map(data, filename))
 		return (0);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	close(data->map_fd);
+	data->map_fd = open(filename, O_RDONLY);
+	if (data->map_fd < 0)
 		return (0);
-
-	if (!read_lines(data, fd))
+	if (!read_lines(data))
 	{
-		close (fd);
+		close (data->map_fd);
 		return (0);
 	}
-	// if (!check_configs(data))
-	// 	return (0);
-	return (close(fd), 1);
+	return (close(data->map_fd), 1);
 }
