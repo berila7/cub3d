@@ -147,6 +147,7 @@ int	read_lines(t_data *data)
 		if (data->width < (int)ft_strlen(line))
 			data->width = ft_strlen(line);
 		data->map[i] = line;
+		free(raw_line);
 		i++;
 		raw_line = get_next_line(data->map_fd);
 	}

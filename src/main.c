@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+// void	f(void) { system("leaks cub3D"); }
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
