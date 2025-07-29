@@ -15,7 +15,7 @@ MLX_LIB			=	$(MLX_DIR)/build/libmlx42.a
 MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/mnt/homes/$(USER)/.brew/opt/glfw/lib/" -I"/mnt/homes/$(USER)/.brew/include"
 
 
-RAYCASTING_SRCS	=	$(RAYCASTING_DIR)/game.c
+RAYCASTING_SRCS	=	$(RAYCASTING_DIR)/game.c $(RAYCASTING_DIR)/helpers.c
 
 SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
 					$(PARSING_DIR)/free.c $(PARSING_DIR)/init_utils.c \

@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <math.h>
 # include "../src/lib/gnl/get_next_line.h"
 # include "../src/lib/MLX42/include/MLX42/MLX42.h"
 
@@ -16,9 +17,16 @@
 # define EMPTY '0'
 # define WALL '1'
 
-# define WINDOW_W 2048
-# define WINDOW_H 1024
-# define TILE_SIZE 500
+// # define WINDOW_W 2000
+// # define WINDOW_H 1000
+// # define TILE_SIZE 100
+# define FOV_ANGLE 60 
+
+# define WINDOW_W 1000
+# define WINDOW_H 500
+# define TILE_SIZE 40
+# define M_SPEED 1.8
+# define R_SPEED 0.08
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
@@ -41,11 +49,11 @@ struct s_gcnode
 
 struct s_player
 {
-	int	rotationInp;
-	int	moveInp;
-	int	angle;
-	int	x;
-	int	y;
+	int		rotation_inp;
+	int		move_inp;
+	double	angle;
+	double	x;
+	double	y;
 };
 
 struct s_data
@@ -58,6 +66,7 @@ struct s_data
 	int			player_y;
 	mlx_t		*mlx;
 	t_player	*player;
+	mlx_image_t	*w_img;
 	// char	*no_path;
 	// char	*so_path;
 	// char	*we_path;
@@ -101,10 +110,13 @@ int		valid_char(char element);
 void	count_elements(t_data *data, char element);
 char	*parse_line(t_data *data, char *line);
 void	gc_free_all(void);
+int		equal(char *s1, char *s2);
 t_data	*data();
 
-
 // Raycasting:
-int	game();
+int		game();
+double	to_rad(double deg);
+double	normalize_angle(double angle);
+double	get_dist(double ax, double ay, double bx, double by);
 
 #endif

@@ -24,8 +24,6 @@ int	main(int ac, char **av)
 	{
 		if (!read_map(data(), av[1]))
 			return (1);
-		printf("Map Height: %d\n", data()->height);
-		printf("Map 0: %s\n", data()->map[0]);
 		int i = 0;
 		while (i < data()->height)
 		{
