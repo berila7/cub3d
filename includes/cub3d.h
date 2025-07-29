@@ -48,7 +48,6 @@ struct s_data
 	// char	*floor;
 	// char	*ceiling;
 	t_texture	*texture;
-	t_gcnode	*gc;
 	char		**map;
 };
 
