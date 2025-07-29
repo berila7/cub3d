@@ -7,10 +7,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../src/lib/gnl/get_next_line.h"
-
-typedef struct s_data t_data;
-typedef struct s_texture t_texture;
-typedef struct s_gcnode	t_gcnode;
+# include "../src/lib/MLX42/include/MLX42/MLX42.h"
 
 # define P_NORTH 'N'
 # define P_SOUTH 'S'
@@ -18,6 +15,15 @@ typedef struct s_gcnode	t_gcnode;
 # define P_WEST 'W'
 # define EMPTY '0'
 # define WALL '1'
+
+# define WINDOW_W 2048
+# define WINDOW_H 1024
+# define TILE_SIZE 500
+
+typedef struct s_data		t_data;
+typedef struct s_texture	t_texture;
+typedef struct s_gcnode		t_gcnode;
+typedef struct s_player		t_player;
 
 struct s_texture
 {
@@ -29,8 +35,17 @@ struct s_texture
 
 struct s_gcnode
 {
-	void			*ptr;
-	t_gcnode		*next;
+	void		*ptr;
+	t_gcnode	*next;
+};
+
+struct s_player
+{
+	int	rotationInp;
+	int	moveInp;
+	int	angle;
+	int	x;
+	int	y;
 };
 
 struct s_data
@@ -41,6 +56,8 @@ struct s_data
 	int			player_count;
 	int			player_x;
 	int			player_y;
+	mlx_t		*mlx;
+	t_player	*player;
 	// char	*no_path;
 	// char	*so_path;
 	// char	*we_path;
@@ -84,5 +101,10 @@ int		valid_char(char element);
 void	count_elements(t_data *data, char element);
 char	*parse_line(t_data *data, char *line);
 void	gc_free_all(void);
+t_data	*data();
+
+
+// Raycasting:
+int	game();
 
 #endif

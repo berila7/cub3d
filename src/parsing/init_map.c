@@ -33,8 +33,6 @@ int	init_map(t_data *data, char *filename)
 	if (!valid_map(data))
 		return (0);
 	data->map = gc_malloc(sizeof(char *) * (data->height + 1));
-	if (!data->map)
-		return (0);
 	return (1);
 }
 
@@ -170,7 +168,7 @@ int	read_map(t_data *data, char *filename)
 		return (0);
 	if (!read_lines(data))
 	{
-		close (data->map_fd);
+		close(data->map_fd);
 		return (0);
 	}
 	return (close(data->map_fd), 1);

@@ -1,0 +1,3 @@
+*.o
+cub3D
+./src/lib/MLX42

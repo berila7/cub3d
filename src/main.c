@@ -1,24 +1,35 @@
 #include "cub3d.h"
 
+t_data	**get_data()
+{
+	static t_data	*data;
+	return (&data);
+}
+
+t_data	*data()
+{
+	return (*get_data());
+}
+
 // void	f(void) { system("leaks cub3D"); }
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
-	// t_texture	*current;
-	data = NULL;
-	data = gc_malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	data->texture = NULL;
+	t_data	**game_data;
+
+	game_data = get_data();
+	*game_data = gc_malloc(sizeof(t_data));
+	data()->texture = NULL;
 	if (ac == 2)
 	{
-		if (!read_map(data, av[1]))
+		if (!read_map(data(), av[1]))
 			return (1);
+		printf("Map Height: %d\n", data()->height);
+		printf("Map 0: %s\n", data()->map[0]);
 		int i = 0;
-		while (i < data->height)
+		while (i < data()->height)
 		{
-			printf("line [%d]: %s\n", i, data->map[i]);
+			printf("line [%d]: %s\n", i, data()->map[i]);
 			i++;
 		}
 		// current = data->texture;
@@ -29,13 +40,17 @@ int	main(int ac, char **av)
 		// 	printf("fd: %d\n", current->fd);
 		// 	current = current->next;
 		// }
-		if (!check_map(data))
+		if (!check_map(data()))
 			printf("\nInvalid walls\n");
 		else
-			printf("\nvalid walls\n");		
+		{
+			printf("\nValid walls\n");
+			if (game())
+				return (printf("Error in the game\n"), 1);
+		}
 	}
 	else
-		printf("invalid args");
+		printf("Invalid args\n");
 	gc_free_all();
 	return (0);
 }

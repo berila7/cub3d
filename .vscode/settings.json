@@ -1,5 +1,8 @@
 {
 	"files.associations": {
+		"*.ejs": "html",
+		"__locale": "c",
+		".env*": "dotenv",
 		"array": "c",
 		"iterator": "c",
 		"string": "c",
@@ -9,6 +12,8 @@
 		"algorithm": "c",
 		"bitset": "c",
 		"chrono": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"cub3d.h": "c",
+		"mlx42.h": "c"
 	}
 }
