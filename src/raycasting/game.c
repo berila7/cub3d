@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/30 13:42:08 by anachat          ###   ########.fr       */
+/*   Updated: 2025/07/30 13:53:33 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ void	draw_rays()
 	printf("num_rays = %d\n", data()->num_rays);
 	while (++i < data()->num_rays)
 	{
-		printf("[%d], ray_angle: %.2f\n", i, start_angle);
-		data()->rays[i].angle = start_angle;
+		data()->rays[i].angle = normalize_angle(start_angle);
+		printf("[%d], ray_angle: %.2f\n", i, data()->rays[i].angle);
 		draw_line(data()->player->x, data()->player->y, 
-			data()->player->x+cos(start_angle)*50,
-			data()->player->y+sin(start_angle)*50,
+			data()->player->x+cos(data()->rays[i].angle)*50,
+			data()->player->y+sin(data()->rays[i].angle)*50,
 			0x0000FFFF
 		);
 		start_angle += (data()->fov_angle / data()->num_rays);
