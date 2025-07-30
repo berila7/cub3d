@@ -14,6 +14,7 @@
 		"chrono": "c",
 		"unordered_map": "c",
 		"cub3d.h": "c",
-		"mlx42.h": "c"
+		"mlx42.h": "c",
+		"unistd.h": "c"
 	}
 }

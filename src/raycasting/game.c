@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/29 21:02:19 by anachat          ###   ########.fr       */
+/*   Updated: 2025/07/30 13:42:08 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,26 @@ void	render_map()
 		i++;
 	}
 }
+void	draw_rays()
+{
+	double start_angle;
+	int i;
+
+	start_angle = data()->player->angle - (data()->fov_angle/2);
+	i = -1;
+	printf("num_rays = %d\n", data()->num_rays);
+	while (++i < data()->num_rays)
+	{
+		printf("[%d], ray_angle: %.2f\n", i, start_angle);
+		data()->rays[i].angle = start_angle;
+		draw_line(data()->player->x, data()->player->y, 
+			data()->player->x+cos(start_angle)*50,
+			data()->player->y+sin(start_angle)*50,
+			0x0000FFFF
+		);
+		start_angle += (data()->fov_angle / data()->num_rays);
+	}
+}
 
 static void	game_loop(void *param) 
 {
@@ -149,6 +169,10 @@ static void	game_loop(void *param)
 	game_input(mlx);
 	render_map();
 	draw_player();
+	draw_rays();
+	
+	gc_free(data()->rays);
+	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 }
 
 int	game()
@@ -161,6 +185,12 @@ int	game()
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	
+	data()->num_rays = WINDOW_W/10;
+	data()->fov_angle = to_rad(data()->fov_angle);
+	
+	printf("data()->num_rays: %d\n",data()->num_rays);
+	
+	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	
 	data()->player_y = 2;
 	data()->player_x = 10;	

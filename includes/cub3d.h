@@ -32,6 +32,7 @@ typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
 typedef struct s_gcnode		t_gcnode;
 typedef struct s_player		t_player;
+typedef struct s_ray		t_ray;
 
 struct s_texture
 {
@@ -56,6 +57,11 @@ struct s_player
 	double	y;
 };
 
+struct s_ray
+{
+	double	angle;
+};
+
 struct s_data
 {
 	int			height;
@@ -64,9 +70,12 @@ struct s_data
 	int			player_count;
 	int			player_x;
 	int			player_y;
+	int			num_rays;
 	mlx_t		*mlx;
+	double		fov_angle;
 	t_player	*player;
 	mlx_image_t	*w_img;
+	t_ray		*rays;
 	// char	*no_path;
 	// char	*so_path;
 	// char	*we_path;
@@ -112,6 +121,8 @@ char	*parse_line(t_data *data, char *line);
 void	gc_free_all(void);
 int		equal(char *s1, char *s2);
 t_data	*data();
+void	gc_free(void *ptr);
+
 
 // Raycasting:
 int		game();
