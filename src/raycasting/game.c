@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/30 13:53:33 by anachat          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:00:53 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,16 +145,27 @@ void	draw_rays()
 	double start_angle;
 	int i;
 
-	start_angle = data()->player->angle - (data()->fov_angle/2);
+	start_angle = data()->player->angle - (data()->fov_angle/2.0);
 	i = -1;
-	printf("num_rays = %d\n", data()->num_rays);
+	
+	// Debug info
+	printf("=== DEBUG INFO ===\n");
+	printf("player->angle: %.6f\n", data()->player->angle);
+	printf("fov_angle: %.6f\n", data()->fov_angle);
+	printf("num_rays: %d\n", data()->num_rays);
+	printf("increment: %.6f\n", (data()->fov_angle / data()->num_rays));
+	printf("initial start_angle: %.6f\n", start_angle);
+	printf("==================\n");
+	
 	while (++i < data()->num_rays)
 	{
+		printf("[%d] start_angle: %.6f -> ", i, start_angle);
 		data()->rays[i].angle = normalize_angle(start_angle);
-		printf("[%d], ray_angle: %.2f\n", i, data()->rays[i].angle);
+		printf("normalized: %.6f\n", data()->rays[i].angle);
+		
 		draw_line(data()->player->x, data()->player->y, 
-			data()->player->x+cos(data()->rays[i].angle)*50,
-			data()->player->y+sin(data()->rays[i].angle)*50,
+			data()->player->x+cos(data()->rays[i].angle)*100,
+			data()->player->y+sin(data()->rays[i].angle)*100,
 			0x0000FFFF
 		);
 		start_angle += (data()->fov_angle / data()->num_rays);
@@ -170,9 +181,6 @@ static void	game_loop(void *param)
 	render_map();
 	draw_player();
 	draw_rays();
-	
-	gc_free(data()->rays);
-	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 }
 
 int	game()
@@ -186,7 +194,7 @@ int	game()
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	
 	data()->num_rays = WINDOW_W/10;
-	data()->fov_angle = to_rad(data()->fov_angle);
+	data()->fov_angle = to_rad(FOV_ANGLE);
 	
 	printf("data()->num_rays: %d\n",data()->num_rays);
 	
