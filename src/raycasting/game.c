@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/30 14:00:53 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/05 18:26:34 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,35 +55,9 @@ void draw_rect(int x, int y, int width, int height, int color)
 	}
 }
 
-void draw_line(int x0, int y0, int x1, int y1, int color)
-{
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int sy = (y0 < y1) ? 1 : -1;
-	int err = dx - dy;
 
-	while (1)
-	{
-		// draw_pixel(x0, y0); // Put pixel at current point
-		mlx_put_pixel(data()->w_img, x0, y0, color);
 
-		if (x0 == x1 && y0 == y1)
-			break;
-
-		int e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}
+ 
 
 void draw_player()
 {
@@ -103,9 +77,9 @@ void draw_player()
 	data()->player->angle = normalize_angle(data()->player->angle + (data()->player->rotation_inp * R_SPEED));
 	draw_rect(data()->player->x - (size/2), data()->player->y - (size/2), size, size, 0xFF0000FF);
 	
-	draw_line(data()->player->x, data()->player->y, 
-		data()->player->x + cos(data()->player->angle) * 50,
-		data()->player->y + sin(data()->player->angle) * 50, 0xFF0000FF
+	draw_line(new_point(data()->player->x, data()->player->y), 
+		new_point(data()->player->x + cos(data()->player->angle) * 50,
+		data()->player->y + sin(data()->player->angle) * 50), 0xFF0000FF
 	);
 }
 
@@ -163,11 +137,9 @@ void	draw_rays()
 		data()->rays[i].angle = normalize_angle(start_angle);
 		printf("normalized: %.6f\n", data()->rays[i].angle);
 		
-		draw_line(data()->player->x, data()->player->y, 
-			data()->player->x+cos(data()->rays[i].angle)*100,
-			data()->player->y+sin(data()->rays[i].angle)*100,
-			0x0000FFFF
-		);
+		draw_line(new_point(data()->player->x, data()->player->y),
+			new_point(data()->player->x+cos(data()->rays[i].angle)*100,
+			data()->player->y+sin(data()->rays[i].angle)*100), 0x0000FFFF);
 		start_angle += (data()->fov_angle / data()->num_rays);
 	}
 }
@@ -193,7 +165,7 @@ int	game()
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	
-	data()->num_rays = WINDOW_W/10;
+	data()->num_rays = WINDOW_W/50;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	
 	printf("data()->num_rays: %d\n",data()->num_rays);

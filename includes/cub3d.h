@@ -32,6 +32,7 @@ typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
 typedef struct s_gcnode		t_gcnode;
 typedef struct s_player		t_player;
+typedef struct s_point		t_point;
 typedef struct s_ray		t_ray;
 
 struct s_texture
@@ -60,6 +61,12 @@ struct s_player
 struct s_ray
 {
 	double	angle;
+};
+
+struct s_point
+{
+	double	x;
+	double	y;
 };
 
 struct s_data
@@ -129,5 +136,7 @@ int		game();
 double	to_rad(double deg);
 double	normalize_angle(double angle);
 double	get_dist(double ax, double ay, double bx, double by);
+t_point	*new_point(double x, double y);
+void draw_line(t_point *p1, t_point *p2, int color);
 
 #endif
