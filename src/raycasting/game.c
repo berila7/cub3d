@@ -6,21 +6,11 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/05 18:26:34 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/05 21:52:10 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	has_wall_at(double x, double y)
-{
-	int fx;
-	int fy;
-
-	fy = floor(y/TILE_SIZE);
-	fx = floor(x/TILE_SIZE);
-	return (data()->map[fy][fx] == '1');
-}
 
 static void	game_input(mlx_t *mlx)
 {
@@ -38,52 +28,7 @@ static void	game_input(mlx_t *mlx)
 		data()->player->rotation_inp = 1;
 }
 
-void draw_rect(int x, int y, int width, int height, int color)
-{	
-	int i = y;
-	int j;
-
-	while ((i-y) < height)
-	{
-		j = x;
-		while ((j-x) < width)
-		{
-			mlx_put_pixel(data()->w_img, j, i, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-
-
- 
-
-void draw_player()
-{
-	int	size;
-	double new_x;
-	double new_y;
-
-	size = 10;
-	new_x = data()->player->x + cos(data()->player->angle) * data()->player->move_inp * M_SPEED;
-	new_y = data()->player->y + sin(data()->player->angle) * data()->player->move_inp * M_SPEED;
-
-	if (!has_wall_at(new_x, new_y))
-	{
-		data()->player->x = new_x;
-		data()->player->y = new_y;
-	}
-	data()->player->angle = normalize_angle(data()->player->angle + (data()->player->rotation_inp * R_SPEED));
-	draw_rect(data()->player->x - (size/2), data()->player->y - (size/2), size, size, 0xFF0000FF);
-	
-	draw_line(new_point(data()->player->x, data()->player->y), 
-		new_point(data()->player->x + cos(data()->player->angle) * 50,
-		data()->player->y + sin(data()->player->angle) * 50), 0xFF0000FF
-	);
-}
-
-void	render_map()
+void	render_map(void)
 {
 	char **map;
 	int i;
@@ -101,12 +46,12 @@ void	render_map()
 			if (map[i][j] == 'N' || map[i][j] == '0')
 			{
 				// draw ground
-				draw_rect(j*TILE_SIZE, i*TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xADD8E6FF);
+				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0xADD8E6FF);
 			}
 			else if (map[i][j] == '1')
 			{
 				// draw wall
-				draw_rect(j*TILE_SIZE, i*TILE_SIZE, TILE_SIZE, TILE_SIZE, 0x111111FF);
+				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0x111111FF);
 			}
 			ind++;
 			j++;
@@ -114,35 +59,7 @@ void	render_map()
 		i++;
 	}
 }
-void	draw_rays()
-{
-	double start_angle;
-	int i;
 
-	start_angle = data()->player->angle - (data()->fov_angle/2.0);
-	i = -1;
-	
-	// Debug info
-	printf("=== DEBUG INFO ===\n");
-	printf("player->angle: %.6f\n", data()->player->angle);
-	printf("fov_angle: %.6f\n", data()->fov_angle);
-	printf("num_rays: %d\n", data()->num_rays);
-	printf("increment: %.6f\n", (data()->fov_angle / data()->num_rays));
-	printf("initial start_angle: %.6f\n", start_angle);
-	printf("==================\n");
-	
-	while (++i < data()->num_rays)
-	{
-		printf("[%d] start_angle: %.6f -> ", i, start_angle);
-		data()->rays[i].angle = normalize_angle(start_angle);
-		printf("normalized: %.6f\n", data()->rays[i].angle);
-		
-		draw_line(new_point(data()->player->x, data()->player->y),
-			new_point(data()->player->x+cos(data()->rays[i].angle)*100,
-			data()->player->y+sin(data()->rays[i].angle)*100), 0x0000FFFF);
-		start_angle += (data()->fov_angle / data()->num_rays);
-	}
-}
 
 static void	game_loop(void *param) 
 {
@@ -155,7 +72,7 @@ static void	game_loop(void *param)
 	draw_rays();
 }
 
-int	game()
+int	game(void)
 {
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "Test Cub3d", false);
 	if (!data()->mlx)

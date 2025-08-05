@@ -6,11 +6,36 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/05 18:28:27 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/05 21:54:00 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_pixel(int x, int y, int color)
+{
+	if (x < 0 || y < 0 || x > WINDOW_W || y > WINDOW_H)
+		return ;
+	mlx_put_pixel(data()->w_img, x, y, color);
+}
+
+void	draw_rect(t_point *start, int width, int height, int color)
+{
+	int	i;
+	int	j;
+
+	i = start->y;
+	while ((i - start->y) < height)
+	{
+		j = start->x;
+		while ((j - start->x) < width)
+		{
+			draw_pixel(j, i, color);
+			j++;
+		}
+		i++;
+	}
+}
 
 void	draw_line(t_point *p1, t_point *p2, int color)
 {
@@ -30,8 +55,56 @@ void	draw_line(t_point *p1, t_point *p2, int color)
 	pos = new_point(p1->x, p1->y);
 	while (max_steps--)
 	{
-		mlx_put_pixel(data()->w_img, roundf(pos->x), roundf(pos->y), color);
+		draw_pixel(roundf(pos->x), roundf(pos->y), color);
 		pos->x += step[0];
 		pos->y += step[1];
+	}
+}
+
+void	draw_player(void)
+{
+	int			size;
+	t_point		*new_p;
+	t_player	*pl;
+
+	size = 10;
+	pl = data()->player;
+	new_p = new_point(pl->x + cos(pl->angle) * pl->move_inp * M_SPEED,
+			pl->y + sin(pl->angle) * pl->move_inp * M_SPEED);
+	// new_x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
+	// new_y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
+	if (!has_wall_at(new_p->x, new_p->y))
+	{
+		pl->x = new_p->x;
+		pl->y = new_p->y;
+	}
+	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
+	draw_rect(new_point(pl->x - (size / 2), pl->y - (size / 2)),
+		size, size, 0xFF0000FF);
+	// draw_line(new_point(pl->x, pl->y), 
+	// 	new_point(pl->x + cos(pl->angle) * 50,
+	// 	pl->y + sin(pl->angle) * 50), 0xFF0000FF
+	// );
+}
+
+void	draw_rays(void)
+{
+	double	start_angle;
+	t_point	*start;
+	t_point	*end;
+	int		i;
+
+	start_angle = data()->player->angle - (data()->fov_angle / 2.0);
+	i = -1;
+	while (++i < data()->num_rays)
+	{
+		data()->rays[i].angle = normalize_angle(start_angle);
+		// printf("[%d] start_angle: %.6f -> ", i, start_angle);
+		// printf("normalized: %.6f\n", data()->rays[i].angle);
+		start = new_point(data()->player->x, data()->player->y);
+		end = new_point(data()->player->x + cos(data()->rays[i].angle) * 100,
+				data()->player->y + sin(data()->rays[i].angle) * 100);
+		draw_line(start, end, 0x0000FFFF);
+		start_angle += (data()->fov_angle / data()->num_rays);
 	}
 }
