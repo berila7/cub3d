@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/05 21:52:10 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/06 11:08:58 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,16 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	data()->player = gc_malloc(sizeof(t_player));
-
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
-	
-	data()->num_rays = WINDOW_W/50;
+	data()->num_rays = WINDOW_W / 50;
 	data()->fov_angle = to_rad(FOV_ANGLE);
-	
-	printf("data()->num_rays: %d\n",data()->num_rays);
-	
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
-	
 	data()->player_y = 2;
-	data()->player_x = 10;	
+	data()->player_x = 10;
 	data()->player->angle = to_rad(45);
-	
-	data()->player->x = data()->player_x*TILE_SIZE;
-	data()->player->y = data()->player_y*TILE_SIZE;
-
+	data()->player->x = data()->player_x * TILE_SIZE;
+	data()->player->y = data()->player_y * TILE_SIZE;
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);

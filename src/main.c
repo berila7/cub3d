@@ -30,6 +30,8 @@ int	main(int ac, char **av)
 			printf("line [%d]: %s\n", i, data()->map[i]);
 			i++;
 		}
+		printf("Map Rows: [%d]\n", data()->height);
+		printf("Map Cols: [%d]\n", data()->width);
 		// current = data->texture;
 		// while (current)
 		// {

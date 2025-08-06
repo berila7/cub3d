@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/05 21:31:51 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/06 14:09:46 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ bool	has_wall_at(double x, double y)
 	int	fx;
 	int	fy;
 
+	if (!in_window(x, y))
+		return (false);
 	fy = floor(y/TILE_SIZE);
 	fx = floor(x/TILE_SIZE);
+	if (fy < 0 || fy > data()->height || fx < 0 || fx > data()->width)
+		return (false);
+	printf("FX: [%d] (%f)  |  FY: [%d] (%f)\n", fx, x, fy, y);
 	return (data()->map[fy][fx] == '1');
 }

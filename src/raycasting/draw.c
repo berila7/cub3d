@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/05 21:54:00 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/06 13:46:30 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,23 @@ void	draw_rays(void)
 {
 	double	start_angle;
 	t_point	*start;
-	t_point	*end;
+	t_ray	ray;
 	int		i;
 
-	start_angle = data()->player->angle - (data()->fov_angle / 2.0);
 	i = -1;
+	start_angle = data()->player->angle - (data()->fov_angle / 2.0);
 	while (++i < data()->num_rays)
 	{
-		data()->rays[i].angle = normalize_angle(start_angle);
-		// printf("[%d] start_angle: %.6f -> ", i, start_angle);
-		// printf("normalized: %.6f\n", data()->rays[i].angle);
-		start = new_point(data()->player->x, data()->player->y);
-		end = new_point(data()->player->x + cos(data()->rays[i].angle) * 100,
-				data()->player->y + sin(data()->rays[i].angle) * 100);
-		draw_line(start, end, 0x0000FFFF);
-		start_angle += (data()->fov_angle / data()->num_rays);
+		ray = data()->rays[i];
+		ray.hit = new_point(0, 0);
+		ray.angle = normalize_angle(start_angle);
+		ray.is_down = start_angle > 0 && start_angle < M_PI;
+		ray.is_right = start_angle > (M_PI * 1.5) || start_angle < M_PI / 2;
+		if (find_horiz_hit(&ray))
+		{
+			start = new_point(data()->player->x, data()->player->y);
+			draw_line(start, new_point(ray.hit->x, ray.hit->y), 0x0000FFFF);
+			start_angle += (data()->fov_angle / data()->num_rays);
+		}
 	}
 }
