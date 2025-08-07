@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 17:46:38 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/07 18:28:21 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ static void	game_loop(void *param)
 	if (input_changed || !has_started)
 	{
 		has_started = true;
-		printf("Game Frame Rendered\n");
-		if (data()->w_img)
-				mlx_delete_image(mlx, data()->w_img);
-		data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
-		mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
+		
+	ft_bzero(data()->w_img->pixels, 
+			data()->w_img->width * data()->w_img->height * sizeof(uint32_t));
 		render_map();
 		draw_player();
 		draw_rays();
@@ -95,6 +93,8 @@ int	game(void)
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
 	
+	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
+	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	
