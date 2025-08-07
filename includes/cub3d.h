@@ -51,6 +51,12 @@ struct s_gcnode
 	t_gcnode	*next;
 };
 
+struct s_point
+{
+	double	x;
+	double	y;
+};
+
 struct s_player
 {
 	int		rotation_inp;
@@ -64,15 +70,9 @@ struct s_ray
 {
 	double	angle;
 	double	dist;
-	t_point	*hit;
+	t_point	hit;
 	bool	is_down;
 	bool	is_right;
-};
-
-struct s_point
-{
-	double	x;
-	double	y;
 };
 
 struct s_data
@@ -143,10 +143,11 @@ bool		has_wall_at(double x, double y);
 double		to_rad(double deg);
 double		normalize_angle(double angle);
 double		get_dist(double ax, double ay, double bx, double by);
-t_point		*new_point(double x, double y);
+t_point		*create_point(double x, double y);
+t_point		new_point(double x, double y);
 void		draw_pixel(int x, int y, int color);
-void		draw_line(t_point *p1, t_point *p2, int color);
-void		draw_rect(t_point *start, int w, int h, int color);
+void		draw_line(t_point p1, t_point p2, int color);
+void		draw_rect(t_point start, int w, int h, int color);
 void		draw_player(void);
 void		draw_rays(void);
 

@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:55:36 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 17:13:07 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/07 20:09:28 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool	find_horiz_hit(t_ray *ray)
 		if (has_wall_at(interc.x, interc.y - y))
 		{
 			ray->dist = get_dist(pl->x, pl->y, interc.x, interc.y);
-			return (ray->hit->x = interc.x, ray->hit->y = interc.y, true);
+			return (ray->hit.x = interc.x, ray->hit.y = interc.y, true);
 		}
 		(1 && (interc.x += step.x, interc.y += step.y));
 	}
@@ -86,7 +86,7 @@ bool	find_vert_hit(t_ray *ray)
 			if (dist < ray->dist)
 			{
 				ray->dist = get_dist(pl->x, pl->y, interc.x, interc.y);
-				return (ray->hit->x = interc.x, ray->hit->y = interc.y, true);
+				return (ray->hit.x = interc.x, ray->hit.y = interc.y, true);
 			}
 			break ;
 		}
