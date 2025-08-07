@@ -6,13 +6,40 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/06 11:08:58 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/07 17:46:38 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	game_input(mlx_t *mlx)
+void	render_map(void)
+{
+	char **map;
+	int ind;
+	int i;
+	int j;
+
+	map = data()->map;
+	i = 0;
+	ind=0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == '0')
+				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0xADD8E6FF);
+			else if (map[i][j] == '1')
+				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0x111111FF);
+			ind++;
+			j++;
+		}
+		i++;
+	}
+}
+
+
+static bool	game_input(mlx_t *mlx)
 {
 	data()->player->move_inp = 0;
 	data()->player->rotation_inp = 0;
@@ -26,50 +53,31 @@ static void	game_input(mlx_t *mlx)
 		data()->player->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		data()->player->rotation_inp = 1;
+	if (data()->player->move_inp || data()->player->rotation_inp)
+		return (true);
+	return (false);
 }
-
-void	render_map(void)
-{
-	char **map;
-	int i;
-	int j;
-	int ind;
-
-	map = data()->map;
-	i = 0;
-	ind=0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == '0')
-			{
-				// draw ground
-				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0xADD8E6FF);
-			}
-			else if (map[i][j] == '1')
-			{
-				// draw wall
-				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE), TILE_SIZE, TILE_SIZE, 0x111111FF);
-			}
-			ind++;
-			j++;
-		}
-		i++;
-	}
-}
-
 
 static void	game_loop(void *param) 
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
+	bool		input_changed;
+	static bool	has_started;
 
 	mlx = (mlx_t *)param;
-	game_input(mlx);
-	render_map();
-	draw_player();
-	draw_rays();
+	input_changed = game_input(mlx);
+	if (input_changed || !has_started)
+	{
+		has_started = true;
+		printf("Game Frame Rendered\n");
+		if (data()->w_img)
+				mlx_delete_image(mlx, data()->w_img);
+		data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
+		mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
+		render_map();
+		draw_player();
+		draw_rays();
+	}
 }
 
 int	game(void)
@@ -78,8 +86,6 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	data()->player = gc_malloc(sizeof(t_player));
-	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
-	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	data()->num_rays = WINDOW_W / 50;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
@@ -88,7 +94,10 @@ int	game(void)
 	data()->player->angle = to_rad(45);
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
+	
+	
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
+	
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);
 	return (0);

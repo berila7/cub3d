@@ -151,6 +151,8 @@ void		draw_player(void);
 void		draw_rays(void);
 
 bool		find_horiz_hit(t_ray *ray);
+bool		find_vert_hit(t_ray *ray);
 bool		in_window(double x, double y);
+bool		in_map(double x, double y);
 
 #endif

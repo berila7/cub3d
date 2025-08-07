@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/06 13:46:30 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/07 17:14:35 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,10 @@ void	draw_rays(void)
 		ray.angle = normalize_angle(start_angle);
 		ray.is_down = start_angle > 0 && start_angle < M_PI;
 		ray.is_right = start_angle > (M_PI * 1.5) || start_angle < M_PI / 2;
-		if (find_horiz_hit(&ray))
-		{
-			start = new_point(data()->player->x, data()->player->y);
-			draw_line(start, new_point(ray.hit->x, ray.hit->y), 0x0000FFFF);
-			start_angle += (data()->fov_angle / data()->num_rays);
-		}
+		find_horiz_hit(&ray);
+		find_vert_hit(&ray);
+		start = new_point(data()->player->x, data()->player->y);
+		draw_line(start, new_point(ray.hit->x, ray.hit->y), 0x0000FFFF);
+		start_angle += (data()->fov_angle / data()->num_rays);
 	}
 }
