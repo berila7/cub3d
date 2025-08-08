@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 11:42:44 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 13:05:16 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,11 @@ void	draw_rays(void)
 		ray = data()->rays[i];
 		ray.hit = new_point(0, 0);
 		ray.angle = normalize_angle(start_angle);
-		// ray.angle = start_angle;
 		ray.is_down = ray.angle > 0 && ray.angle < M_PI;
 		ray.is_right = ray.angle > (M_PI * 1.5) || ray.angle < M_PI / 2;
 		find_hit(&ray);
-		start.x = data()->player->x;
-		start.y = data()->player->y;
-
-		end.x = ray.hit.x;
-		end.y = ray.hit.y;
-
+		start = new_point(data()->player->x, data()->player->y);
+		end = new_point(ray.hit.x, ray.hit.y);
 		draw_line(start, end, 0x0000FFFF);
 		start_angle += (data()->fov_angle / data()->num_rays);
 	}
