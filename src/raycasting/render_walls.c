@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 10:47:03 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 15:58:52 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 16:09:04 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	render_walls()
 	pl = data()->player;
 	i = -1;
 	line_x = 0;
-	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H/2, 0x87CEEBFF);
-	draw_rect(new_point(0, WINDOW_H/2), WINDOW_W, WINDOW_H/2, 0x8B4513FF);
+	// draw sky
+	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H/2, 0x6CA0DCFF);
+	// draw ground
+	draw_rect(new_point(0, WINDOW_H/2), WINDOW_W, WINDOW_H/2, 0x70543CFF);
 	while (++i < data()->num_rays)
 	{
 		ray = data()->rays[i];
