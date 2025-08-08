@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:55:36 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 10:28:51 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 15:45:32 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,13 @@ void	find_hit(t_ray *ray)
 		ray->dist = horiz_hit.dist;
 		ray->hit.x = horiz_hit.x;
 		ray->hit.y = horiz_hit.y;
+		ray->was_vert = false;
 	}
 	else
 	{
 		ray->dist = vert_hit.dist;
 		ray->hit.x = vert_hit.x;
 		ray->hit.y = vert_hit.y;
+		ray->was_vert = true;
 	}
 }

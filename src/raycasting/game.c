@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 10:47:55 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 16:04:34 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ void	render_game()
 
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
-	render_map();
-	draw_rays();
-	draw_player();
+	
 	render_walls();
+	render_map();
+	cast_rays();
+	draw_player();
 }
 
 void	game_loop(void *param) 
@@ -88,7 +89,7 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	data()->player = gc_malloc(sizeof(t_player));
-	data()->num_rays = WINDOW_W / 20;
+	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	data()->player_y = 2;

@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 13:05:16 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 16:06:02 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,27 +98,25 @@ void	draw_player(void)
 	);
 }
 
-void	draw_rays(void)
+void	cast_rays(void)
 {
 	double	start_angle;
-	t_point	start;
-	t_point	end;
-	t_ray	ray;
+	t_ray	*ray;
 	int		i;
 
 	i = -1;
 	start_angle = data()->player->angle - (data()->fov_angle / 2.0);
+	
 	while (++i < data()->num_rays)
 	{
-		ray = data()->rays[i];
-		ray.hit = new_point(0, 0);
-		ray.angle = normalize_angle(start_angle);
-		ray.is_down = ray.angle > 0 && ray.angle < M_PI;
-		ray.is_right = ray.angle > (M_PI * 1.5) || ray.angle < M_PI / 2;
-		find_hit(&ray);
-		start = new_point(data()->player->x, data()->player->y);
-		end = new_point(ray.hit.x, ray.hit.y);
-		draw_line(start, end, 0x0000FFFF);
+		ray = data()->rays + i;
+		ray->hit = new_point(0, 0);
+		ray->angle = normalize_angle(start_angle);
+		ray->is_down = ray->angle > 0 && ray->angle < M_PI;
+		ray->is_right = ray->angle > (M_PI * 1.5) || ray->angle < M_PI / 2;
+		find_hit(ray);
+		//! draw Ray:
+		// draw_line(new_point(data()->player->x, data()->player->y), new_point(ray->hit.x, ray->hit.y), 0x0000FFFF);
 		start_angle += (data()->fov_angle / data()->num_rays);
 	}
 }
