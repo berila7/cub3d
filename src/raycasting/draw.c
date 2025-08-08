@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 16:06:02 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 18:43:08 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,32 @@ bool	can_move(double x, double y)
 
 void	draw_player(void)
 {
-	int			size;
-	t_point		new_p;
 	t_player	*pl;
+	int			size;
 
 	size = 10;
 	pl = data()->player;
-	new_p.x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
-	new_p.y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
-	if (can_move(new_p.x, pl->y))
-		pl->x = new_p.x;
-	if (can_move(pl->x, new_p.y))
-		pl->y = new_p.y;
-	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
 	draw_rect(new_point(pl->x - (size / 2), pl->y - (size / 2)),
 		size, size, 0xFF0000FF);
 	draw_line(new_point(pl->x, pl->y), 
 		new_point(pl->x + cos(pl->angle) * 50,
 		pl->y + sin(pl->angle) * 50), 0xFF0000FF
 	);
+}
+
+void	update_player(void)
+{
+	t_point		new_p;
+	t_player	*pl;
+
+	pl = data()->player;
+	new_p.x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
+	new_p.y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
+	// if (can_move(new_p.x, pl->y))
+		pl->x = new_p.x;
+	// if (can_move(pl->x, new_p.y))
+		pl->y = new_p.y;
+	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
 }
 
 void	cast_rays(void)
@@ -117,6 +124,8 @@ void	cast_rays(void)
 		find_hit(ray);
 		//! draw Ray:
 		// draw_line(new_point(data()->player->x, data()->player->y), new_point(ray->hit.x, ray->hit.y), 0x0000FFFF);
+		//? render ray wall strip:
+		render_wall_strip(ray, RAY_THICKNESS * i);
 		start_angle += (data()->fov_angle / data()->num_rays);
 	}
 }

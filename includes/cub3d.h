@@ -159,12 +159,14 @@ void		draw_pixel(int x, int y, int color);
 void		draw_line(t_point p1, t_point p2, int color);
 void		draw_rect(t_point start, int w, int h, int color);
 void		draw_player(void);
+void		update_player(void);
 void		cast_rays(void);
 
 bool		in_window(double x, double y);
 bool		in_map(double x, double y);
 void		find_hit(t_ray *ray);
 
-void		render_walls();
+// void		render_walls();
+void		render_wall_strip(t_ray *ray, double line_x);
 
 #endif

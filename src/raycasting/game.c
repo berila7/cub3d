@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 16:04:34 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 18:45:51 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,17 @@ void	render_game()
 
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
-	
-	render_walls();
-	render_map();
+
+	// draw sky
+	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H/2, 0x6CA0DCFF);
+	// draw ground
+	draw_rect(new_point(0, WINDOW_H/2), WINDOW_W, WINDOW_H/2, 0x70543CFF);
+
+	// render_map();
+	// draw_player();
+	update_player();
 	cast_rays();
-	draw_player();
+	// render_walls();
 }
 
 void	game_loop(void *param) 
@@ -83,6 +89,39 @@ void	game_loop(void *param)
 		render_game();
 }
 
+void	get_pl_pos(char **map)
+{
+	bool	found;
+	int		i;
+	int		j;
+
+	found = false;
+	i = -1;
+	while (!found && ++i < data()->height)
+	{
+		j = -1;
+		while (++j < data()->width)
+		{ 
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
+			{
+				data()->player_y = i;
+				data()->player_x = j;
+				found = true;
+				break ;
+			}
+		}
+	}
+	printf("ch: %c\n", map[i][j]);
+	if (map[i][j] == 'E')
+		data()->player->angle = 0;
+	else if (map[i][j] == 'N')
+		data()->player->angle = (M_PI * 1.5);
+	else if (map[i][j] == 'W')
+		data()->player->angle = (M_PI);
+	else if (map[i][j] == 'S')
+		data()->player->angle = (M_PI * 0.5);
+}
+
 int	game(void)
 {
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "Test Cub3d", false);
@@ -92,12 +131,11 @@ int	game(void)
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
-	data()->player_y = 2;
-	data()->player_x = 10;
-	data()->player->angle = to_rad(45);
+
+	get_pl_pos(data()->map);
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
-	
+	printf("Alloa\n");
 	render_game();
 	
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
