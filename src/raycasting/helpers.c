@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 15:50:40 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 10:20:35 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ double	normalize_angle(double angle)
 
 double get_dist(double ax, double ay, double bx, double by)
 {
-	// get distance between 2 points:
-	return (sqrt(pow(by - ay, 2) + pow(bx - ax, 2)));
+	return sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
 }
 
 bool	has_wall_at(double x, double y)
@@ -38,7 +37,9 @@ bool	has_wall_at(double x, double y)
 
 	if (!in_map(x, y))
 		return (true);
-	fy = floor(y/TILE_SIZE);
-	fx = floor(x/TILE_SIZE);
+	fy = (int)(y / TILE_SIZE);
+	fx = (int)(x / TILE_SIZE);
+	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
+		return (true);
 	return (data()->map[fy][fx] == '1');
 }

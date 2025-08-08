@@ -28,7 +28,7 @@
 # define WINDOW_H 500
 # define TILE_SIZE 40
 # define M_SPEED 1.8
-# define R_SPEED 0.08
+# define R_SPEED 0.02
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
@@ -36,6 +36,7 @@ typedef struct s_gcnode		t_gcnode;
 typedef struct s_player		t_player;
 typedef struct s_point		t_point;
 typedef struct s_ray		t_ray;
+typedef struct s_ray_hit		t_ray_hit;
 
 struct s_texture
 {
@@ -51,10 +52,11 @@ struct s_gcnode
 	t_gcnode	*next;
 };
 
-struct s_point
+struct s_ray_hit
 {
 	double	x;
 	double	y;
+	double	dist;
 };
 
 struct s_player
@@ -62,6 +64,12 @@ struct s_player
 	int		rotation_inp;
 	int		move_inp;
 	double	angle;
+	double	x;
+	double	y;
+};
+
+struct s_point
+{
 	double	x;
 	double	y;
 };
@@ -151,9 +159,8 @@ void		draw_rect(t_point start, int w, int h, int color);
 void		draw_player(void);
 void		draw_rays(void);
 
-bool		find_horiz_hit(t_ray *ray);
-bool		find_vert_hit(t_ray *ray);
 bool		in_window(double x, double y);
 bool		in_map(double x, double y);
+void		find_hit(t_ray *ray);
 
 #endif

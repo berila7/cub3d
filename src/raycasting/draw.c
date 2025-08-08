@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 20:09:13 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 10:28:05 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_line(t_point p1, t_point p2, int color)
 	step[1] = dy / max_steps;
 	pos.x = p1.x;
 	pos.y = p1.y;
-	while (max_steps--)
+	while (max_steps-- >= 0)
 	{
 		draw_pixel(roundf(pos.x), roundf(pos.y), color);
 		pos.x += step[0];
@@ -78,12 +78,13 @@ void	draw_player(void)
 		pl->y = new_p.y;
 	}
 	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
+	//pl->angle = pl->angle + (pl->rotation_inp * R_SPEED);
 	draw_rect(new_point(pl->x - (size / 2), pl->y - (size / 2)),
 		size, size, 0xFF0000FF);
-	// draw_line(new_point(pl->x, pl->y), 
-	// 	new_point(pl->x + cos(pl->angle) * 50,
-	// 	pl->y + sin(pl->angle) * 50), 0xFF0000FF
-	// );
+	draw_line(new_point(pl->x, pl->y), 
+		new_point(pl->x + cos(pl->angle) * 50,
+		pl->y + sin(pl->angle) * 50), 0xFF0000FF
+	);
 }
 
 void	draw_rays(void)
@@ -101,10 +102,10 @@ void	draw_rays(void)
 		ray = data()->rays[i];
 		ray.hit = new_point(0, 0);
 		ray.angle = normalize_angle(start_angle);
-		ray.is_down = start_angle > 0 && start_angle < M_PI;
-		ray.is_right = start_angle > (M_PI * 1.5) || start_angle < M_PI / 2;
-		find_horiz_hit(&ray);
-		find_vert_hit(&ray);
+		// ray.angle = start_angle;
+		ray.is_down = ray.angle > 0 && ray.angle < M_PI;
+		ray.is_right = ray.angle > (M_PI * 1.5) || ray.angle < M_PI / 2;
+		find_hit(&ray);
 		start.x = data()->player->x;
 		start.y = data()->player->y;
 

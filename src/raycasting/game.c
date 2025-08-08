@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 18:28:21 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 10:10:49 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,27 @@ static bool	game_input(mlx_t *mlx)
 	return (false);
 }
 
-static void	game_loop(void *param) 
+void	render_game()
+{
+	if (data()->w_img)
+		mlx_delete_image(data()->mlx, data()->w_img);
+
+	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
+	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
+	render_map();
+	draw_rays();
+	draw_player();
+}
+
+void	game_loop(void *param) 
 {
 	mlx_t		*mlx;
 	bool		input_changed;
-	static bool	has_started;
 
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
-	if (input_changed || !has_started)
-	{
-		has_started = true;
-		
-	ft_bzero(data()->w_img->pixels, 
-			data()->w_img->width * data()->w_img->height * sizeof(uint32_t));
-		render_map();
-		draw_player();
-		draw_rays();
-	}
+	if (input_changed)
+		render_game();
 }
 
 int	game(void)
@@ -84,7 +87,7 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	data()->player = gc_malloc(sizeof(t_player));
-	data()->num_rays = WINDOW_W / 50;
+	data()->num_rays = WINDOW_W / 20;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	data()->player_y = 2;
@@ -93,8 +96,7 @@ int	game(void)
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
 	
-	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
-	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
+	render_game();
 	
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	

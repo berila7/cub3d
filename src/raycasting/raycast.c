@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:55:36 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/07 20:09:28 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 10:28:51 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ bool	in_window(double x, double y)
 
 bool	in_map(double x, double y)
 {
-	return ((x >= 0 && x <= (data()->width * TILE_SIZE)) && (y >= 0 && y <= (data()->height * TILE_SIZE)));
+	return ((x >= 0 && x < (data()->width * TILE_SIZE))
+		&& (y >= 0 && y < (data()->height * TILE_SIZE)));
 }
 
-bool	find_horiz_hit(t_ray *ray)
+t_ray_hit	find_horiz_hit(t_ray *ray, t_player *pl)
 {
 	t_point		interc;
 	t_point		step;
-	t_player	*pl;
-	double		y;
+	t_ray_hit	hit;
+	double		decr;
 
-	ray->dist = MAX_DOUBLE;
+	hit.x = 0;
+	hit.y = 0;
+	hit.dist = MAX_DOUBLE;
 	pl = data()->player; 
 	interc.y = floor(pl->y / TILE_SIZE) * TILE_SIZE;
 	if (ray->is_down)
@@ -41,56 +44,72 @@ bool	find_horiz_hit(t_ray *ray)
 	step.x = fabs(TILE_SIZE / tan(ray->angle));
 	if (!ray->is_right)
 		step.x *= -1;
-	while (in_window(interc.x, interc.y))
+	while (in_map(interc.x, interc.y))
 	{
-		y = 0;
+		decr = 0;
 		if (!ray->is_down)
-			y = 1;
-		if (has_wall_at(interc.x, interc.y - y))
-		{
-			ray->dist = get_dist(pl->x, pl->y, interc.x, interc.y);
-			return (ray->hit.x = interc.x, ray->hit.y = interc.y, true);
-		}
+			decr = 1;
+		if (has_wall_at(interc.x, interc.y - decr))
+			return (hit.x = interc.x, hit.y = interc.y, hit.dist = get_dist(pl->x, pl->y, hit.x, hit.y), hit);
 		(1 && (interc.x += step.x, interc.y += step.y));
 	}
-	return (false);
+	return (hit);
 }
 
 
-bool	find_vert_hit(t_ray *ray)
+t_ray_hit	find_vert_hit(t_ray *ray, t_player *pl)
 {
 	t_point		interc;
 	t_point		step;
-	t_player	*pl;
-	double		x;
+	t_ray_hit	hit;
+	double		decr;
 
-	pl = data()->player; 
-	interc.y = floor(pl->y / TILE_SIZE) * TILE_SIZE;
+	hit.x = 0;
+	hit.y = 0;
+	hit.dist = MAX_DOUBLE;
+	interc.x = floor(pl->x / TILE_SIZE) * TILE_SIZE;
 	if (ray->is_right)
 		interc.x += TILE_SIZE;
-	interc.y = ((interc.x - pl->x) / tan(ray->angle)) + pl->y;
+	interc.y = ((interc.x - pl->x) * tan(ray->angle)) + pl->y;
 	step.x = TILE_SIZE;
 	if (!ray->is_right)
 		step.x *= -1;
-	step.y = fabs(TILE_SIZE / tan(ray->angle));
+	step.y = fabs(TILE_SIZE * tan(ray->angle));
 	if (!ray->is_down)
-		step.x *= -1;
-	while (in_window(interc.x, interc.y))
+		step.y *= -1;
+	while (in_map(interc.x, interc.y))
 	{
-		x = 0;
+		decr = 0;
 		if (!ray->is_right)
-			x = 1;
-		if (has_wall_at(interc.x - x, interc.y))
+			decr = 1;
+		if (has_wall_at(interc.x - decr, interc.y))
 		{
-			double dist = get_dist(pl->x, pl->y, interc.x, interc.y);
-			if (dist < ray->dist)
-			{
-				ray->dist = get_dist(pl->x, pl->y, interc.x, interc.y);
-				return (ray->hit.x = interc.x, ray->hit.y = interc.y, true);
-			}
-			break ;
+			return (hit.x = interc.x, hit.y = interc.y, hit.dist = get_dist(pl->x, pl->y, hit.x, hit.y), hit);
+			printf("HIT at x=%.2f, y=%.2f\n", interc.x - decr, interc.y);	
 		}
 		(1 && (interc.x += step.x, interc.y += step.y));
 	}
-	return (false);
+	return (hit);
+}
+
+
+void	find_hit(t_ray *ray)
+{
+	t_ray_hit	horiz_hit;
+	t_ray_hit	vert_hit;
+
+	horiz_hit = find_horiz_hit(ray, data()->player);
+	vert_hit = find_vert_hit(ray, data()->player);
+	if (horiz_hit.dist < vert_hit.dist)
+	{
+		ray->dist = horiz_hit.dist;
+		ray->hit.x = horiz_hit.x;
+		ray->hit.y = horiz_hit.y;
+	}
+	else
+	{
+		ray->dist = vert_hit.dist;
+		ray->hit.x = vert_hit.x;
+		ray->hit.y = vert_hit.y;
+	}
 }
