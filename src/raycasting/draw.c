@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 10:45:10 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 11:42:44 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,10 @@ void	draw_player(void)
 	pl = data()->player;
 	new_p.x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
 	new_p.y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
-	if (can_move(new_p.x, new_p.y))
-	{
+	if (can_move(new_p.x, pl->y))
 		pl->x = new_p.x;
+	if (can_move(pl->x, new_p.y))
 		pl->y = new_p.y;
-	}
 	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
 	draw_rect(new_point(pl->x - (size / 2), pl->y - (size / 2)),
 		size, size, 0xFF0000FF);

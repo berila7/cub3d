@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 10:10:49 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/08 10:47:55 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	render_game()
 	render_map();
 	draw_rays();
 	draw_player();
+	render_walls();
 }
 
 void	game_loop(void *param) 

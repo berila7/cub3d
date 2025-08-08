@@ -28,7 +28,7 @@
 # define WINDOW_H 500
 # define TILE_SIZE 40
 # define M_SPEED 1.8
-# define R_SPEED 0.02
+# define R_SPEED 0.04
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
@@ -162,5 +162,7 @@ void		draw_rays(void);
 bool		in_window(double x, double y);
 bool		in_map(double x, double y);
 void		find_hit(t_ray *ray);
+
+void		render_walls();
 
 #endif
