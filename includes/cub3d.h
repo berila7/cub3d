@@ -1,6 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-
+#define _GNU_SOURCE
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
