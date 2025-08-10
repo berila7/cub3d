@@ -23,6 +23,7 @@ SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(P
 					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
 					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c \
+					$(UTILS_DIR)/ft_memset.c \
 					$(HELPERS_DIR)/gc.c $(HELPERS_DIR)/utils.c \
 					$(RC_SRCS) \
 					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c

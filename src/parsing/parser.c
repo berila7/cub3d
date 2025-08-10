@@ -18,23 +18,23 @@ int	valid_char(char element)
 		|| player_char(element)	|| element == ' ');
 }
 
-void	count_elements(t_data *data, char element)
+void	count_elements(char element)
 {
 	if (player_char(element))
-		data->player_count++;
+		data()->player_count++;
 }
 
-bool	valid_line(t_data *data, char *line)
+bool	valid_line(char *line)
 {
 	int		i;
 
 	i = 0;
-	data->height++;
+	data()->height++;
 	while (line[i])
 	{
 		if (!valid_char(line[i]))
 			return (false);
-		count_elements(data, line[i]);
+		count_elements(line[i]);
 		i++;
 	}
 	return (true);

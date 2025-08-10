@@ -22,12 +22,12 @@ int	main(int ac, char **av)
 	data()->texture = NULL;
 	if (ac == 2)
 	{
-		if (!read_map(data(), av[1]))
+		if (!read_map(av[1]))
 			return (1);
 		int i = 0;
 		while (i < data()->height)
 		{
-			printf("line [%d]: %s\n", i, data()->map[i]);
+			printf("line [%d]: [%s]\n", i, data()->map[i]);
 			i++;
 		}
 		printf("Map Rows: [%d]\n", data()->height);

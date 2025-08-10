@@ -110,20 +110,20 @@ struct s_data
 };
 
 char		*ft_strrchr(const char *str, int c);
-int			read_map(t_data *data, char *filename);
+int			read_map(char *filename);
 int			ft_strcmp(const char *s1, const char *s2);
 int			valid_extension(char *filename);
 char		*get_next_line(int fd);
-bool		valid_line(t_data *data, char *line);
+bool		valid_line(char *line);
 void		free_map(char **map, int height);
-bool		valid_map(t_data *data);
+bool		valid_map();
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
 void		*ft_calloc(size_t count, size_t size);
 void		ft_bzero(void *s, size_t n);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void		find_char_pos(t_data *data, int *pos_x, int *pos_y);
-int			check_map(t_data *data);
+void		find_char_pos(int *pos_x, int *pos_y);
+int			check_map();
 char		**gc_split(char *s);
 char		*gc_strdup(char *src);
 int			gc_word_count(char *s);
@@ -135,15 +135,16 @@ void		*gc_malloc(size_t size);
 void		add_txt(t_texture **texutre, t_texture *new_texutre);
 t_texture	*new_txt(char *direction, char *path, int fd);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			is_map_line(t_data *data, char *line);
-int			is_config(t_data *data, char *line);
+int			is_map_line(char *line);
+int			is_config(char *line);
 bool		player_char(char element);
 int			valid_char(char element);
-void		count_elements(t_data *data, char element);
-char		*parse_line(t_data *data, char *line);
+void		count_elements(char element);
+char		*parse_line(char *line);
 void		gc_free_all(void);
 int			equal(char *s1, char *s2);
 t_data		*data();
+void		*ft_memset(void *b, int c, size_t len);
 void		gc_free(void *ptr);
 
 

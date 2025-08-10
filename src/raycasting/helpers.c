@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/10 10:53:17 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/10 11:57:30 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ bool	has_wall_at(double x, double y)
 	fx = (int)(x / TILE_SIZE);
 	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
 		return (true);
-	
-	printf("fy: %d, fx: %d\n\n", fy, fx);
-	printf("Map: %s\n\n", data()->map[0]);
-	printf("fy: %d, fx: %d\n\n", fy, fx);
 		
 	return (data()->map[fy][fx] == '1');
 }
