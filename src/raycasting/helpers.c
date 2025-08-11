@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/10 11:57:30 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/11 18:27:38 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double to_rad(double deg)
+double	to_rad(double deg)
 {
-	return ((deg * M_PI) / 180);	
+	return ((deg * M_PI) / 180);
 }
 
 double	normalize_angle(double angle)
@@ -25,9 +25,9 @@ double	normalize_angle(double angle)
 	return (angle);
 }
 
-double get_dist(double ax, double ay, double bx, double by)
+double	get_dist(double ax, double ay, double bx, double by)
 {
-	return sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
 bool	has_wall_at(double x, double y)
@@ -35,14 +35,19 @@ bool	has_wall_at(double x, double y)
 	int	fx;
 	int	fy;
 
-	if(!data())
-		return false;
+	if (!data())
+		return (false);
 	if (!in_map(x, y))
 		return (true);
 	fy = (int)(y / TILE_SIZE);
 	fx = (int)(x / TILE_SIZE);
 	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
 		return (true);
-		
 	return (data()->map[fy][fx] == '1');
+}
+
+bool	in_map(double x, double y)
+{
+	return ((x >= 0 && x < (data()->width * TILE_SIZE))
+		&& (y >= 0 && y < (data()->height * TILE_SIZE)));
 }

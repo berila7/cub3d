@@ -147,7 +147,6 @@ t_data		*data();
 void		*ft_memset(void *b, int c, size_t len);
 void		gc_free(void *ptr);
 
-
 // Raycasting:
 int			game(void);
 bool		has_wall_at(double x, double y);
@@ -165,9 +164,9 @@ void		cast_rays(void);
 
 bool		in_window(double x, double y);
 bool		in_map(double x, double y);
+bool		can_move(double x, double y);
+void		get_pl_pos(char **map);
 void		find_hit(t_ray *ray);
-
-// void		render_walls();
 void		render_wall_strip(t_ray *ray, double line_x);
 
 #endif

@@ -16,7 +16,8 @@ MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -
 # MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
 
 
-RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c $(RC_DIR)/render_walls.c
+RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c \
+					$(RC_DIR)/render_walls.c $(RC_DIR)/draw_utils.c $(RC_DIR)/helpers2.c
 
 SRCS			=	$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
 					$(PARSING_DIR)/free.c $(PARSING_DIR)/init_utils.c \
