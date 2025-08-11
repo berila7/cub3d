@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/08 18:45:51 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/11 16:53:08 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	render_map(void)
 	int j;
 
 	map = data()->map;
+	ind = 0;
 	i = 0;
-	ind=0;
 	while (map[i])
 	{
 		j = 0;
@@ -37,7 +37,6 @@ void	render_map(void)
 		i++;
 	}
 }
-
 
 static bool	game_input(mlx_t *mlx)
 {
@@ -67,9 +66,9 @@ void	render_game()
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 
 	// draw sky
-	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H/2, 0x6CA0DCFF);
+	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H / 2, 0x6CA0DCFF);
 	// draw ground
-	draw_rect(new_point(0, WINDOW_H/2), WINDOW_W, WINDOW_H/2, 0x70543CFF);
+	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, 0x70543CFF);
 
 	// render_map();
 	// draw_player();
@@ -135,7 +134,7 @@ int	game(void)
 	get_pl_pos(data()->map);
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
-	printf("Alloa\n");
+
 	render_game();
 	
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);

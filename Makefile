@@ -1,7 +1,7 @@
 NAME			=	cub3D
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -Iincludes -fsanitize=address -g
+CFLAGS			=	-Wall -Wextra -Werror -Iincludes #-fsanitize=address -g -O0
 
 SRC_DIR			=	src
 RC_DIR	=	$(SRC_DIR)/raycasting

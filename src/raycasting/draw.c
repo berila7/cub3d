@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/11 10:27:08 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/11 16:52:56 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void	update_player(void)
 	pl = data()->player;
 	new_p.x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
 	new_p.y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
+	// if (can_move(new_p.x, new_p.y))
+	// {
+	// 	pl->x = new_p.x;
+	// 	pl->y = new_p.y;
+	// }
 	if (can_move(new_p.x, pl->y))
 		pl->x = new_p.x;
 	if (can_move(pl->x, new_p.y))
@@ -113,7 +118,6 @@ void	cast_rays(void)
 
 	i = -1;
 	start_angle = data()->player->angle - (data()->fov_angle / 2.0);
-	
 	while (++i < data()->num_rays)
 	{
 		ray = data()->rays + i;
