@@ -63,7 +63,8 @@ struct s_ray_hit
 struct s_player
 {
 	int		rotation_inp;
-	int		move_inp;
+	int		move_forward;
+	int		move_side;
 	double	angle;
 	double	x;
 	double	y;
