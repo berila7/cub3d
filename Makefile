@@ -4,7 +4,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror -Iincludes #-fsanitize=address -g -O0
 
 SRC_DIR			=	src
-RC_DIR	=	$(SRC_DIR)/raycasting
+RC_DIR			=	$(SRC_DIR)/raycasting
 PARSING_DIR		=	$(SRC_DIR)/parsing
 HELPERS_DIR		=	$(SRC_DIR)/helpers
 UTILS_DIR		=	$(SRC_DIR)/lib/utils

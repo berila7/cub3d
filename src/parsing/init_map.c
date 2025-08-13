@@ -2,8 +2,8 @@
 
 bool	allconfig()
 {
-	if (!data()->no_path || !data()->so_path 
-		|| !data()->we_path || !data()->ea_path)
+	if (!data()->no_path || !data()->so_path || data()->floor == -1
+		|| !data()->we_path || !data()->ea_path || data()->ceiling == -1)
 		return (false);
 	return (true);
 }
@@ -44,6 +44,8 @@ int	init_map(char *filename)
 		return (0);
 	data()->height = 0;
 	data()->width = 0;
+	data()->floor = -1;
+	data()->ceiling = -1;
 	if (!valid_map())
 		return (0);
 	data()->map = gc_malloc(sizeof(char *) * (data()->height + 1));
@@ -83,6 +85,10 @@ char	*pad_line(char *line)
     pad[i] = '\0';
     return (pad);
 }
+int	get_color(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
 
 bool		is_config(char *line)
 {
@@ -97,51 +103,54 @@ bool		is_config(char *line)
 		return (true);
 	newline = parse_line(line);
 	splited = gc_split(newline);
-	if (ft_strncmp(&line[i], "NO ", 3) == 0 && gc_word_count(newline) == 2)
+	if (gc_word_count(newline) == 2)
 	{
-		data()->no_path = splited[1];
-		return (true);
-	}
-	if (ft_strncmp(&line[i], "SO ", 3) == 0 && gc_word_count(newline) == 2)
-	{
-		data()->so_path = splited[1];
-		return (true);
-	}
-	if (ft_strncmp(&line[i], "WE ", 3) == 0 && gc_word_count(newline) == 2)
-	{
-		data()->we_path = splited[1];
-		return (true);
-	}
-	if (ft_strncmp(&line[i], "EA ", 3) == 0 && gc_word_count(newline) == 2)
-	{
-		data()->ea_path = splited[1];
-		return (true);
-	}
-	if (ft_strncmp(&line[i], "F ", 2) == 0 && gc_word_count(newline) == 2)
-	{
-		char **floor = gc_split_char(splited[1], ',');
-		int j = 0;
-		while (j < word_count(splited[1], ','))
+		if (!data()->no_path && ft_strncmp(&line[i], "NO ", 3) == 0)
 		{
-			data()->floor[j] = ft_atoi(floor[j]);
-			if (data()->floor[j] > 255 || data()->floor[j] < 0)
-				return (false);
-			j++;
+			data()->no_path = splited[1];
+			return (true);
 		}
-		return (true);
-	}
-	if (ft_strncmp(&line[i], "C ", 2) == 0 && gc_word_count(newline) == 2)
-	{
-		char **celling = gc_split_char(splited[1], ',');
-		int j = 0;
-		while (j < word_count(splited[1], ','))
+		if (!data()->so_path && ft_strncmp(&line[i], "SO ", 3) == 0)
 		{
-			data()->ceiling[j] = ft_atoi(celling[j]);
-			if (data()->ceiling[j] > 255 || data()->ceiling[j] < 0)
-				return (false);
-			j++;
+			data()->so_path = splited[1];
+			return (true);
 		}
-		return (true);
+		if (!data()->we_path && ft_strncmp(&line[i], "WE ", 3) == 0)
+		{
+			data()->we_path = splited[1];
+			return (true);
+		}
+		if (!data()->ea_path && ft_strncmp(&line[i], "EA ", 3) == 0)
+		{
+			data()->ea_path = splited[1];
+			return (true);
+		}
+		if (data()->floor == -1 && ft_strncmp(&line[i], "F ", 2) == 0)
+		{
+			char **floor = gc_split_char(splited[1], ',');
+			int j = 0;
+			while (j < word_count(splited[1], ','))
+			{
+				if (ft_atoi(floor[j]) > 255 || ft_atoi(floor[j]) < 0)
+					return (false);
+				j++;
+			}
+			data()->floor = get_color(ft_atoi(floor[0]), ft_atoi(floor[1]), ft_atoi(floor[2]), 255);
+			return (true);
+		}
+		if (data()->ceiling == -1 && ft_strncmp(&line[i], "C ", 2) == 0)
+		{
+			char **ceiling = gc_split_char(splited[1], ',');
+			int j = 0;
+			while (j < word_count(splited[1], ','))
+			{
+				if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
+					return (false);
+				j++;
+			}
+			data()->ceiling = get_color(ft_atoi(ceiling[0]), ft_atoi(ceiling[1]), ft_atoi(ceiling[2]), 255);
+			return (true);
+		}
 	}
 	return (false);
 }

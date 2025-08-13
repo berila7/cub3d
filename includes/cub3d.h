@@ -106,8 +106,8 @@ struct s_data
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	int			floor[3];
-	int			ceiling[3];
+	int			floor;
+	int			ceiling;
 	char		**map;
 };
 

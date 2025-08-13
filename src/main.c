@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 		printf("SO: %s\n", data()->so_path);
 		printf("WE: %s\n", data()->we_path);
 		printf("EA: %s\n", data()->ea_path);
-		printf("FLOOR: %d, %d, %d\n", data()->floor[0], data()->floor[1], data()->floor[2]);
-		printf("CELLING: %d, %d, %d\n", data()->ceiling[0], data()->ceiling[1], data()->ceiling[2]);
+		printf("FLOOR: %d\n", data()->floor);
+		printf("CELLING: %d\n", data()->ceiling);
 		while (i < data()->height)
 		{
 			printf("line [%d]: [%s]\n", i, data()->map[i]);

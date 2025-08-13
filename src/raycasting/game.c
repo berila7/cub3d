@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/11 21:05:22 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/13 16:02:54 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	render_game(void)
 		mlx_delete_image(data()->mlx, data()->w_img);
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
-	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H / 2, 0x6CA0DCFF);
-	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, 0x70543CFF);
+	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H / 2, data()->ceiling);
+	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, data()->floor);
 	update_player();
 	cast_rays();
 }
