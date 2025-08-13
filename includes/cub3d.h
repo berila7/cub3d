@@ -39,13 +39,15 @@ typedef struct s_point		t_point;
 typedef struct s_ray		t_ray;
 typedef struct s_ray_hit		t_ray_hit;
 
-struct s_texture
-{
-	int			fd;
-	char		*direction;
-	char		*path;
-	t_texture	*next;
-};
+// struct s_texture
+// {
+// 	int			fd;
+// 	char		*direction;
+// 	char		*path;
+// 	char		*floor;
+// 	char		*celling;
+// 	t_texture	*next;
+// };
 
 struct s_gcnode
 {
@@ -99,13 +101,12 @@ struct s_data
 	t_player	*player;
 	mlx_image_t	*w_img;
 	t_ray		*rays;
-	// char	*no_path;
-	// char	*so_path;
-	// char	*we_path;
-	// char	*ea_path;
-	// char	*floor;
-	// char	*ceiling;
-	t_texture	*texture;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	int			floor[3];
+	int			ceiling[3];
 	char		**map;
 };
 
@@ -117,6 +118,7 @@ char		*get_next_line(int fd);
 bool		valid_line(char *line);
 void		free_map(char **map, int height);
 bool		valid_map();
+int			ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
 void		*ft_calloc(size_t count, size_t size);
@@ -124,6 +126,8 @@ void		ft_bzero(void *s, size_t n);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void		find_char_pos(int *pos_x, int *pos_y);
 int			check_map();
+int			ft_isdigit(int c);
+char		**gc_split_char(char *s, char c);
 char		**gc_split(char *s);
 char		*gc_strdup(char *src);
 int			gc_word_count(char *s);
@@ -132,11 +136,9 @@ int			find_word_end(char *s, int start, char *in_quote_char);
 int			skip_word_end(char *s, int start, char *in_quote_char);
 char		*gc_substr(const char *s, unsigned int start, size_t len);
 void		*gc_malloc(size_t size);
-void		add_txt(t_texture **texutre, t_texture *new_texutre);
-t_texture	*new_txt(char *direction, char *path, int fd);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			is_map_line(char *line);
-int			is_config(char *line);
+bool		is_config(char *line);
 bool		player_char(char element);
 int			valid_char(char element);
 void		count_elements(char element);
@@ -144,6 +146,7 @@ char		*parse_line(char *line);
 void		gc_free_all(void);
 int			equal(char *s1, char *s2);
 t_data		*data();
+int			word_count(char *str, char c);
 void		*ft_memset(void *b, int c, size_t len);
 void		gc_free(void *ptr);
 

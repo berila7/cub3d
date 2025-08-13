@@ -11,16 +11,20 @@ bool	valid_map()
 	{
 		if (is_map_line(line) && !map_started)
 			map_started = 1;
-		if (map_started)
+		if(!map_started)
 		{
-			if (!valid_line(parse_line(line)))
+			if (!is_config(line))
 				return (false);
-			if (data()->width < (int)ft_strlen(line))
-				data()->width = ft_strlen(line);
+			line = get_next_line(data()->map_fd);
+			continue ;
 		}
+		if (!valid_line(parse_line(line)))
+			return (false);
+		if (data()->width < (int)ft_strlen(line))
+			data()->width = ft_strlen(line);
 		line = get_next_line(data()->map_fd);
 	}
-	if (!data()->height || data()->player_count != 1)
+	if (!data()->height || data()->player_count != 1 )
 		return (false);
 	return (true);
 }
@@ -72,22 +76,62 @@ char	*pad_line(char *line)
     return (pad);
 }
 
-int	is_config(char *line)
+bool		is_config(char *line)
 {
 	int		i;
+	char	*newline;
+	char	**splited;
 
 	i = 0;
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
 	if (line[i] == '\0' || line[i] == '\n')
-		return (0);
-	if (ft_strncmp(&line[i], "NO ", 3) == 0 || ft_strncmp(&line[i], "SO ", 3) == 0
-		|| ft_strncmp(&line[i], "WE ", 3) == 0 || ft_strncmp(&line[i], "EA ", 3) == 0
-		|| ft_strncmp(&line[i], "F ", 2) == 0 || ft_strncmp(&line[i], "C ", 2) == 0)
+		return (true);
+	newline = parse_line(line);
+	splited = gc_split(newline);
+	if (ft_strncmp(&line[i], "NO ", 3) == 0 && gc_word_count(newline) == 2)
 	{
-		return (1);
+		data()->no_path = splited[1];
+		return (true);
 	}
-	return (0);
+	if (ft_strncmp(&line[i], "SO ", 3) == 0 && gc_word_count(newline) == 2)
+	{
+		data()->so_path = splited[1];
+		return (true);
+	}
+	if (ft_strncmp(&line[i], "WE ", 3) == 0 && gc_word_count(newline) == 2)
+	{
+		data()->we_path = splited[1];
+		return (true);
+	}
+	if (ft_strncmp(&line[i], "EA ", 3) == 0 && gc_word_count(newline) == 2)
+	{
+		data()->ea_path = splited[1];
+		return (true);
+	}
+	if (ft_strncmp(&line[i], "F ", 2) == 0 && gc_word_count(newline) == 2)
+	{
+		char **floor = gc_split_char(splited[1], ',');
+		int j = 0;
+		while (j < word_count(splited[1], ','))
+		{
+			data()->floor[j] = ft_atoi(floor[j]);
+			j++;
+		}
+		return (true);
+	}
+	if (ft_strncmp(&line[i], "C ", 2) == 0 && gc_word_count(newline) == 2)
+	{
+		char **celling = gc_split_char(splited[1], ',');
+		int j = 0;
+		while (j < word_count(splited[1], ','))
+		{
+			data()->ceiling[j] = ft_atoi(celling[j]);
+			j++;
+		}
+		return (true);
+	}
+	return (false);
 }
 
 int	is_map_line(char *line)
@@ -113,37 +157,15 @@ int	is_map_line(char *line)
 	return (1);
 }
 
-int	handle_configs(t_texture **texture, char *line)
-{
-	int		fd;
-	char	**splited;
-	char	*parsed_line; 
-
-	parsed_line = parse_line(line);
-	if (!is_config(line) && ft_strcmp(line, "\n"))
-		return (0);
-	if (gc_word_count(parsed_line) > 2)
-		return (0);
-	if (ft_strcmp(parsed_line, "\n"))
-	{
-		splited = gc_split(parsed_line);
-		fd = open(splited[1], O_RDONLY);
-		add_txt(texture, new_txt(splited[0], splited[1], fd));
-	}
-	return (1);
-}
-
 int	read_lines()
 {
 	int		i;
 	char	*line;
 	char	*raw_line;
 	int		map_started;
-	t_texture	*texture;
 
 	i = 0;
 	map_started = 0;
-	texture = NULL;
 	raw_line = get_next_line(data()->map_fd);
 	while (raw_line)
 	{
@@ -151,8 +173,6 @@ int	read_lines()
 			map_started = 1;
 		if (!map_started)
 		{
-			if (!handle_configs(&texture, raw_line))
-				return (0);
 			free(raw_line);
 			raw_line = get_next_line(data()->map_fd);
 			continue;
@@ -170,7 +190,6 @@ int	read_lines()
 		raw_line = get_next_line(data()->map_fd);
 	}
 	data()->map[i] = NULL;
-	data()->texture = texture;
 	return (1);
 }
 
