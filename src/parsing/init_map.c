@@ -1,5 +1,13 @@
 #include "cub3d.h"
 
+bool	allconfig()
+{
+	if (!data()->no_path || !data()->so_path 
+		|| !data()->we_path || !data()->ea_path)
+		return (false);
+	return (true);
+}
+
 bool	valid_map()
 {
 	char	*line;
@@ -24,7 +32,7 @@ bool	valid_map()
 			data()->width = ft_strlen(line);
 		line = get_next_line(data()->map_fd);
 	}
-	if (!data()->height || data()->player_count != 1 )
+	if (!data()->height || data()->player_count != 1 || !allconfig())
 		return (false);
 	return (true);
 }
@@ -116,6 +124,8 @@ bool		is_config(char *line)
 		while (j < word_count(splited[1], ','))
 		{
 			data()->floor[j] = ft_atoi(floor[j]);
+			if (data()->floor[j] > 255 || data()->floor[j] < 0)
+				return (false);
 			j++;
 		}
 		return (true);
@@ -127,6 +137,8 @@ bool		is_config(char *line)
 		while (j < word_count(splited[1], ','))
 		{
 			data()->ceiling[j] = ft_atoi(celling[j]);
+			if (data()->ceiling[j] > 255 || data()->ceiling[j] < 0)
+				return (false);
 			j++;
 		}
 		return (true);
