@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/11 18:41:15 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/11 21:05:22 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 
 static bool	game_input(mlx_t *mlx)
 {
-	data()->player->move_inp = 0;
-	data()->player->rotation_inp = 0;
+	t_player	*pl;
+
+	pl = data()->player;
+	pl->move_side = 0;
+	pl->move_forward = 0;
+	pl->rotation_inp = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		data()->player->move_inp = 1;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		data()->player->move_inp = -1;
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+		pl->move_forward = 1;
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
+		pl->move_forward = -1;
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+		pl->move_side = -1;
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+		pl->move_side = 1;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		data()->player->rotation_inp = -1;
+		pl->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		data()->player->rotation_inp = 1;
-	if (data()->player->move_inp || data()->player->rotation_inp)
+		pl->rotation_inp = 1;
+	if (pl->move_forward || pl->move_side || pl->rotation_inp)
 		return (true);
 	return (false);
 }
@@ -37,8 +45,12 @@ void	update_player(void)
 	t_player	*pl;
 
 	pl = data()->player;
-	new_p.x = pl->x + cos(pl->angle) * pl->move_inp * M_SPEED;
-	new_p.y = pl->y + sin(pl->angle) * pl->move_inp * M_SPEED;
+	new_p.x = pl->x
+		+ cos(pl->angle) * pl->move_forward * M_SPEED
+		+ cos(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
+	new_p.y = pl->y
+		+ sin(pl->angle) * pl->move_forward * M_SPEED
+		+ sin(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
 	if (can_move(new_p.x, pl->y))
 		pl->x = new_p.x;
 	if (can_move(pl->x, new_p.y))
