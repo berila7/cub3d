@@ -102,6 +102,7 @@ struct s_data
 	t_player	*player;
 	mlx_image_t	*w_img;
 	t_ray		*rays;
+	int			map_started;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;

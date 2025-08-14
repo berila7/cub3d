@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 13:13:20 by mberila           #+#    #+#             */
-/*   Updated: 2025/07/28 17:30:52 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/13 16:46:16 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (size != 0 && count * size / size != count)
 		return (NULL);
-	ptr = malloc(count * size);
+	ptr = gc_malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
 	ft_bzero(ptr, count * size);

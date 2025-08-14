@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:03:25 by mberila           #+#    #+#             */
-/*   Updated: 2025/07/28 17:25:59 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/13 16:38:02 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (malloc(1));
+		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	str = malloc((len + 1) * sizeof(char));
+	str = gc_malloc((len + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -56,7 +56,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	unsigned int	i;
 	unsigned int	j;
 
-	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	res = gc_malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
 		return (NULL);
 	i = 0;

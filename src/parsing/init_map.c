@@ -90,6 +90,72 @@ int	get_color(int r, int g, int b, int a)
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
+bool handle_redir(char *line, char *config)
+{
+
+	if (!data()->no_path && ft_strncmp(line, "NO ", 3) == 0)
+	{
+		data()->no_path = config;
+		return (true);
+	}
+	if (!data()->so_path && ft_strncmp(line, "SO ", 3) == 0)
+	{
+		data()->so_path = config;
+		return (true);
+	}
+	if (!data()->we_path && ft_strncmp(line, "WE ", 3) == 0)
+	{
+		data()->we_path = config;
+		return (true);
+	}
+	if (!data()->ea_path && ft_strncmp(line, "EA ", 3) == 0)
+	{
+		data()->ea_path = config;
+		return (true);
+	}
+	return (false);
+}
+
+bool	handle_floor(char *line, char *config)
+{
+	printf("line: %s\n", line);
+	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0)
+	{
+		char **floor = gc_split_char(config, ',');
+		int j = 0;
+		while (j < word_count(config, ','))
+		{
+			if (ft_atoi(floor[j]) > 255 || ft_atoi(floor[j]) < 0)
+			{
+				printf("FLOOR COLORS: %d\n", ft_atoi(floor[j]));
+				return (false);
+			}
+			j++;
+		}
+		data()->floor = get_color(ft_atoi(floor[0]), ft_atoi(floor[1]), ft_atoi(floor[2]), 255);
+		return (true);
+	}
+	return (false);
+}
+
+bool	handle_ceiling(char *line, char *config)
+{
+	if (data()->ceiling == -1 && ft_strncmp(line, "C ", 2) == 0)
+	{
+		char **ceiling = gc_split_char(config, ',');
+		int j = 0;
+		while (j < word_count(config, ','))
+		{
+			if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
+				return (false);
+			j++;
+		}
+		data()->ceiling = get_color(ft_atoi(ceiling[0]), ft_atoi(ceiling[1]), ft_atoi(ceiling[2]), 255);
+		return (true);
+	}
+	return (false);
+}
+
 bool		is_config(char *line)
 {
 	int		i;
@@ -97,60 +163,20 @@ bool		is_config(char *line)
 	char	**splited;
 
 	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	if (line[i] == '\0' || line[i] == '\n')
-		return (true);
 	newline = parse_line(line);
+	while (newline[i] && (newline[i] == ' ' || newline[i] == '\t'))
+		i++;
+	if (newline[i] == '\0' || newline[i] == '\n')
+		return (true);
 	splited = gc_split(newline);
 	if (gc_word_count(newline) == 2)
 	{
-		if (!data()->no_path && ft_strncmp(&line[i], "NO ", 3) == 0)
-		{
-			data()->no_path = splited[1];
+		if (handle_redir(&newline[i], splited[1]))
 			return (true);
-		}
-		if (!data()->so_path && ft_strncmp(&line[i], "SO ", 3) == 0)
-		{
-			data()->so_path = splited[1];
+		else if (handle_floor(&newline[i], splited[1]))
 			return (true);
-		}
-		if (!data()->we_path && ft_strncmp(&line[i], "WE ", 3) == 0)
-		{
-			data()->we_path = splited[1];
+		else if (handle_ceiling(&newline[i], splited[1]))
 			return (true);
-		}
-		if (!data()->ea_path && ft_strncmp(&line[i], "EA ", 3) == 0)
-		{
-			data()->ea_path = splited[1];
-			return (true);
-		}
-		if (data()->floor == -1 && ft_strncmp(&line[i], "F ", 2) == 0)
-		{
-			char **floor = gc_split_char(splited[1], ',');
-			int j = 0;
-			while (j < word_count(splited[1], ','))
-			{
-				if (ft_atoi(floor[j]) > 255 || ft_atoi(floor[j]) < 0)
-					return (false);
-				j++;
-			}
-			data()->floor = get_color(ft_atoi(floor[0]), ft_atoi(floor[1]), ft_atoi(floor[2]), 255);
-			return (true);
-		}
-		if (data()->ceiling == -1 && ft_strncmp(&line[i], "C ", 2) == 0)
-		{
-			char **ceiling = gc_split_char(splited[1], ',');
-			int j = 0;
-			while (j < word_count(splited[1], ','))
-			{
-				if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
-					return (false);
-				j++;
-			}
-			data()->ceiling = get_color(ft_atoi(ceiling[0]), ft_atoi(ceiling[1]), ft_atoi(ceiling[2]), 255);
-			return (true);
-		}
 	}
 	return (false);
 }
@@ -183,30 +209,23 @@ int	read_lines()
 	int		i;
 	char	*line;
 	char	*raw_line;
-	int		map_started;
 
 	i = 0;
-	map_started = 0;
 	raw_line = get_next_line(data()->map_fd);
 	while (raw_line)
 	{
-		if (is_map_line(raw_line) && !map_started)
-			map_started = 1;
-		if (!map_started)
+		if (is_map_line(raw_line) && !data()->map_started)
+			data()->map_started = 1;
+		if (!data()->map_started)
 		{
-			free(raw_line);
 			raw_line = get_next_line(data()->map_fd);
 			continue;
 		}
 		line = parse_line(raw_line);
 		if (!line)
-		{
-			free(raw_line);
 			return (0);
-		}
 		line = pad_line(line);
 		data()->map[i] = line;
-		free(raw_line);
 		i++;
 		raw_line = get_next_line(data()->map_fd);
 	}

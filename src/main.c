@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 {
 	t_data	**game_data;
 
+	// atexit(f);
 	game_data = get_data();
 	*game_data = gc_malloc(sizeof(t_data));
 	if (ac == 2)

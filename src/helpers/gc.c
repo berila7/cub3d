@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/28 18:37:00 by anachat          ###   ########.fr       */
+/*   Updated: 2025/08/13 16:43:42 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	gc_free(void *ptr)
 		prev = curr;
 		curr = curr->next;
 	}
-	free(ptr);
+	// free(ptr);
 }
 
 void	gc_free_all(void)
@@ -62,7 +62,10 @@ void	gc_free_all(void)
 	{
 		next = curr->next;
 		if (curr->ptr)
+		{
 			free(curr->ptr);
+			curr->ptr = NULL;
+		}
 		free(curr);
 		curr = next;
 	}
