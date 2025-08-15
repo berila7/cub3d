@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nachat <nachat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/13 16:02:54 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/15 14:55:10 by nachat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void track_mouse(int *rotation_inp)
+{
+	int	x;
+	int	y;
+	(void)rotation_inp;
+	mlx_get_mouse_pos(data()->mlx, &x, &y);
+	// if (x != WINDOW_W / 2)
+	// 	printf("changed x: %d\n", x);
+	// else
+	// 	printf("x: %d\n", x);
+
+	
+	if (x < WINDOW_W / 2)
+		*rotation_inp = -1;
+	else if (x > WINDOW_W / 2)
+		*rotation_inp = 1;
+	// data()->mouse_x = x;
+	mlx_set_mouse_pos(data()->mlx, WINDOW_W / 2, WINDOW_H / 2);
+}
 
 static bool	game_input(mlx_t *mlx)
 {
@@ -34,6 +54,7 @@ static bool	game_input(mlx_t *mlx)
 		pl->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		pl->rotation_inp = 1;
+	track_mouse(&pl->rotation_inp);
 	if (pl->move_forward || pl->move_side || pl->rotation_inp)
 		return (true);
 	return (false);
@@ -93,6 +114,7 @@ int	game(void)
 	get_pl_pos(data()->map);
 	data()->player->x = data()->player_x * TILE_SIZE;
 	data()->player->y = data()->player_y * TILE_SIZE;
+	data()->mouse_x = WINDOW_W / 2;
 	render_game();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
