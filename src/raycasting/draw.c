@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nachat <nachat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/13 16:26:58 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/15 17:48:00 by nachat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player(void)
+void	draw_player(t_point pos)
 {
 	t_player	*pl;
 	int			size;
 
 	size = 10;
 	pl = data()->player;
-	draw_rect(new_point(pl->x - (size / 2), pl->y - (size / 2)),
+	draw_rect(new_point(pos.x - (size / 2), pos.y - (size / 2)),
 		size, size, 0xFF0000FF);
-	draw_line(new_point(pl->x, pl->y), new_point(pl->x + cos(pl->angle) * 50,
-			pl->y + sin(pl->angle) * 50), 0xFF0000FF);
+	draw_line(new_point(pos.x, pos.y), new_point(pos.x + cos(pl->angle) * 50,
+			pos.y + sin(pl->angle) * 50), 0xFF0000FF);
 }
 
 void	cast_rays(void)
@@ -72,4 +72,54 @@ void	draw_map(void)
 		}
 		i++;
 	}
+}
+
+int	get_px_color(double x, double y)
+{
+	char	**map;
+	int		color;
+	int		fx;
+	int		fy;
+
+	map = data()->map;
+	fy = (int)(y / TILE_SIZE);
+	fx = (int)(x / TILE_SIZE);
+	if (!((fx >= 0 && fx < data()->width
+         && fy >= 0 && fy < data()->height)))
+		return (0x1ca3ecFF);
+	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
+		color = 0x4B4B4BFF;
+	else // 0
+		color = 0xC2B280FF;
+	return (color);
+}
+
+void	render_minimap()
+{
+	int	mapx;
+	int	mapy;
+
+	mapx = floor(data()->player->x / TILE_SIZE);
+	mapy = floor(data()->player->y / TILE_SIZE);
+	double starty = data()->player->y - (MINIMAP_W / 2);
+	double startx = data()->player->x - (MINIMAP_W / 2);
+	double x = startx;
+	double y = starty;
+	draw_rect(new_point(WINDOW_W - (MINIMAP_W + 8), 0), (MINIMAP_W + 8), (MINIMAP_W + 8), 0x000000FF);
+	printf("startX: %2f, startY: %2f\n", startx, starty);
+	while (y < starty + MINIMAP_W)
+	{
+		x = startx;
+		while (x < startx + MINIMAP_W)
+		{
+			draw_pixel(
+				(WINDOW_W - MINIMAP_W) + (x - startx),
+				(y - starty),
+				get_px_color(x, y)
+			);
+			x++;
+		}
+		y++;
+	}
+	draw_player(new_point(WINDOW_W - (MINIMAP_W / 2), MINIMAP_W / 2));
 }

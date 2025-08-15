@@ -12,8 +12,8 @@ GNL_DIR			=	$(SRC_DIR)/lib/gnl
 MLX_DIR			=	$(SRC_DIR)/lib/MLX42
 
 MLX_LIB			=	$(MLX_DIR)/build/libmlx42.a
-MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/mnt/homes/$(USER)/.brew/opt/glfw/lib/" -I"/mnt/homes/$(USER)/.brew/include"
-# MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
+# MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/mnt/homes/$(USER)/.brew/opt/glfw/lib/" -I"/mnt/homes/$(USER)/.brew/include"
+MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
 
 
 RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c \

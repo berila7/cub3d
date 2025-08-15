@@ -24,11 +24,12 @@
 // # define TILE_SIZE 100
 # define FOV_ANGLE 60 
 
+# define MINIMAP_W 160
 # define WINDOW_W 1000
 # define WINDOW_H 500
 # define TILE_SIZE 40
-# define M_SPEED 1.8
-# define R_SPEED 0.04
+# define M_SPEED 1.3
+# define R_SPEED 0.02
 # define RAY_THICKNESS 1
 
 typedef struct s_data		t_data;
@@ -163,9 +164,10 @@ t_point		new_point(double x, double y);
 void		draw_pixel(int x, int y, int color);
 void		draw_line(t_point p1, t_point p2, int color);
 void		draw_rect(t_point start, int w, int h, int color);
-void		draw_player(void);
+void		draw_player(t_point pos);
 void		update_player(void);
 void		cast_rays(void);
+void		render_minimap();
 
 bool		in_window(double x, double y);
 bool		in_map(double x, double y);
