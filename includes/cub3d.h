@@ -110,6 +110,11 @@ struct s_data
 	int			floor;
 	int			ceiling;
 	char		**map;
+
+	mlx_texture_t *no_tex;
+	mlx_texture_t *so_tex;
+	mlx_texture_t *we_tex;
+	mlx_texture_t *ea_tex;
 };
 
 char		*ft_strrchr(const char *str, int c);
@@ -173,5 +178,9 @@ bool		can_move(double x, double y);
 void		get_pl_pos(char **map);
 void		find_hit(t_ray *ray);
 void		render_wall_strip(t_ray *ray, double line_x);
+void 		render_textured_column(const t_ray *ray, int screen_x, double line_h);
+
+int			load_textures(void);
+void		unload_textures(void);
 
 #endif
