@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nachat <nachat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/15 17:48:00 by nachat           ###   ########.fr       */
+/*   Updated: 2025/08/30 10:45:06 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	get_px_color(double x, double y)
          && fy >= 0 && fy < data()->height)))
 		return (0x1ca3ecFF);
 	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
-		color = 0x4B4B4BFF;
+		color = WALL_COLOR;
 	else // 0
 		color = 0xC2B280FF;
 	return (color);
@@ -101,22 +101,19 @@ void	render_minimap()
 
 	mapx = floor(data()->player->x / TILE_SIZE);
 	mapy = floor(data()->player->y / TILE_SIZE);
-	double starty = data()->player->y - (MINIMAP_W / 2);
-	double startx = data()->player->x - (MINIMAP_W / 2);
-	double x = startx;
-	double y = starty;
+	int starty = data()->player->y - (MINIMAP_W / 2);
+	int startx = data()->player->x - (MINIMAP_W / 2);
+	int x = startx;
+	int y = starty;
 	draw_rect(new_point(WINDOW_W - (MINIMAP_W + 8), 0), (MINIMAP_W + 8), (MINIMAP_W + 8), 0x000000FF);
-	printf("startX: %2f, startY: %2f\n", startx, starty);
+	printf("startX: %d, startY: %d\n", startx, starty);
 	while (y < starty + MINIMAP_W)
 	{
 		x = startx;
 		while (x < startx + MINIMAP_W)
 		{
-			draw_pixel(
-				(WINDOW_W - MINIMAP_W) + (x - startx),
-				(y - starty),
-				get_px_color(x, y)
-			);
+			draw_pixel((WINDOW_W - MINIMAP_W) + (x - startx),
+				(y - starty), get_px_color(x, y));
 			x++;
 		}
 		y++;

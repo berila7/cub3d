@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 10:47:03 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/13 14:45:11 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/30 10:46:17 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_wall_strip(t_ray *ray, double line_x)
 	line_y = (WINDOW_H / 2) - (line_h / 2);
 	color = 0xAA0000FF;
 	if (ray->was_vert)
-		color = 0xFF0000FF;
+		color = WALL_COLOR;
 	if (line_y < 0.0)
 		line_y = 0;
 	if (line_x < 0.0)

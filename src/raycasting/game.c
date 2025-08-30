@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nachat <nachat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/15 17:43:33 by nachat           ###   ########.fr       */
+/*   Updated: 2025/08/30 10:59:50 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	render_game(void)
 	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, data()->floor);
 	update_player();
 	cast_rays();
+	t_point	center = new_point(WINDOW_W / 2, WINDOW_H / 2);
+	int thick = 2;
+	int h = 20;
+	draw_rect(new_point(center.x - h/2, center.y - thick/2), h, thick, 0xCCCCCCCC);
+	draw_rect(new_point(center.x - thick/2, center.y - h/2), thick, h, 0xCCCCCCCC);
 	render_minimap();
 }
 
@@ -92,8 +97,9 @@ int	game(void)
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	get_pl_pos(data()->map);
-	data()->player->x = data()->player_x * TILE_SIZE;
-	data()->player->y = data()->player_y * TILE_SIZE;
+	
+	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
+	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);

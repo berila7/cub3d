@@ -12,6 +12,8 @@
 
 # define MAX_DOUBLE 1.7976931348623157e+308
 
+# define WALL_COLOR 0xDDFF00FF
+
 # define P_NORTH 'N'
 # define P_SOUTH 'S'
 # define P_EAST 'E'
