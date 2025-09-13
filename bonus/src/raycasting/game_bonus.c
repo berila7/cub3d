@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 12:01:24 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:24:15 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	render_game(void)
 	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, data()->floor);
 	update_player();
 	cast_rays();
+	render_minimap();
 }
 
 void	game_loop(void *param)
