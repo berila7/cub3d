@@ -1,7 +1,7 @@
-NO ./textures/texture.png
-SO ./textures/texture.png
-WE ./textures/texture.png
-EA ./textures/texture.png
+NO ./textures/no_text.png
+SO ./textures/so_text.png
+WE ./textures/no_text.png
+EA ./textures/so_text.png
 
 F 150,75,0
 C 130,200,229
