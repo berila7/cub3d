@@ -44,10 +44,21 @@ void unload_textures(void)
 static inline mlx_texture_t *pick_wall_texture(const t_ray *ray)
 {
 	t_data *d = data();
+
 	if (ray->was_vert)
-		return ray->is_right ? d->ea_tex : d->we_tex;
+	{
+		if (ray->is_right)
+			return d->ea_tex;
+		else
+			return d->we_tex;
+	}
 	else
-		return ray->is_down ? d->so_tex : d->no_tex;
+	{
+		if (ray->is_down)
+			return d->so_tex;
+		else
+			return d->no_tex;
+	}
 }
 
 static inline uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
