@@ -2,7 +2,7 @@ NAME			=	cub3D
 NAME_BONUS		=	cub3D_bonus
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror -fsanitize=address -g
+FLAGS			=	-Wall -Wextra -Werror #-fsanitize=address -g
 CFLAGS			=	$(FLAGS) -Imandatory/includes
 CFLAGS_B		=	$(FLAGS) -Ibonus/includes
 
@@ -65,14 +65,14 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 
 mandatory/src/%.o: mandatory/src/%.c mandatory/includes/cub3d.h
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(NAME_BONUS): $(OBJS_BONUS)
 	$(CC) $(CFLAGS_B) $(OBJS_BONUS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
 
 bonus/src/%_bonus.o: bonus/src/%_bonus.c bonus/includes/cub3d_bonus.h
-	$(CC) $(CFLAGS_B) -c $< -o $@ 
+	$(CC) $(CFLAGS_B) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
