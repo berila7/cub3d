@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/no_text.png
+SO ./textures/we_text.png
+WE ./textures/we_text.png
+EA ./textures/we_text.png
 
 F 255,0,0
 C 0,0,0
