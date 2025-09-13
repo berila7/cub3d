@@ -69,8 +69,13 @@ static inline uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
 
 static inline int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 {
-	double offset = ray->was_vert ? fmod(ray->hit.y, (double)TILE_SIZE)
-	                              : fmod(ray->hit.x, (double)TILE_SIZE);
+	double offset;
+
+	if (ray->was_vert)
+		offset = fmod(ray->hit.y, (double)TILE_SIZE);
+	else
+		offset = fmod(ray->hit.x, (double)TILE_SIZE);
+
 	int tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
 
 	// Flip horizontally to make orientation feel natural.
@@ -79,10 +84,14 @@ static inline int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 	else if (!ray->was_vert && ray->is_down)
 		tx = (int)tex->width - 1 - tx;
 
-	if (tx < 0) tx = 0;
-	if (tx >= (int)tex->width) tx = (int)tex->width - 1;
+	if (tx < 0)
+		tx = 0;
+	if (tx >= (int)tex->width)
+		tx = (int)tex->width - 1;
+
 	return tx;
 }
+
 
 // Draw one textured vertical column at screen x using the ray result.
 void render_textured_column(const t_ray *ray, int screen_x, double line_h)
