@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/13 16:02:54 by mberila          ###   ########.fr       */
+/*   Updated: 2025/08/20 13:40:38 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ int	game(void)
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "Test Cub3d", false);
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
+
+	// Load textures before any rendering
+	if (load_textures() != 0)
+	{
+		fprintf(stderr, "Failed to load textures. Check your .cub paths.\n");
+		mlx_terminate(data()->mlx);
+		return (1);
+	}
+
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
@@ -96,6 +105,9 @@ int	game(void)
 	render_game();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
+
+	// Cleanup textures before terminating MLX
+	unload_textures();
 	mlx_terminate(data()->mlx);
 	return (0);
 }

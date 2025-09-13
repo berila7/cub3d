@@ -6,7 +6,7 @@
 /*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 10:47:03 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/19 11:26:28 by berila           ###   ########.fr       */
+/*   Updated: 2025/08/19 11:56:45 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 
 void	render_wall_strip(t_ray *ray, double line_x)
 {
-	double	fixed_dist;
-	double	line_h;
-	double	line_y;
-	int		color;
+	// Fish-eye correction (you already had this)
+	double fixed_dist = ray->dist * cos(normalize_angle(ray->angle - data()->player->angle));
+	if (fixed_dist < 0.0001)
+		fixed_dist = 0.0001;
 
-	fixed_dist = ray->dist * cos(normalize_angle(ray->angle
-				- data()->player->angle));
-	line_h = (WINDOW_H * TILE_SIZE) / fixed_dist;
-	line_y = (WINDOW_H / 2) - (line_h / 2);
-	color = 0xAA0000FF;
-	if (ray->was_vert)
-		color = 0xFF0000FF;
-	if (line_y < 0.0)
-		line_y = 0;
-	if (line_x < 0.0)
-		line_x = 0;
-	if (line_h > (double)WINDOW_H)
-		line_h = WINDOW_H;
-	if (line_h < 0.0)
-		line_h = 0;
-	if (line_y > (double)WINDOW_H)
-		line_y = WINDOW_H;
-	if (line_x > (double)WINDOW_W)
-		line_x = WINDOW_W;
-	draw_rect(new_point(line_x, line_y), RAY_THICKNESS, line_h, color);
+	// Projected wall height
+	double line_h = (WINDOW_H * TILE_SIZE) / fixed_dist;
+
+	// Clamp x to int pixel
+	int screen_x = (int)line_x;
+	if (screen_x < 0) screen_x = 0;
+	if (screen_x >= WINDOW_W) screen_x = WINDOW_W - 1;
+
+	// Draw textured wall column (also draws ceiling and floor for that column)
+	render_textured_column(ray, screen_x, line_h);
 }

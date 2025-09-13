@@ -1,9 +1,8 @@
 #include "cub3d.h"
+#include <stdint.h>
 
 static inline uint32_t pack_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
-	// Your code uses 0xRRGGBBAA (ex: 0xFF0000FF is red with full alpha),
-	// so keep this packing order.
 	return ((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | (uint32_t)a;
 }
 
@@ -77,6 +76,9 @@ static inline int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 // Draw one textured vertical column at screen x using the ray result.
 void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 {
+	int y;
+	int tx;
+
 	if (screen_x < 0 || screen_x >= WINDOW_W) return;
 
 	mlx_texture_t *tex = pick_wall_texture(ray);
@@ -92,14 +94,19 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 	if (wall_bottom > WINDOW_H) wall_bottom = WINDOW_H;
 
 	// Ceiling
-	for (int y = 0; y < wall_top; ++y)
+	y = 0;
+	while (y < wall_top)
+	{
 		draw_pixel(screen_x, y, data()->ceiling);
+		y++;
+	}
 
 	// Texture x coordinate is constant for this column
-	int tx = compute_tex_x(ray, tex);
+	tx = compute_tex_x(ray, tex);
 
 	// Draw wall section
-	for (int y = wall_top; y < wall_bottom; ++y)
+	y = wall_top;
+	while (++y < wall_bottom)
 	{
 		double dist_from_top = (double)y - wall_top_f;      // 0 .. line_h
 		double v = dist_from_top / line_h;                  // 0 .. 1
@@ -112,6 +119,7 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 	}
 
 	// Floor
-	for (int y = wall_bottom; y < WINDOW_H; ++y)
+	y = wall_bottom;
+	while (++y < WINDOW_H)
 		draw_pixel(screen_x, y, data()->floor);
 }
