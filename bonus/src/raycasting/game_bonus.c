@@ -6,11 +6,24 @@
 /*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 17:24:15 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:38:46 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static void track_mouse(int *rotation_inp)
+{
+	int	x;
+	int	y;
+
+	mlx_get_mouse_pos(data()->mlx, &x, &y);
+	if (x < WINDOW_W / 2)
+		*rotation_inp = -1;
+	else if (x > WINDOW_W / 2)
+		*rotation_inp = 1;
+	mlx_set_mouse_pos(data()->mlx, WINDOW_W / 2, WINDOW_H / 2);
+}
 
 static bool	game_input(mlx_t *mlx)
 {
@@ -34,6 +47,7 @@ static bool	game_input(mlx_t *mlx)
 		pl->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		pl->rotation_inp = 1;
+	track_mouse(&pl->rotation_inp);
 	if (pl->move_forward || pl->move_side || pl->rotation_inp)
 		return (true);
 	return (false);
