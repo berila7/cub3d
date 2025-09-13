@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 17:31:15 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:41:23 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	get_px_color(double x, double y)
 	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
 		color = 0x000000FF;
 	else // 0
-		color = data()->floor;
+		color = 0xf2c385FF;
 	return (color);
 }
 
