@@ -26,7 +26,7 @@ RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/dra
 
 RC_SRCS_B		=	$(RC_DIR_B)/game_bonus.c $(RC_DIR_B)/helpers_bonus.c $(RC_DIR_B)/point_bonus.c $(RC_DIR_B)/draw_bonus.c \
 					$(RC_DIR_B)/raycast_bonus.c $(RC_DIR_B)/render_walls_bonus.c $(RC_DIR_B)/draw_utils_bonus.c \
-					$(RC_DIR_B)/helpers2_bonus.c $(RC_DIR_B)/textures_bonus.c 
+					$(RC_DIR_B)/helpers2_bonus.c $(RC_DIR_B)/textures_bonus.c $(RC_DIR_B)/player_bonus.c
 
 SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
 					$(PARSING_DIR)/init_utils.c \

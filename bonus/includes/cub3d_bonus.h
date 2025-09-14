@@ -24,13 +24,14 @@
 // # define WINDOW_H 1000
 // # define TILE_SIZE 100
 # define FOV_ANGLE 60
+# define GUN_MAX_FRAMES 90
 
 # define MINIMAP_W 160
 # define WINDOW_W 1000
 # define WINDOW_H 500
 # define TILE_SIZE 80
 # define M_SPEED 10
-# define R_SPEED 0.15
+# define R_SPEED 0.1
 # define RAY_THICKNESS 1
 
 typedef struct s_data		t_data;
@@ -117,6 +118,19 @@ struct s_data
 	mlx_texture_t *so_tex;
 	mlx_texture_t *we_tex;
 	mlx_texture_t *ea_tex;
+
+	 mlx_texture_t *gun_texs[GUN_MAX_FRAMES];
+    mlx_image_t   *gun_imgs[GUN_MAX_FRAMES];
+    int32_t        gun_insts[GUN_MAX_FRAMES];
+    int            gun_frame_count;
+    int            gun_current_frame;
+    double         gun_fps;
+    double         gun_last_time;
+
+    mlx_texture_t *gun_tex;
+    mlx_image_t   *gun_img;
+    int32_t        gun_inst;
+
 };
 
 char		*ft_strrchr(const char *str, int c);
@@ -185,5 +199,9 @@ void 		render_textured_column(const t_ray *ray, int screen_x, double line_h);
 
 int			load_textures(void);
 void		unload_textures(void);
+int			load_weapon(void);
+void		render_weapon(void);
+void		unload_weapon(void);
+void 		update_weapon_animation(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 17:38:46 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/14 15:24:24 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	render_game(void)
 	update_player();
 	cast_rays();
 	render_minimap();
+	render_weapon();
 }
 
 void	game_loop(void *param)
@@ -92,6 +93,8 @@ void	game_loop(void *param)
 
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
+	update_weapon_animation();
+    render_weapon();
 	if (input_changed)
 		render_game();
 }
@@ -110,6 +113,9 @@ int	game(void)
 		return (1);
 	}
 
+	if (load_weapon() != 0)
+		fprintf(stderr, "Failed to load weapon texture. Check your .cub paths.\n");
+
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
@@ -122,6 +128,7 @@ int	game(void)
 	mlx_loop(data()->mlx);
 
 	// Cleanup textures before terminating MLX
+	unload_weapon();
 	unload_textures();
 	mlx_terminate(data()->mlx);
 	return (0);
