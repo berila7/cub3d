@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 10:47:03 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 12:00:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/15 20:10:58 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 void	render_wall_strip(t_ray *ray, double line_x)
 {
-	// Fish-eye correction (you already had this)
 	double fixed_dist = ray->dist * cos(normalize_angle(ray->angle - data()->player->angle));
 	if (fixed_dist < 0.0001)
 		fixed_dist = 0.0001;
 
-	// Projected wall height
 	double line_h = (WINDOW_H * TILE_SIZE) / fixed_dist;
 
-	// Clamp x to int pixel
 	int screen_x = (int)line_x;
 	if (screen_x < 0) screen_x = 0;
 	if (screen_x >= WINDOW_W) screen_x = WINDOW_W - 1;
 
-	// Draw textured wall column (also draws ceiling and floor for that column)
 	render_textured_column(ray, screen_x, line_h);
 }
