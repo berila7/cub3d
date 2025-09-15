@@ -1,16 +1,16 @@
 #include "cub3d_bonus.h"
 
-static inline uint32_t pack_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+static uint32_t pack_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
 	return ((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | (uint32_t)a;
 }
 
-static mlx_texture_t *load_png_or_die(const char *path)
+static mlx_texture_t *load_png(const char *path)
 {
 	mlx_texture_t *t = mlx_load_png(path);
 	if (!t)
 	{
-		fprintf(stderr, "Error: Failed to load texture: %s\n", path);
+		perror("Error: Failed to load texture: %s\n");
 		exit(EXIT_FAILURE);
 	}
 	return t;
@@ -21,17 +21,17 @@ int load_textures(void)
 	t_data *d = data();
 	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
 	{
-		fprintf(stderr, "Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
+		perror("Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
 		return 1;
 	}
-	d->no_tex = load_png_or_die(d->no_path);
-	d->so_tex = load_png_or_die(d->so_path);
-	d->we_tex = load_png_or_die(d->we_path);
-	d->ea_tex = load_png_or_die(d->ea_path);
+	d->no_tex = load_png(d->no_path);
+	d->so_tex = load_png(d->so_path);
+	d->we_tex = load_png(d->we_path);
+	d->ea_tex = load_png(d->ea_path);
 	return 0;
 }
 
-static inline mlx_texture_t *pick_wall_texture(const t_ray *ray)
+static mlx_texture_t *pick_wall_texture(const t_ray *ray)
 {
 	t_data *d = data();
 
@@ -51,13 +51,13 @@ static inline mlx_texture_t *pick_wall_texture(const t_ray *ray)
 	}
 }
 
-static inline uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
+static uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
 {
 	const uint8_t *p = tex->pixels + (y * tex->width + x) * tex->bytes_per_pixel;
 	return pack_rgba(p[0], p[1], p[2], p[3]);
 }
 
-static inline int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
+static int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 {
 	double offset;
 
@@ -106,9 +106,7 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 		draw_pixel(screen_x, y, data()->ceiling);
 		y++;
 	}
-
 	tx = compute_tex_x(ray, tex);
-
 	y = wall_top;
 	while (++y < wall_bottom)
 	{
@@ -121,7 +119,6 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 		int color = (int)sample_texel_rgba(tex, tx, ty);
 		draw_pixel(screen_x, y, color);
 	}
-
 	y = wall_bottom;
 	while (++y < WINDOW_H)
 		draw_pixel(screen_x, y, data()->floor);
