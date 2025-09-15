@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/14 20:04:28 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/15 20:14:48 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,26 +161,4 @@ void render_weapon(void)
     }
     if (data()->w_img && data()->w_img->count > 0)
         mlx_set_instance_depth(&data()->w_img->instances[0], 0);
-}
-
-void unload_weapon(void)
-{
-    for (int i = 0; i < data()->gun_frame_count; ++i)
-    {
-        if (data()->gun_imgs[i])
-        {
-            mlx_delete_image(data()->mlx, data()->gun_imgs[i]);
-            data()->gun_imgs[i] = NULL;
-        }
-        if (data()->gun_texs[i])
-        {
-            mlx_delete_texture(data()->gun_texs[i]);
-            data()->gun_texs[i] = NULL;
-        }
-    }
-    data()->gun_frame_count = 0;
-    data()->gun_current_frame = 0;
-    data()->gun_tex = NULL;
-    data()->gun_img = NULL;
-    data()->gun_inst = -1;
 }
