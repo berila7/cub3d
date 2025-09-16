@@ -11,7 +11,7 @@
 # include "../../lib/gnl/get_next_line.h"
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
 
-# define MAX_DOUBLE 1.7976931348623157e+308
+# define MAX_DOUBLE 1.7976931348623157e+308	
 
 # define P_NORTH 'N'
 # define P_SOUTH 'S'
@@ -24,7 +24,7 @@
 // # define WINDOW_H 1000
 // # define TILE_SIZE 100
 # define FOV_ANGLE 60
-# define GUN_MAX_FRAMES 90
+# define FRAMES 50
 
 # define MINIMAP_W 160
 # define WINDOW_W 1000
@@ -33,6 +33,7 @@
 # define M_SPEED 10
 # define R_SPEED 0.1
 # define RAY_THICKNESS 1
+# define ANIMATION_SPEED 4
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
@@ -114,22 +115,20 @@ struct s_data
 	int			ceiling;
 	char		**map;
 
+	bool		is_shooting;
+	bool		r_key_was_pressed;
+	bool		r_key_pressed;
+
 	mlx_texture_t *no_tex;
 	mlx_texture_t *so_tex;
 	mlx_texture_t *we_tex;
 	mlx_texture_t *ea_tex;
 
-	 mlx_texture_t *gun_texs[GUN_MAX_FRAMES];
-    mlx_image_t   *gun_imgs[GUN_MAX_FRAMES];
-    int32_t        gun_insts[GUN_MAX_FRAMES];
-    int            gun_frame_count;
-    int            gun_current_frame;
-    double         gun_fps;
-    double         gun_last_time;
-
-    mlx_texture_t *gun_tex;
-    mlx_image_t   *gun_img;
-    int32_t        gun_inst;
+	mlx_texture_t	*gun_tex[FRAMES];
+	mlx_image_t		*gun_img[FRAMES];
+	int32_t			gun_inst[FRAMES];
+	int				current_frame;
+	int				animation_timer;
 
 };
 
@@ -141,6 +140,7 @@ char		*get_next_line(int fd);
 bool		valid_line(char *line);
 void		free_map(char **map, int height);
 bool		valid_map();
+char		*ft_itoa(int n);
 int			ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
@@ -198,10 +198,7 @@ void		render_wall_strip(t_ray *ray, double line_x);
 void 		render_textured_column(const t_ray *ray, int screen_x, double line_h);
 
 int			load_textures(void);
-void		unload_textures(void);
-int			load_weapon(void);
-void		render_weapon(void);
-void		unload_weapon(void);
-void 		update_weapon_animation(void);
+void		load_weapon(void);
+void		update_animations(void);
 
 #endif

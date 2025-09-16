@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/20 13:40:38 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/16 10:50:09 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	game(void)
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	get_pl_pos(data()->map);
-	data()->player->x = data()->player_x * TILE_SIZE;
-	data()->player->y = data()->player_y * TILE_SIZE;
+	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
+	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);

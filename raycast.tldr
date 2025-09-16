@@ -119,22 +119,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -124.14487723142241,
-			"y": -380.3234440429281,
-			"lastActivityTimestamp": 1757963218928,
-			"meta": {}
-		},
-		{
-			"id": "asset:1002924033",
-			"typeName": "asset",
-			"type": "bookmark",
-			"props": {
-				"src": "https://www.youtube.com/@elbalf",
-				"description": "معاك الاسطى عبده البلف، اكتر واحد بيفهم كورة في الدنيا. \nالتواضع سر نجاحي.\nمواليد نجع المطايسة 06/09/1930 \nالسيرة الذاتية قريبا في الأسواق",
-				"image": "https://yt3.googleusercontent.com/mmZqJWkttckUh971UyEJod1fgmQRJZ8TUmAupgTDh-UtObne5Yp_aQIMmUVsptVEqRaI5TN0RR0=s900-c-k-c0x00ffffff-no-rj",
-				"favicon": "https://www.youtube.com/s/desktop/1c9f2583/img/favicon_32x32.png",
-				"title": "EL BALF - الاسطى عبده الـبلــف"
-			},
+			"x": 280.6761684889243,
+			"y": 880.9310154597733,
+			"lastActivityTimestamp": 1758017454135,
 			"meta": {}
 		},
 		{
@@ -1031,9 +1018,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 155.48239430519143,
-			"y": 626.4193858185768,
-			"z": 0.41855002972385236,
+			"x": -130.78718801994106,
+			"y": -701.4586801205268,
+			"z": 1.9718298942658121,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1428,9 +1415,9 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:ZKYNxXIt1UsfBm0hLyCXv"
+				"shape:QfUyWi9s999awDzJYNDTE"
 			],
-			"hoveredShapeId": null,
+			"hoveredShapeId": "shape:QfUyWi9s999awDzJYNDTE",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -1784,25 +1771,6 @@
 			},
 			"parentId": "page:page",
 			"index": "a6W8R",
-			"typeName": "shape"
-		},
-		{
-			"x": 1824.6112245693967,
-			"y": 511.17059889383665,
-			"rotation": 0,
-			"isLocked": false,
-			"opacity": 1,
-			"meta": {},
-			"id": "shape:ZKYNxXIt1UsfBm0hLyCXv",
-			"type": "bookmark",
-			"props": {
-				"url": "https://www.youtube.com/@elbalf",
-				"w": 300,
-				"h": 320,
-				"assetId": "asset:1002924033"
-			},
-			"parentId": "page:page",
-			"index": "acAbX",
 			"typeName": "shape"
 		},
 		{
@@ -4016,7 +3984,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "default",
+				"type": "ew-resize",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -4026,8 +3994,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 673.3333129882812,
-				"h": 1013.8888549804688
+				"w": 673.3333740234375,
+				"h": 730.0000610351562
 			},
 			"insets": [
 				false,
@@ -4042,9 +4010,9 @@
 			"isChatting": false,
 			"highlightedUserIds": [],
 			"isFocused": true,
-			"devicePixelRatio": 1.8000000715255737,
+			"devicePixelRatio": 1.7999999523162842,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": false,
+			"isHoveringCanvas": true,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
@@ -5210,7 +5178,7 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 283.3333435058594,
+			"x": 282.03467139144743,
 			"y": 718.3333501285979,
 			"rotation": 0,
 			"isLocked": false,
@@ -5219,7 +5187,7 @@
 			"id": "shape:QfUyWi9s999awDzJYNDTE",
 			"type": "geo",
 			"props": {
-				"w": 15.217010498046875,
+				"w": 16.515682612458818,
 				"h": 238.66323852539062,
 				"geo": "rectangle",
 				"dash": "draw",

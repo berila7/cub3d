@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/15 20:24:55 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/16 14:53:37 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ static bool	game_input(mlx_t *mlx)
 		pl->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		pl->rotation_inp = 1;
+	if (mlx_is_key_down(mlx, MLX_KEY_SPACE) && !data()->is_shooting)
+    {
+        data()->is_shooting = true;
+        data()->current_frame = 0;
+        data()->animation_timer = 0;
+    }
 	track_mouse(&pl->rotation_inp);
 	if (pl->move_forward || pl->move_side || pl->rotation_inp)
 		return (true);
@@ -83,7 +89,6 @@ void	render_game(void)
 	update_player();
 	cast_rays();
 	render_minimap();
-	render_weapon();
 }
 
 void	game_loop(void *param)
@@ -93,10 +98,11 @@ void	game_loop(void *param)
 
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
-	update_weapon_animation();
-    render_weapon();
-	if (input_changed)
+	update_animations();
+	if (input_changed || data()->is_shooting)
+	{
 		render_game();
+	}
 }
 
 int	game(void)
@@ -111,18 +117,16 @@ int	game(void)
 		mlx_terminate(data()->mlx);
 		return (1);
 	}
-
-	if (load_weapon() != 0)
-		perror("Failed to load weapon texture. Check your .cub paths.\n");
-
+	
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
 	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
 	get_pl_pos(data()->map);
-	data()->player->x = data()->player_x * TILE_SIZE;
-	data()->player->y = data()->player_y * TILE_SIZE;
+	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
+	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
+	load_weapon();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);

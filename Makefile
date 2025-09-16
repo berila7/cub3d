@@ -32,7 +32,7 @@ SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init
 					$(PARSING_DIR)/init_utils.c \
 					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c \
+					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c\
 					$(UTILS_DIR)/ft_memset.c $(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
 					$(HELPERS_DIR)/gc.c $(HELPERS_DIR)/utils.c \
 					$(RC_SRCS) \
@@ -40,7 +40,7 @@ SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init
 
 SRCS_B			=	bonus/$(SRC_DIR)/main_bonus.c $(PARSING_DIR_B)/parser_bonus.c $(PARSING_DIR_B)/init_map_bonus.c \
 					$(PARSING_DIR_B)/map_validation_bonus.c $(PARSING_DIR_B)/init_utils_bonus.c \
-					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
+					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c $(UTILS_DIR)/ft_itoa.c\
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
 					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c \
 					$(UTILS_DIR)/ft_memset.c $(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
