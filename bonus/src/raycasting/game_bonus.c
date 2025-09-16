@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/16 14:53:37 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/16 15:23:30 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	render_game(void)
 		mlx_delete_image(data()->mlx, data()->w_img);
 	data()->w_img = mlx_new_image(data()->mlx, WINDOW_W, WINDOW_H);
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
+ 	mlx_set_instance_depth(data()->w_img->instances, 0);
 	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H / 2, data()->ceiling);
 	draw_rect(new_point(0, WINDOW_H / 2), WINDOW_W, WINDOW_H / 2, data()->floor);
 	update_player();

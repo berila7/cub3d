@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/16 14:54:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/16 15:24:32 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,5 @@ void	update_animations()
 		data()->current_frame = (data()->current_frame + 1) % FRAMES;
 		data()->gun_img[data()->current_frame]->enabled = true;
 		data()->animation_timer = 0;
-		// if (data()->current_frame == 0)
-		// {
-		// 	data()->is_shooting = false;
-		// 	data()->gun_img[data()->current_frame]->enabled = true;
-		// }
 	}
 }

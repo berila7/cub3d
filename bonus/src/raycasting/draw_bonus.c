@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 17:41:23 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/16 15:15:52 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ int	get_px_color(double x, double y)
 
 void	render_minimap()
 {
-	int	mapx;
-	int	mapy;
+	// int	mapx;
+	// int	mapy;
 
-	mapx = floor(data()->player->x / TILE_SIZE);
-	mapy = floor(data()->player->y / TILE_SIZE);
+	// mapx = floor(data()->player->x / TILE_SIZE);
+	// mapy = floor(data()->player->y / TILE_SIZE);
 	int starty = data()->player->y - (MINIMAP_W / 2);
 	int startx = data()->player->x - (MINIMAP_W / 2);
 	int x = startx;

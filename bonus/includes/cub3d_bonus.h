@@ -24,7 +24,7 @@
 // # define WINDOW_H 1000
 // # define TILE_SIZE 100
 # define FOV_ANGLE 60
-# define FRAMES 50
+# define FRAMES 180
 
 # define MINIMAP_W 160
 # define WINDOW_W 1000
@@ -33,7 +33,7 @@
 # define M_SPEED 10
 # define R_SPEED 0.1
 # define RAY_THICKNESS 1
-# define ANIMATION_SPEED 4
+# define ANIMATION_SPEED 2
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
