@@ -35,6 +35,10 @@
 # define RAY_THICKNESS 1
 # define ANIMATION_SPEED 2
 
+#define DOOR_CLOSED 'D'
+#define DOOR_OPEN   'd'
+#define INTERACT_DIST (TILE_SIZE * 0.6)
+
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
 typedef struct s_gcnode		t_gcnode;
@@ -115,14 +119,13 @@ struct s_data
 	int			ceiling;
 	char		**map;
 
-	bool		is_shooting;
-	bool		r_key_was_pressed;
-	bool		r_key_pressed;
-
 	mlx_texture_t *no_tex;
 	mlx_texture_t *so_tex;
 	mlx_texture_t *we_tex;
 	mlx_texture_t *ea_tex;
+
+	mlx_texture_t	*door_tex;
+	bool			space_was_dow;
 
 	mlx_texture_t	*gun_tex[FRAMES];
 	mlx_image_t		*gun_img[FRAMES];
@@ -200,5 +203,6 @@ void 		render_textured_column(const t_ray *ray, int screen_x, double line_h);
 int			load_textures(void);
 void		load_weapon(void);
 void		update_animations(void);
+int			load_door_texture(void);
 
 #endif

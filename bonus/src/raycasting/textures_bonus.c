@@ -31,9 +31,35 @@ int load_textures(void)
 	return 0;
 }
 
+static int map_cell_at_point(double x, double y)
+{
+	int fx = (int)(x / TILE_SIZE);
+	int fy = (int)(y / TILE_SIZE);
+	if (fy < 0 || fx < 0 || fy >= data()->height || fx >= data()->width)
+		return '1';
+	return data()->map[fy][fx];
+}
+
 static mlx_texture_t *pick_wall_texture(const t_ray *ray)
 {
 	t_data *d = data();
+	int offset_x = 0;
+	int offset_y = 0;
+	
+	if (ray->was_vert && !ray->is_right)
+		offset_x = 1;
+	if (!ray->was_vert && !ray->is_down)
+		offset_y = 1;
+	
+	int cell = map_cell_at_point(ray->hit.x - offset_x, ray->hit.y - offset_y);
+	
+	if (cell == DOOR_CLOSED || cell == DOOR_OPEN)
+	{
+		if (d->door_tex)
+			return d->door_tex;
+		else
+			return d->we_tex;
+	}
 
 	if (ray->was_vert)
 	{
@@ -122,4 +148,16 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 	y = wall_bottom;
 	while (++y < WINDOW_H)
 		draw_pixel(screen_x, y, data()->floor);
+}
+
+int load_door_texture(void)
+{
+	char *door_path = "textures/door.png";
+	data()->door_tex = mlx_load_png(door_path);
+	if (!data()->door_tex)
+	{
+		perror("Error: Failed to load texture: %s\n");
+		return (1);
+	}
+	return 0;
 }

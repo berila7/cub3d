@@ -6,7 +6,7 @@
 /*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/16 15:24:32 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:52:11 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ void	load_weapon(void)
 	}
 	data()->current_frame = 0;
 	data()->animation_timer = 0;
-	data()->is_shooting = false;
-	data()->r_key_pressed = false;
-	data()->r_key_was_pressed = false;
+	data()->space_was_dow = false;
 }
 
 void	update_animations()

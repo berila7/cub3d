@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 12:00:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/17 15:49:02 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ bool	has_wall_at(double x, double y)
 	fx = (int)(x / TILE_SIZE);
 	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
 		return (true);
-	return (data()->map[fy][fx] == '1');
+	char cell = data()->map[fy][fx];
+	if (cell == DOOR_CLOSED)
+		return (true);
+	return (cell == '1');
 }
 
 bool	in_map(double x, double y)

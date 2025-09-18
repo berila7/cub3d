@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers2_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 12:00:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/17 16:14:57 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	get_pl_pos(char **map)
 		j = -1;
 		while (++j < data()->width)
 		{
-			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
+			if (player_char(map[i][j]))
 			{
 				data()->player_y = i;
 				data()->player_x = j;

@@ -1,4 +1,3 @@
-// #include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 
@@ -15,6 +14,7 @@ int	valid_extension(char *filename)
 int	valid_char(char element)
 {
 	return (element == WALL || element == EMPTY 
+		|| element == DOOR_CLOSED || element == DOOR_OPEN
 		|| player_char(element)	|| element == ' ');
 }
 

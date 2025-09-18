@@ -1,7 +1,7 @@
-NO ./textures/ea_text.png
+NO ./textures/we_text.png
 SO ./textures/we_text.png
 WE ./textures/we_text.png
-EA ./textures/ea_text.png
+EA ./textures/we_text.png
 
 F 150,75,0
 C 130,200,229

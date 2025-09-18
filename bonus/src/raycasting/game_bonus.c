@@ -6,7 +6,7 @@
 /*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/16 15:23:30 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/17 16:19:18 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,24 @@ static bool	game_input(mlx_t *mlx)
 		pl->rotation_inp = -1;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		pl->rotation_inp = 1;
-	if (mlx_is_key_down(mlx, MLX_KEY_SPACE) && !data()->is_shooting)
-    {
-        data()->is_shooting = true;
-        data()->current_frame = 0;
-        data()->animation_timer = 0;
-    }
+
+	bool space_down = mlx_is_key_down(mlx, MLX_KEY_SPACE);
+	if (space_down && !data()->space_was_dow)
+	{
+		double check_x = data()->player->x + cos(data()->player->angle) * INTERACT_DIST;
+		double check_y = data()->player->y + sin(data()->player->angle) * INTERACT_DIST;
+		int fx = (int)(check_x / TILE_SIZE);
+		int fy = (int)(check_y / TILE_SIZE);
+		if (fy >= 0 && fx >= 0 && fy < data()->height && fx < data()->width)
+		{
+			char *cell = &data()->map[fy][fx];
+			if (*cell == DOOR_CLOSED)
+				*cell = DOOR_OPEN;
+			else if (*cell == DOOR_OPEN)
+				*cell = DOOR_CLOSED;
+		}
+	}
+	data()->space_was_dow = space_down;
 	track_mouse(&pl->rotation_inp);
 	if (pl->move_forward || pl->move_side || pl->rotation_inp)
 		return (true);
@@ -100,7 +112,7 @@ void	game_loop(void *param)
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
 	update_animations();
-	if (input_changed || data()->is_shooting)
+	if (input_changed)
 	{
 		render_game();
 	}
@@ -112,13 +124,12 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 
-	if (load_textures() != 0)
+	if (load_textures() != 0 || load_door_texture() != 0)
 	{
 		perror("Failed to load textures. Check your .cub paths.\n");
 		mlx_terminate(data()->mlx);
 		return (1);
 	}
-	
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);

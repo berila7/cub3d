@@ -65,7 +65,9 @@ int	check_holes(char **filled_map)
 		while (++width < (int)ft_strlen(data()->map[height]))
 		{
 			if (!player_char(data()->map[height][width]) 
-				&& data()->map[height][width] != '0')
+				&& data()->map[height][width] != '0'
+				&& data()->map[height][width] != DOOR_OPEN
+				&& data()->map[height][width] != DOOR_CLOSED)
 				continue ;
 			if (!width || !height || !data()->map[height + 1]
 				|| width == ((int)ft_strlen(data()->map[height]) - 1)

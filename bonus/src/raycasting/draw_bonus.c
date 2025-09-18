@@ -6,7 +6,7 @@
 /*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/16 15:15:52 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/17 16:07:14 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	draw_map(void)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == '0')
+			if (map[i][j] == 'N' || map[i][j] == '0' || map[i][j] == DOOR_OPEN)
 				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE),
 					TILE_SIZE, TILE_SIZE, 0xADD8E6FF);
-			else if (map[i][j] == '1')
+			else if (map[i][j] == '1' || map[i][j] == DOOR_CLOSED)
 				draw_rect(new_point(j * TILE_SIZE, i * TILE_SIZE),
 					TILE_SIZE, TILE_SIZE, 0x111111FF);
 			ind++;
@@ -90,6 +90,10 @@ int	get_px_color(double x, double y)
 		return (0x1ca3ecFF);
 	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
 		color = 0x000000FF;
+	else if (map[fy][fx] == DOOR_CLOSED)
+		color = 0x8B4513FF; // brown closed door
+	else if (map[fy][fx] == DOOR_OPEN)
+		color = 0xA0522D88; // semi-open/light brown
 	else // 0
 		color = 0xf2c385FF;
 	return (color);
