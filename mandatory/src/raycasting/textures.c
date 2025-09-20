@@ -10,7 +10,7 @@ static mlx_texture_t *load_png_or_die(const char *path)
 	mlx_texture_t *t = mlx_load_png(path);
 	if (!t)
 	{
-		perror("Error: Failed to load texture: %s\n", path);
+		perror("Error: Failed to load texture\n");
 		exit(EXIT_FAILURE);
 	}
 	return (t);
