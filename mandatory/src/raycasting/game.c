@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/16 10:50:09 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/20 11:11:43 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ int	game(void)
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 
-	// Load textures before any rendering
 	if (load_textures() != 0)
 	{
-		fprintf(stderr, "Failed to load textures. Check your .cub paths.\n");
+		perror("Failed to load textures. Check your .cub paths.\n");
 		mlx_terminate(data()->mlx);
 		return (1);
 	}
@@ -105,9 +104,6 @@ int	game(void)
 	render_game();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
-
-	// Cleanup textures before terminating MLX
-	unload_textures();
 	mlx_terminate(data()->mlx);
 	return (0);
 }
