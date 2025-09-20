@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/17 16:07:14 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/20 09:43:37 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	get_px_color(double x, double y)
 	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
 		color = 0x000000FF;
 	else if (map[fy][fx] == DOOR_CLOSED)
-		color = 0x8B4513FF; // brown closed door
+		color = 0x8B4513FF;
 	else if (map[fy][fx] == DOOR_OPEN)
-		color = 0xA0522D88; // semi-open/light brown
+		color = 0xA0522D88;
 	else // 0
 		color = 0xf2c385FF;
 	return (color);
