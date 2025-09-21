@@ -63,7 +63,6 @@ static mlx_texture_t *pick_wall_texture(const t_ray *ray)
 		else
 			return (d->we_tex);
 	}
-
 	if (ray->was_vert)
 	{
 		if (ray->is_right)
@@ -116,7 +115,8 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 	int y;
 	int tx;
 
-	if (screen_x < 0 || screen_x >= WINDOW_W) return;
+	if (screen_x < 0 || screen_x >= WINDOW_W)
+		return;
 
 	mlx_texture_t *tex = pick_wall_texture(ray);
 	if (!tex)
@@ -128,29 +128,20 @@ void render_textured_column(const t_ray *ray, int screen_x, double line_h)
 	int wall_bottom = (int)wall_bot_f;
 	if (wall_top < 0) wall_top = 0;
 	if (wall_bottom > WINDOW_H) wall_bottom = WINDOW_H;
-
-	y = 0;
-	while (y < wall_top)
-	{
-		draw_pixel(screen_x, y, data()->ceiling);
-		y++;
-	}
 	tx = compute_tex_x(ray, tex);
 	y = wall_top;
-	while (++y < wall_bottom)
+	while (y < wall_bottom)
 	{
-		double dist_from_top = (double)y - wall_top_f;      // 0 .. line_h
-		double v = dist_from_top / line_h;                  // 0 .. 1
+		double dist_from_top = (double)y - wall_top_f;
+		double v = dist_from_top / line_h;
 		int ty = (int)(v * (double)tex->height);
 		if (ty < 0) ty = 0;
 		if (ty >= (int)tex->height) ty = (int)tex->height - 1;
 
 		int color = (int)sample_texel_rgba(tex, tx, ty);
 		draw_pixel(screen_x, y, color);
+		y++;
 	}
-	y = wall_bottom;
-	while (++y < WINDOW_H)
-		draw_pixel(screen_x, y, data()->floor);
 }
 
 int load_door_texture(void)

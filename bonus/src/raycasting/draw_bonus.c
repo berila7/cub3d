@@ -6,12 +6,11 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/20 09:43:37 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/21 12:02:06 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
 
 void	draw_player(t_point pos)
 {
@@ -94,7 +93,7 @@ int	get_px_color(double x, double y)
 		color = 0x8B4513FF;
 	else if (map[fy][fx] == DOOR_OPEN)
 		color = 0xA0522D88;
-	else // 0
+	else
 		color = 0xf2c385FF;
 	return (color);
 }

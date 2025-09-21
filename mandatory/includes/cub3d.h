@@ -28,8 +28,8 @@
 # define WINDOW_W 1000
 # define WINDOW_H 500
 # define TILE_SIZE 80
-# define M_SPEED 10
-# define R_SPEED 0.15
+# define M_SPEED 5
+# define R_SPEED 0.06
 # define RAY_THICKNESS 1
 
 typedef struct s_data		t_data;
