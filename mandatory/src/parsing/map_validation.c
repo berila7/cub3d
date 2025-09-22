@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 10:08:24 by mberila           #+#    #+#             */
+/*   Updated: 2025/09/22 10:10:23 by mberila          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-char	**copy_map()
+char	**copy_map(void)
 {
-	int			i;
+	int		i;
 	char	**copy;
 
 	copy = gc_malloc(sizeof(char *) * (data()->height + 1));
@@ -22,8 +34,8 @@ char	**copy_map()
 
 bool	player_char(char element)
 {
-	if ( element == P_NORTH|| element == P_WEST 
-	|| element == P_EAST || element == P_SOUTH)
+	if (element == P_NORTH || element == P_WEST
+		|| element == P_EAST || element == P_SOUTH)
 		return (true);
 	return (false);
 }
@@ -49,37 +61,36 @@ void	find_char_pos(int *pos_x, int *pos_y)
 		}
 		i++;
 	}
-	
 }
 
 int	check_holes(char **filled_map)
 {
-	int	height;
-	int	width;
+	int	h;
+	int	w;
 
-	height = 0;
+	h = 0;
 	(void)filled_map;
-	while (height < data()->height)
+	while (h < data()->height)
 	{
-		width = -1;
-		while (++width < (int)ft_strlen(data()->map[height]))
+		w = -1;
+		while (++w < (int)ft_strlen(data()->map[h]))
 		{
-			if (!player_char(data()->map[height][width]) 
-				&& data()->map[height][width] != '0')
+			if (!player_char(data()->map[h][w])
+				&& data()->map[h][w] != '0')
 				continue ;
-			if (!width || !height || !data()->map[height + 1]
-				|| width == ((int)ft_strlen(data()->map[height]) - 1)
-				|| data()->map[height][width + 1] == ' ' || data()->map[height][width - 1] == ' '
-				|| data()->map[height + 1][width] == ' ' || data()->map[height - 1][width] == ' '
+			if (!w || !h || !data()->map[h + 1]
+				|| w == ((int)ft_strlen(data()->map[h]) - 1)
+				|| data()->map[h][w + 1] == ' ' || data()->map[h][w - 1] == ' '
+				|| data()->map[h + 1][w] == ' ' || data()->map[h - 1][w] == ' '
 			)
 				return (0);
 		}
-		height++;
+		h++;
 	}
 	return (1);
 }
 
-int	check_map()
+int	check_map(void)
 {
 	int		player_x;
 	int		player_y;

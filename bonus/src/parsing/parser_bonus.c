@@ -1,5 +1,16 @@
-#include "cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 10:02:17 by mberila           #+#    #+#             */
+/*   Updated: 2025/09/22 10:02:51 by mberila          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 
 int	valid_extension(char *filename)
 {
@@ -13,9 +24,9 @@ int	valid_extension(char *filename)
 
 int	valid_char(char element)
 {
-	return (element == WALL || element == EMPTY 
+	return (element == WALL || element == EMPTY
 		|| element == DOOR_CLOSED || element == DOOR_OPEN
-		|| player_char(element)	|| element == ' ');
+		|| player_char(element) || element == ' ');
 }
 
 void	count_elements(char element)
