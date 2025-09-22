@@ -81,11 +81,11 @@ static mlx_texture_t *pick_wall_texture(const t_ray *ray)
 
 static uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
 {
-	const uint8_t *p = tex->pixels + (y * tex->width + x) * tex->bytes_per_pixel;
+	uint8_t *p = tex->pixels + (y * tex->width + x) * tex->bytes_per_pixel;
 	return (pack_rgba(p[0], p[1], p[2], p[3]));
 }
 
-static int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
+static int compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 {
 	double offset;
 
@@ -110,7 +110,7 @@ static int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 }
 
 
-void render_textured_column(const t_ray *ray, int screen_x, double line_h)
+void render_textured_column(t_ray *ray, int screen_x, double line_h)
 {
 	int y;
 	int tx;

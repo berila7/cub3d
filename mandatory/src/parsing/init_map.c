@@ -118,7 +118,9 @@ bool handle_redir(char *line, char *config)
 
 bool	handle_floor(char *line, char *config)
 {
-	printf("line: %s\n", line);
+	uint32_t	alpha;
+
+	alpha = 255;
 	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0)
 	{
 		char **floor = gc_split_char(config, ',');
@@ -132,7 +134,8 @@ bool	handle_floor(char *line, char *config)
 			}
 			j++;
 		}
-		data()->floor = get_color(ft_atoi(floor[0]), ft_atoi(floor[1]), ft_atoi(floor[2]), 255);
+		data()->floor = pack_rgba((uint32_t)ft_atoi(floor[0]),
+		(uint32_t)ft_atoi(floor[1]), (uint32_t)ft_atoi(floor[2]), alpha);
 		return (true);
 	}
 	return (false);
@@ -140,6 +143,9 @@ bool	handle_floor(char *line, char *config)
 
 bool	handle_ceiling(char *line, char *config)
 {
+	uint32_t	alpha;
+
+	alpha = 255;
 	if (data()->ceiling == -1 && ft_strncmp(line, "C ", 2) == 0)
 	{
 		char **ceiling = gc_split_char(config, ',');
@@ -150,7 +156,8 @@ bool	handle_ceiling(char *line, char *config)
 				return (false);
 			j++;
 		}
-		data()->ceiling = get_color(ft_atoi(ceiling[0]), ft_atoi(ceiling[1]), ft_atoi(ceiling[2]), 255);
+		data()->ceiling = pack_rgba((uint32_t)ft_atoi(ceiling[0]),
+		(uint32_t)ft_atoi(ceiling[1]), (uint32_t)ft_atoi(ceiling[2]), alpha);
 		return (true);
 	}
 	return (false);

@@ -102,6 +102,18 @@ struct s_data
 	mlx_texture_t			*so_tex;
 	mlx_texture_t			*we_tex;
 	mlx_texture_t			*ea_tex;
+
+	mlx_texture_t			*tex;
+	int						y;
+	int						tx;
+	double					wall_top_f;
+	double					wall_bot_f;
+	int						wall_top;
+	int						wall_bottom;
+	double					dist_from_top;
+	double					v;
+	int						ty;
+	int						color;
 };
 
 char						*ft_strrchr(const char *str, int c);
@@ -110,7 +122,6 @@ int							ft_strcmp(const char *s1, const char *s2);
 int							valid_extension(char *filename);
 char						*get_next_line(int fd);
 bool						valid_line(char *line);
-void						free_map(char **map, int height);
 bool						valid_map();
 int							ft_atoi(const char *str);
 size_t						ft_strlen(const char *str);
@@ -164,8 +175,12 @@ bool						can_move(double x, double y);
 void						get_pl_pos(char **map);
 void						find_hit(t_ray *ray);
 void						render_wall_strip(t_ray *ray, double line_x);
-void 						render_textured_column(const t_ray *ray, int screen_x, double line_h);
+void 						render_textured_column(t_ray *ray, int screen_x, double line_h);
 int							load_textures(void);
-void						unload_textures(void);
+uint32_t					pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
+mlx_texture_t				*load_png_or_die(const char *path);
+int							load_textures(void);
+mlx_texture_t				*pick_wall_texture(const t_ray *ray);
+uint32_t					sample_rgba(mlx_texture_t *tex, int x, int y);
 
 #endif

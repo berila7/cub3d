@@ -119,9 +119,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 2120.267083033635,
-			"y": 886.3541996754298,
-			"lastActivityTimestamp": 1758364500264,
+			"x": -299.35305081352067,
+			"y": -92.96865749115321,
+			"lastActivityTimestamp": 1758551100642,
 			"meta": {}
 		},
 		{
@@ -1086,9 +1086,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -477.44701677337434,
-			"y": 1144.9567357908209,
-			"z": 0.2688466223705063,
+			"x": 522.607856722663,
+			"y": 339.5207354563014,
+			"z": 0.5484670576093806,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1551,10 +1551,8 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
-			"selectedShapeIds": [
-				"shape:Rt7cXJOV_46b-DW34_j_Y"
-			],
-			"hoveredShapeId": null,
+			"selectedShapeIds": [],
+			"hoveredShapeId": "shape:F6mQmiLKUG_TvLVEhdpUK",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -4228,13 +4226,11 @@
 		{
 			"followingUserId": null,
 			"opacityForNextShape": 1,
-			"stylesForNextShape": {
-				"tldraw:color": "light-green"
-			},
+			"stylesForNextShape": {},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "move",
+				"type": "default",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -4244,8 +4240,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 848.3333129882812,
-				"h": 729.9999389648438
+				"w": 1756.66650390625,
+				"h": 1013.8888549804688
 			},
 			"insets": [
 				false,

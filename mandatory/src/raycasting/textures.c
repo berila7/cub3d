@@ -1,78 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 13:39:31 by mberila           #+#    #+#             */
+/*   Updated: 2025/09/22 16:39:26 by mberila          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static uint32_t pack_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 {
-	return ((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | (uint32_t)a;
-}
-
-static mlx_texture_t *load_png_or_die(const char *path)
-{
-	mlx_texture_t *t = mlx_load_png(path);
-	if (!t)
-	{
-		perror("Error: Failed to load texture\n");
-		exit(EXIT_FAILURE);
-	}
-	return (t);
-}
-
-int load_textures(void)
-{
-	t_data *d = data();
-	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
-	{
-		perror("Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
-		return (1);
-	}
-	d->no_tex = load_png_or_die(d->no_path);
-	d->so_tex = load_png_or_die(d->so_path);
-	d->we_tex = load_png_or_die(d->we_path);
-	d->ea_tex = load_png_or_die(d->ea_path);
-	return (0);
-}
-
-static mlx_texture_t *pick_wall_texture(const t_ray *ray)
-{
-	t_data *d = data();
-
-	if (ray->was_vert)
-	{
-		if (ray->is_right)
-			return (d->ea_tex);
-		else
-			return (d->we_tex);
-	}
-	else
-	{
-		if (ray->is_down)
-			return (d->so_tex);
-		else
-			return (d->no_tex);
-	}
-}
-
-static uint32_t sample_texel_rgba(mlx_texture_t *tex, int x, int y)
-{
-	const uint8_t *p = tex->pixels + (y * tex->width + x) * tex->bytes_per_pixel;
-	return pack_rgba(p[0], p[1], p[2], p[3]);
-}
-
-static int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
-{
-	double offset;
+	double	offset;
+	int		tx;
 
 	if (ray->was_vert)
 		offset = fmod(ray->hit.y, (double)TILE_SIZE);
 	else
 		offset = fmod(ray->hit.x, (double)TILE_SIZE);
-
-	int tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
-
+	tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
 	if (ray->was_vert && !ray->is_right)
 		tx = (int)tex->width - 1 - tx;
 	else if (!ray->was_vert && ray->is_down)
 		tx = (int)tex->width - 1 - tx;
-
 	if (tx < 0)
 		tx = 0;
 	if (tx >= (int)tex->width)
@@ -80,35 +33,38 @@ static int compute_tex_x(const t_ray *ray, mlx_texture_t *tex)
 	return (tx);
 }
 
-
-void render_textured_column(const t_ray *ray, int screen_x, double line_h)
+void	check_boundaries(void)
 {
-	int y;
-	int tx;
+	if (data()->ty < 0)
+		data()->ty = 0;
+	if (data()->ty >= (int)data()->tex->height)
+		data()->ty = (int)data()->tex->height - 1;
+}
 
+void	render_textured_column(t_ray *ray, int screen_x, double line_h)
+{
 	if (screen_x < 0 || screen_x >= WINDOW_W)
-		return;
-	mlx_texture_t *tex = pick_wall_texture(ray);
-	if (!tex)
-		return;
-	double wall_top_f = (WINDOW_H / 2.0) - (line_h / 2.0);
-	double wall_bot_f = wall_top_f + line_h;
-	int wall_top = (int)wall_top_f;
-	int wall_bottom = (int)wall_bot_f;
-	if (wall_top < 0) wall_top = 0;
-	if (wall_bottom > WINDOW_H) wall_bottom = WINDOW_H;
-	tx = compute_tex_x(ray, tex);
-	y = wall_top;
-	while (++y < wall_bottom)
+		return ;
+	data()->tex = pick_wall_texture(ray);
+	if (!data()->tex)
+		return ;
+	data()->wall_top_f = (WINDOW_H / 2.0) - (line_h / 2.0);
+	data()->wall_bot_f = data()->wall_top_f + line_h;
+	data()->wall_top = (int)data()->wall_top_f;
+	data()->wall_bottom = (int)data()->wall_bot_f;
+	if (data()->wall_top < 0)
+		data()->wall_top = 0;
+	if (data()->wall_bottom > WINDOW_H)
+		data()->wall_bottom = WINDOW_H;
+	data()->tx = compute_tex_x(ray, data()->tex);
+	data()->y = data()->wall_top;
+	while (++data()->y < data()->wall_bottom)
 	{
-		double dist_from_top = (double)y - wall_top_f;
-		double v = dist_from_top / line_h;
-		int ty = (int)(v * (double)tex->height);
-		if (ty < 0)
-			ty = 0;
-		if (ty >= (int)tex->height)
-			ty = (int)tex->height - 1;
-		int color = (int)sample_texel_rgba(tex, tx, ty);
-		draw_pixel(screen_x, y, color);
+		data()->dist_from_top = (double)data()->y - data()->wall_top_f;
+		data()->v = data()->dist_from_top / line_h;
+		data()->ty = (int)(data()->v * (double)data()->tex->height);
+		check_boundaries();
+		data()->color = (int)sample_rgba(data()->tex, data()->tx, data()->ty);
+		draw_pixel(screen_x, data()->y, data()->color);
 	}
 }
