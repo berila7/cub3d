@@ -38,8 +38,12 @@ void	cast_rays(void)
 		ray = data()->rays + i;
 		ray->hit = new_point(0, 0);
 		ray->angle = normalize_angle(start_angle);
-		ray->is_down = ray->angle > 0 && ray->angle < M_PI;
-		ray->is_right = ray->angle > (M_PI * 1.5) || ray->angle < M_PI / 2;
+		ray->is_right = false;
+		ray->is_down = false;
+		if ((ray->angle > 0) && (ray->angle < M_PI))
+			ray->is_down = true;
+		if (ray->angle > (M_PI * 1.5) || ray->angle < M_PI / 2)
+			ray->is_right = true;
 		find_hit(ray);
 		render_wall_strip(ray, RAY_THICKNESS * i);
 		start_angle += (data()->fov_angle / data()->num_rays);
