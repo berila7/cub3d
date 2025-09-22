@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 14:47:47 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/22 17:58:58 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	load_weapon(void)
 	int		x;
 	int		y;
 	char	*gun_path[FRAMES];
-	int		i = 0;
+	int		i;
 	char	*path = "anim/frame_";
 	char	*type = ".png";
 	char	*tmp;
 
+	i = 0;
 	while (i < FRAMES)
 	{
 		tmp = ft_strjoin(path, ft_itoa(i));

@@ -24,7 +24,7 @@ MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
 RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c \
 					$(RC_DIR)/render_walls.c $(RC_DIR)/draw_utils.c $(RC_DIR)/helpers2.c $(RC_DIR)/textures.c $(RC_DIR)/textures_helpers.c
 
-RC_SRCS_B		=	$(RC_DIR_B)/game_bonus.c $(RC_DIR_B)/helpers_bonus.c $(RC_DIR_B)/point_bonus.c $(RC_DIR_B)/draw_bonus.c \
+RC_SRCS_B		=	$(RC_DIR_B)/game_bonus.c $(RC_DIR_B)/movement_bonus.c $(RC_DIR_B)/helpers_bonus.c $(RC_DIR_B)/point_bonus.c $(RC_DIR_B)/draw_bonus.c \
 					$(RC_DIR_B)/raycast_bonus.c $(RC_DIR_B)/render_walls_bonus.c $(RC_DIR_B)/draw_utils_bonus.c \
 					$(RC_DIR_B)/helpers2_bonus.c $(RC_DIR_B)/textures_bonus.c $(RC_DIR_B)/player_bonus.c
 

@@ -37,7 +37,7 @@
 
 #define DOOR_CLOSED 'D'
 #define DOOR_OPEN   'd'
-#define INTERACT_DIST (TILE_SIZE + 20)
+#define DIST (TILE_SIZE + 20)
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
@@ -178,6 +178,7 @@ void		gc_free(void *ptr);
 
 // Raycasting:
 int			game(void);
+bool		game_input(mlx_t *mlx);
 bool		has_wall_at(double x, double y);
 double		to_rad(double deg);
 double		normalize_angle(double angle);

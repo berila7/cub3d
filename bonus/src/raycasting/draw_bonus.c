@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/21 12:02:06 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/22 17:57:31 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	get_px_color(double x, double y)
 	map = data()->map;
 	fy = (int)(y / TILE_SIZE);
 	fx = (int)(x / TILE_SIZE);
-	if (!((fx >= 0 && fx < data()->width
-         && fy >= 0 && fy < data()->height)))
+	if (!(fx >= 0 && fx < data()->width
+			&& fy >= 0 && fy < data()->height))
 		return (0x1ca3ecFF);
 	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
 		color = 0x000000FF;
@@ -98,18 +98,19 @@ int	get_px_color(double x, double y)
 	return (color);
 }
 
-void	render_minimap()
+void	render_minimap(void)
 {
-	// int	mapx;
-	// int	mapy;
+	int	starty;
+	int	startx;
+	int	x;
+	int	y;
 
-	// mapx = floor(data()->player->x / TILE_SIZE);
-	// mapy = floor(data()->player->y / TILE_SIZE);
-	int starty = data()->player->y - (MINIMAP_W / 2);
-	int startx = data()->player->x - (MINIMAP_W / 2);
-	int x = startx;
-	int y = starty;
-	draw_rect(new_point(WINDOW_W - (MINIMAP_W + 8), 0), (MINIMAP_W + 8), (MINIMAP_W + 8), 0x474747FF);
+	starty = data()->player->y - (MINIMAP_W / 2);
+	startx = data()->player->x - (MINIMAP_W / 2);
+	x = startx;
+	y = starty;
+	draw_rect(new_point(WINDOW_W - (MINIMAP_W + 8), 0),
+		(MINIMAP_W + 8), (MINIMAP_W + 8), 0x474747FF);
 	while (y < starty + MINIMAP_W)
 	{
 		x = startx;

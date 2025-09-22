@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/17 15:49:02 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/22 17:58:19 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ double	get_dist(double ax, double ay, double bx, double by)
 
 bool	has_wall_at(double x, double y)
 {
-	int	fx;
-	int	fy;
+	int		fx;
+	int		fy;
+	char	cell;
 
 	if (!data())
 		return (false);
@@ -43,7 +44,7 @@ bool	has_wall_at(double x, double y)
 	fx = (int)(x / TILE_SIZE);
 	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
 		return (true);
-	char cell = data()->map[fy][fx];
+	cell = data()->map[fy][fx];
 	if (cell == DOOR_CLOSED)
 		return (true);
 	return (cell == '1');
