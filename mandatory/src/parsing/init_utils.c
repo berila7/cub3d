@@ -3,12 +3,14 @@
 bool	handle_ceiling(char *line, char *config)
 {
 	uint32_t	alpha;
+	char		**ceiling;
+	int			j;
 
 	alpha = 255;
 	if (data()->ceiling == -1 && ft_strncmp(line, "C ", 2) == 0)
 	{
-		char **ceiling = gc_split_char(config, ',');
-		int j = 0;
+		ceiling = gc_split_char(config, ',');
+		j = 0;
 		while (j < word_count(config, ','))
 		{
 			if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
@@ -16,13 +18,14 @@ bool	handle_ceiling(char *line, char *config)
 			j++;
 		}
 		data()->ceiling = pack_rgba((uint32_t)ft_atoi(ceiling[0]),
-		(uint32_t)ft_atoi(ceiling[1]), (uint32_t)ft_atoi(ceiling[2]), alpha);
+			(uint32_t)ft_atoi(ceiling[1]),
+			(uint32_t)ft_atoi(ceiling[2]), alpha);
 		return (true);
 	}
 	return (false);
 }
 
-bool		is_config(char *line)
+bool	is_config(char *line)
 {
 	int		i;
 	char	*newline;
@@ -58,9 +61,9 @@ int	is_map_line(char *line)
 		return (0);
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || 
-			line[i] == 'S' || line[i] == 'E' || line[i] == 'W' || 
-			line[i] == ' ')
+		if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
+			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W'
+			|| line[i] == ' ')
 		{
 			i++;
 		}
@@ -70,7 +73,7 @@ int	is_map_line(char *line)
 	return (1);
 }
 
-int	read_lines()
+int	read_lines(void)
 {
 	int		i;
 	char	*line;
@@ -85,7 +88,7 @@ int	read_lines()
 		if (!data()->map_started)
 		{
 			raw_line = get_next_line(data()->map_fd);
-			continue;
+			continue ;
 		}
 		line = parse_line(raw_line);
 		if (!line)
@@ -98,7 +101,6 @@ int	read_lines()
 	data()->map[i] = NULL;
 	return (1);
 }
-
 
 int	read_map(char *filename)
 {

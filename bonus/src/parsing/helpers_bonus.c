@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 bool	handle_redir(char *line, char *config)
 {
@@ -39,10 +39,7 @@ bool	handle_floor(char *line, char *config)
 		while (j < word_count(config, ','))
 		{
 			if (ft_atoi(floor[j]) > 255 || ft_atoi(floor[j]) < 0)
-			{
-				printf("FLOOR COLORS: %d\n", ft_atoi(floor[j]));
 				return (false);
-			}
 			j++;
 		}
 		data()->floor = pack_rgba((uint32_t)ft_atoi(floor[0]),

@@ -8,27 +8,24 @@ uint32_t	sample_rgba(mlx_texture_t *tex, int x, int y)
 	return (pack_rgba(p[0], p[1], p[2], p[3]));
 }
 
-static int compute_tex_x(t_ray *ray, mlx_texture_t *tex)
+static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 {
-	double offset;
+	double	offset;
+	int		tx;
 
 	if (ray->was_vert)
 		offset = fmod(ray->hit.y, (double)TILE_SIZE);
 	else
 		offset = fmod(ray->hit.x, (double)TILE_SIZE);
-
-	int tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
-
+	tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
 	if (ray->was_vert && !ray->is_right)
 		tx = (int)tex->width - 1 - tx;
 	else if (!ray->was_vert && ray->is_down)
 		tx = (int)tex->width - 1 - tx;
-
 	if (tx < 0)
 		tx = 0;
 	if (tx >= (int)tex->width)
 		tx = (int)tex->width - 1;
-
 	return (tx);
 }
 
@@ -68,9 +65,11 @@ void	render_textured_column(t_ray *ray, int screen_x, double line_h)
 	}
 }
 
-int load_door_texture(void)
+int	load_door_texture(void)
 {
-	char *door_path = "textures/door.png";
+	char	*door_path;
+
+	door_path = "textures/door.png";
 	data()->door_tex = mlx_load_png(door_path);
 	if (!data()->door_tex)
 	{

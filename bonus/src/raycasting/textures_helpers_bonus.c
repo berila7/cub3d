@@ -1,10 +1,5 @@
 #include "cub3d_bonus.h"
 
-uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
-{
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
-
 mlx_texture_t	*load_png_or_die(const char *path)
 {
 	mlx_texture_t	*t;
@@ -35,10 +30,10 @@ int	load_textures(void)
 	return (0);
 }
 
-int map_cell_at_point(double x, double y)
+int	map_cell_at_point(double x, double y)
 {
-	int fx;
-	int fy;
+	int	fx;
+	int	fy;
 
 	fy = (int)(y / TILE_SIZE);
 	fx = (int)(x / TILE_SIZE);
@@ -47,7 +42,7 @@ int map_cell_at_point(double x, double y)
 	return (data()->map[fy][fx]);
 }
 
-mlx_texture_t *other_textures(t_ray *ray)
+mlx_texture_t	*other_textures(t_ray *ray)
 {
 	if (ray->was_vert)
 	{
@@ -87,4 +82,3 @@ mlx_texture_t	*pick_wall_texture(t_ray *ray)
 	}
 	return (other_textures(ray));
 }
-

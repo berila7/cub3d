@@ -6,7 +6,7 @@
 /*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:47:47 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/23 14:14:57 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/23 16:25:16 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,7 @@ bool	can_move(double x, double y)
 		&& !has_wall_at(x + padding, y + padding));
 }
 
-mlx_texture_t *other_textures(t_ray *ray)
+uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {
-	if (ray->was_vert)
-	{
-		if (ray->is_right)
-			return (data()->ea_tex);
-		else
-			return (data()->we_tex);
-	}
-	else
-	{
-		if (ray->is_down)
-			return (data()->so_tex);
-		else
-			return (data()->no_tex);
-	}
+	return ((r << 24) | (g << 16) | (b << 8) | a);
 }

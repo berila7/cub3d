@@ -223,5 +223,9 @@ int			map_cell_at_point(double x, double y);
 mlx_texture_t *other_textures(t_ray *ray);
 mlx_texture_t *pick_wall_texture(t_ray *ray);
 uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
+char		*pad_line(char *line);
+bool		handle_redir(char *line, char *config);
+bool		handle_floor(char *line, char *config);
+int			init_map(char *filename);
 
 #endif

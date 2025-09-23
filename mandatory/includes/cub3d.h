@@ -182,5 +182,9 @@ mlx_texture_t				*load_png_or_die(const char *path);
 int							load_textures(void);
 mlx_texture_t				*pick_wall_texture(const t_ray *ray);
 uint32_t					sample_rgba(mlx_texture_t *tex, int x, int y);
+char						*pad_line(char *line);
+bool						handle_redir(char *line, char *config);
+bool						handle_floor(char *line, char *config);
+int							init_map(char *filename);
 
 #endif
