@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 10:04:36 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/23 14:17:57 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-bool	allconfig()
+bool	allconfig(void)
 {
 	if (!data()->no_path || !data()->so_path || data()->floor == -1
 		|| !data()->we_path || !data()->ea_path || data()->ceiling == -1)
@@ -20,7 +20,7 @@ bool	allconfig()
 	return (true);
 }
 
-bool	valid_map()
+bool	valid_map(void)
 {
 	char	*line;
 	int		map_started;
@@ -31,7 +31,7 @@ bool	valid_map()
 	{
 		if (is_map_line(line) && !map_started)
 			map_started = 1;
-		if(!map_started)
+		if (!map_started)
 		{
 			if (!is_config(line))
 				return (false);
@@ -50,7 +50,7 @@ bool	valid_map()
 }
 
 int	init_map(char *filename)
-{	
+{
 	data()->map = NULL;
 	if (!valid_extension(filename))
 		return (0);
@@ -78,28 +78,24 @@ char	*parse_line(char *line)
 
 char	*pad_line(char *line)
 {
-    int		len;
-    char	*pad;
-    int		i;
+	int		len;
+	char	*pad;
+	int		i;
 
-    len = ft_strlen(line);
-    if (len >= data()->width)
-        return (line);
-    pad = gc_malloc(data()->width + 1);
-    i = 0;
-    while (i < len)
-    {
-        pad[i] = line[i];
-        i++;
-    }
-    while (i < data()->width)
-        pad[i++] = ' ';
-    pad[i] = '\0';
-    return (pad);
-}
-int	get_color(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a);
+	len = ft_strlen(line);
+	if (len >= data()->width)
+		return (line);
+	pad = gc_malloc(data()->width + 1);
+	i = 0;
+	while (i < len)
+	{
+		pad[i] = line[i];
+		i++;
+	}
+	while (i < data()->width)
+		pad[i++] = ' ';
+	pad[i] = '\0';
+	return (pad);
 }
 
 bool handle_redir(char *line, char *config)
@@ -130,7 +126,9 @@ bool handle_redir(char *line, char *config)
 
 bool	handle_floor(char *line, char *config)
 {
-	printf("line: %s\n", line);
+	uint32_t	alpha;
+
+	alpha = 255;
 	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0)
 	{
 		char **floor = gc_split_char(config, ',');
@@ -144,7 +142,8 @@ bool	handle_floor(char *line, char *config)
 			}
 			j++;
 		}
-		data()->floor = get_color(ft_atoi(floor[0]), ft_atoi(floor[1]), ft_atoi(floor[2]), 255);
+		data()->floor = pack_rgba((uint32_t)ft_atoi(floor[0]),
+		(uint32_t)ft_atoi(floor[1]), (uint32_t)ft_atoi(floor[2]), alpha);
 		return (true);
 	}
 	return (false);
@@ -152,6 +151,9 @@ bool	handle_floor(char *line, char *config)
 
 bool	handle_ceiling(char *line, char *config)
 {
+	uint32_t	alpha;
+
+	alpha = 255;
 	if (data()->ceiling == -1 && ft_strncmp(line, "C ", 2) == 0)
 	{
 		char **ceiling = gc_split_char(config, ',');
@@ -162,7 +164,8 @@ bool	handle_ceiling(char *line, char *config)
 				return (false);
 			j++;
 		}
-		data()->ceiling = get_color(ft_atoi(ceiling[0]), ft_atoi(ceiling[1]), ft_atoi(ceiling[2]), 255);
+		data()->ceiling = pack_rgba((uint32_t)ft_atoi(ceiling[0]),
+		(uint32_t)ft_atoi(ceiling[1]), (uint32_t)ft_atoi(ceiling[2]), alpha);
 		return (true);
 	}
 	return (false);

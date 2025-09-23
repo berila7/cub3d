@@ -133,6 +133,17 @@ struct s_data
 	int				current_frame;
 	int				animation_timer;
 
+	mlx_texture_t			*tex;
+	int						y;
+	int						tx;
+	double					wall_top_f;
+	double					wall_bot_f;
+	int						wall_top;
+	int						wall_bottom;
+	double					dist_from_top;
+	double					v;
+	int						ty;
+	int						color;
 };
 
 char		*ft_strrchr(const char *str, int c);
@@ -205,5 +216,12 @@ int			load_textures(void);
 void		load_weapon(void);
 void		update_animations(void);
 int			load_door_texture(void);
+uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
+mlx_texture_t	*load_png_or_die(const char *path);
+int			load_textures(void);
+int			map_cell_at_point(double x, double y);
+mlx_texture_t *other_textures(t_ray *ray);
+mlx_texture_t *pick_wall_texture(t_ray *ray);
+uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
 
 #endif
