@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:02:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/08/13 16:41:32 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/23 16:43:33 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static char	*configure_line(char *line)
 		return (NULL);
 	new_remainder = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (*new_remainder == 0)
-	{
-		// free(new_remainder);
 		new_remainder = NULL;
-	}
 	line[i + 1] = 0;
 	return (new_remainder);
 }

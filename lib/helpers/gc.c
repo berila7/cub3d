@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/08/13 16:43:42 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/23 16:43:09 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_gcnode **get_gc(void)
+static t_gcnode	**get_gc(void)
 {
-	static	t_gcnode *gc;
+	static t_gcnode	*gc;
 
-    return (&gc);
+	return (&gc);
 }
 
 void	gc_free(void *ptr)
