@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/24 19:27:53 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:55:18 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	load_image(char *path, int i)
 	data()->gun_tex[i] = mlx_load_png(path);
 	if (!data()->gun_tex[i])
 	{
-		perror("Failed to load weapon texture\n");
+		perror("Failed to load weapon texture");
 		exit(EXIT_FAILURE);
 	}
 	tmp = mlx_texture_to_image(data()->mlx, data()->gun_tex[i]);
@@ -41,7 +41,7 @@ void	load_image(char *path, int i)
 	{
 		mlx_delete_texture(data()->gun_tex[i]);
 		data()->gun_tex[i] = NULL;
-		perror("Failed to convert weapon texture to image\n");
+		perror("Failed to convert weapon texture to image");
 		exit(EXIT_FAILURE);
 	}
 	data()->gun_img[i] = tmp;

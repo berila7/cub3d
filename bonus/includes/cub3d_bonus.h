@@ -24,7 +24,7 @@
 // # define WINDOW_H 1000
 // # define TILE_SIZE 100
 # define FOV_ANGLE 60
-# define FRAMES 180
+# define FRAMES 76
 
 # define MINIMAP_W 160
 # define WINDOW_W 1000
