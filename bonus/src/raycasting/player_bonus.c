@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/23 16:28:26 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/24 19:27:53 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static char	*create_frame_path(int frame_index)
 	frame_str = ft_itoa(frame_index);
 	tmp = ft_strjoin("bonus/anim/frame_", frame_str);
 	path = ft_strjoin(tmp, ".png");
-	free(frame_str);
-	free(tmp);
+	gc_free(frame_str);
+	gc_free(tmp);
 	return (path);
 }
 
@@ -68,7 +68,7 @@ static void	load_single_frame(int i)
 	data()->gun_inst[i] = tmp;
 	if (i > 0)
 		data()->gun_img[i]->enabled = false;
-	free(gun_path);
+	gc_free(gun_path);
 }
 
 void	load_weapon(void)
