@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 11:30:49 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:37:11 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ struct s_data
 
 	mlx_texture_t	*gun_tex[FRAMES];
 	mlx_image_t		*gun_img[FRAMES];
-	int32_t			gun_inst[FRAMES];
 	int				current_frame;
 	int				animation_timer;
 	int				animate;
