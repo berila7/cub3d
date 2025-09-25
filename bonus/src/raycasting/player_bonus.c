@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 11:36:23 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/25 11:40:23 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ void	update_animations(void)
 	data()->animation_timer++;
 	if (data()->animation_timer >= ANIMATION_SPEED)
 	{
-		// data()->gun_img[data()->current_frame]->enabled = false;
-		// if (data()->gun_img[data()->current_frame])
-		// 	mlx_delete_image(data()->mlx, data()->gun_img[data()->current_frame]);
+		data()->gun_img[data()->current_frame]->enabled = false;
 		data()->current_frame = (data()->current_frame + 1) % FRAMES;
 		x = ((WINDOW_W - data()->gun_img[data()->current_frame]->width) / 2);
 		y = (WINDOW_H - data()->gun_img[data()->current_frame]->height);
@@ -96,7 +94,7 @@ void	update_animations(void)
 			exit(EXIT_FAILURE);
 		}
 		data()->gun_inst[data()->current_frame] = tmp;
-		// data()->gun_img[data()->current_frame]->enabled = true;
+		data()->gun_img[data()->current_frame]->enabled = true;
 		data()->animation_timer = 0;
 	}
 }

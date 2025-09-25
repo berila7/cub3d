@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 11:21:19 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/25 12:21:38 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	game_loop(void *param)
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
 	if (input_changed)
-	{
 		render_game();
-	}
-	update_animations();
+	else
+		update_animations();
 }
 
 int	game(void)
