@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/24 19:51:36 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:34:22 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	gc_free(void *ptr)
 		prev = curr;
 		curr = curr->next;
 	}
-	// free(ptr);
 }
 
 void	gc_free_all(void)
