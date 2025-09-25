@@ -132,6 +132,7 @@ struct s_data
 	int32_t			gun_inst[FRAMES];
 	int				current_frame;
 	int				animation_timer;
+	int				animate;
 
 	mlx_texture_t			*tex;
 	int						y;

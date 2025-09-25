@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:44:35 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 16:45:14 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:37:06 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	{
 		if (!read_map(av[1]))
 			return (1);
-		if (!check_map(data()))
+		if (!check_map())
 			printf("\nInvalid walls\n");
 		else
 		{

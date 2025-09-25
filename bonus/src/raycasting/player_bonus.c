@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/24 19:55:18 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:36:23 by berila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,11 @@ void	load_image(char *path, int i)
 static void	load_single_frame(int i)
 {
 	char		*gun_path;
-	int32_t		tmp;
-	uint32_t	x;
-	uint32_t	y;
 
 	gun_path = create_frame_path(i);
 	load_image(gun_path, i);
-	x = ((WINDOW_W - data()->gun_img[i]->width) / 2);
-	y = (WINDOW_H - data()->gun_img[i]->height);
-	tmp = mlx_image_to_window(data()->mlx,
-			data()->gun_img[i], x, y);
-	if (tmp < 0)
-	{
-		perror("Failed to put weapon image to window\n");
-		exit(EXIT_FAILURE);
-	}
-	data()->gun_inst[i] = tmp;
-	if (i > 0)
-		data()->gun_img[i]->enabled = false;
+	// if (i > 0)
+	// 	data()->gun_img[i]->enabled = false;
 	gc_free(gun_path);
 }
 
@@ -88,12 +75,28 @@ void	load_weapon(void)
 
 void	update_animations(void)
 {
+	int32_t		tmp;
+	uint32_t	x;
+	uint32_t	y;
+
 	data()->animation_timer++;
 	if (data()->animation_timer >= ANIMATION_SPEED)
 	{
-		data()->gun_img[data()->current_frame]->enabled = false;
+		// data()->gun_img[data()->current_frame]->enabled = false;
+		// if (data()->gun_img[data()->current_frame])
+		// 	mlx_delete_image(data()->mlx, data()->gun_img[data()->current_frame]);
 		data()->current_frame = (data()->current_frame + 1) % FRAMES;
-		data()->gun_img[data()->current_frame]->enabled = true;
+		x = ((WINDOW_W - data()->gun_img[data()->current_frame]->width) / 2);
+		y = (WINDOW_H - data()->gun_img[data()->current_frame]->height);
+		tmp = mlx_image_to_window(data()->mlx,
+			data()->gun_img[data()->current_frame], x, y);
+		if (tmp < 0)
+		{
+			perror("Failed to put weapon image to window\n");
+			exit(EXIT_FAILURE);
+		}
+		data()->gun_inst[data()->current_frame] = tmp;
+		// data()->gun_img[data()->current_frame]->enabled = true;
 		data()->animation_timer = 0;
 	}
 }
