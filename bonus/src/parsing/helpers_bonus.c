@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 15:35:12 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:14:58 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	handle_floor(char *line, char *config)
 	int			j;
 
 	alpha = 255;
-	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0)
+	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0 && word_count(config, ',') == 3)
 	{
 		floor = gc_split_char(config, ',');
 		j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: berila <berila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/23 15:11:27 by berila           ###   ########.fr       */
+/*   Updated: 2025/09/25 15:43:30 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_map(char *filename)
 {
 	data()->map = NULL;
 	if (!valid_extension(filename))
-		return (0);
+		return (printf("Invalid extension\n"), 0);
 	data()->height = 0;
 	data()->width = 0;
 	data()->floor = -1;

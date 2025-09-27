@@ -3,7 +3,7 @@ SO ./textures/we_text.png
 WE ./textures/we_text.png
 EA ./textures/we_text.png
 
-F 150,75,0
+F 150,75,20
 C 130,200,229
 
 11111111       11111111111

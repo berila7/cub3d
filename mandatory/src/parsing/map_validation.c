@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:08:24 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 10:10:23 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:29:54 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ void	find_char_pos(int *pos_x, int *pos_y)
 	}
 }
 
-int	check_holes(char **filled_map)
+int	check_holes()
 {
 	int	h;
 	int	w;
 
 	h = 0;
-	(void)filled_map;
 	while (h < data()->height)
 	{
 		w = -1;
@@ -94,13 +93,9 @@ int	check_map(void)
 {
 	int		player_x;
 	int		player_y;
-	char	**temp_map;
 
-	temp_map = copy_map();
-	if (!temp_map)
-		return (0);
 	find_char_pos(&player_x, &player_y);
-	if (!check_holes(temp_map))
+	if (!check_holes())
 		return (0);
 	return (1);
 }

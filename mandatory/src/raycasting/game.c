@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/22 13:38:24 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:32:31 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	game_loop(void *param)
 int	game(void)
 {
 	data()->mlx = mlx_init((int32_t)WINDOW_W,
-		(int32_t)WINDOW_H, "Test Cub3d", false);
+		(int32_t)WINDOW_H, "3arasia", false);
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	if (load_textures() != 0)

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:51:28 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 16:02:33 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:33:29 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ uint32_t	pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-mlx_texture_t	*load_png_or_die(const char *path)
+mlx_texture_t	*load_png(const char *path)
 {
 	mlx_texture_t	*t;
 
@@ -40,10 +40,10 @@ int	load_textures(void)
 		perror("Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
 		return (1);
 	}
-	d->no_tex = load_png_or_die(d->no_path);
-	d->so_tex = load_png_or_die(d->so_path);
-	d->we_tex = load_png_or_die(d->we_path);
-	d->ea_tex = load_png_or_die(d->ea_path);
+	d->no_tex = load_png(d->no_path);
+	d->so_tex = load_png(d->so_path);
+	d->we_tex = load_png(d->we_path);
+	d->ea_tex = load_png(d->ea_path);
 	return (0);
 }
 

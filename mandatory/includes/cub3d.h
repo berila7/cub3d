@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 11:25:01 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:26:52 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ struct s_data
 	char					*so_path;
 	char					*we_path;
 	char					*ea_path;
-	int						floor;
-	int						ceiling;
+	int32_t				floor;
+	int32_t				ceiling;
 	char					**map;
 	mlx_texture_t			*no_tex;
 	mlx_texture_t			*so_tex;
@@ -195,7 +195,7 @@ int				load_textures(void);
 mlx_texture_t	*pick_wall_texture(const t_ray *ray);
 uint32_t		sample_rgba(mlx_texture_t *tex, int x, int y);
 char			*pad_line(char *line);
-bool			handle_redir(char *line, char *config);
+bool			txt_direction(char *line, char *config);
 bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
 
