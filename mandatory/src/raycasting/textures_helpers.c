@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:51:28 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 17:33:29 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:31:14 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ mlx_texture_t	*load_png(const char *path)
 	if (!t)
 	{
 		perror("Error: Failed to load texture\n");
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	return (t);
 }
@@ -44,6 +44,8 @@ int	load_textures(void)
 	d->so_tex = load_png(d->so_path);
 	d->we_tex = load_png(d->we_path);
 	d->ea_tex = load_png(d->ea_path);
+	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
+		return (1);
 	return (0);
 }
 

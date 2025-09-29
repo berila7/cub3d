@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 12:21:38 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:27:24 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	game(void)
 	{
 		perror("Failed to load textures. Check your .cub paths.\n");
 		mlx_terminate(data()->mlx);
-		return (1);
+		return (0);
 	}
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
@@ -78,9 +78,10 @@ int	game(void)
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
-	load_weapon();
+	if (!load_weapon())
+		return (0);
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);
-	return (0);
+	return (1);
 }

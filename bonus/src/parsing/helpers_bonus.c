@@ -6,11 +6,40 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 16:14:58 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:07:26 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+// static void	check_door(void)
+// {
+// 	bool	space_down;
+// 	t_point	check;
+// 	int		fx;
+// 	int		fy;
+// 	char	*cell;
+
+// 	space_down = mlx_is_key_down(data()->mlx, MLX_KEY_SPACE);
+// 	if (space_down && !data()->space_was_dow)
+// 	{
+// 		check = new_point(0, 0);
+// 		check.x = data()->player->x + cos(data()->player->angle) * DIST;
+// 		check.y = data()->player->y
+// 			+ sin(data()->player->angle) * DIST;
+// 		fx = (int)(check.x / TILE_SIZE);
+// 		fy = (int)(check.y / TILE_SIZE);
+// 		if (fy >= 0 && fx >= 0 && fy < data()->height && fx < data()->width)
+// 		{
+// 			cell = &data()->map[fy][fx];
+// 			if (*cell == DOOR_CLOSED)
+// 				*cell = DOOR_OPEN;
+// 			else if (*cell == DOOR_OPEN)
+// 				*cell = DOOR_CLOSED;
+// 		}
+// 	}
+// 	data()->space_was_dow = space_down;
+// }
 
 bool	handle_redir(char *line, char *config)
 {
@@ -44,7 +73,8 @@ bool	handle_floor(char *line, char *config)
 	int			j;
 
 	alpha = 255;
-	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0 && word_count(config, ',') == 3)
+	if (data()->floor == -1 && ft_strncmp(line, "F ", 2) == 0
+		&& word_count(config, ',') == 3)
 	{
 		floor = gc_split_char(config, ',');
 		j = 0;

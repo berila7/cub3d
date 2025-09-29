@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 11:32:14 by anachat          ###   ########.fr       */
+/*   Updated: 2025/09/27 14:41:29 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (!read_map(av[1]))
-			return (1);
+			return (printf("Invalid map"), 1);
 		if (!check_map())
 			printf("\nInvalid walls\n");
 		else

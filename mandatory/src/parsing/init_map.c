@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:59 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 17:26:35 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/27 14:40:50 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	init_map(char *filename)
 {
 	data()->map = NULL;
 	if (!valid_extension(filename))
-		return (printf("Invalid extension\n"), 0);
+		return (0);
 	data()->height = 0;
 	data()->width = 0;
 	data()->floor = -1;
 	data()->ceiling = -1;
 	if (!valid_map())
-		return (printf("Invalid map\n"), 0);
+		return (0);
 	data()->map = gc_malloc(sizeof(char *) * (data()->height + 1));
 	return (1);
 }

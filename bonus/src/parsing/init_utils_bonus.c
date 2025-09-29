@@ -6,24 +6,25 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:02 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 15:35:03 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 11:51:22 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-bool	handle_ceiling(char *line, char *config)
+bool	handle_ceiling(char *line, char *colors)
 {
 	uint32_t	alpha;
 	char		**ceiling;
 	int			j;
 
 	alpha = 255;
-	if (data()->ceiling == -1 && ft_strncmp(line, "C ", 2) == 0)
+	if (data()->ceiling == -1 && !ft_strncmp(line, "C ", 2)
+		&& word_count(colors, ',') == 3)
 	{
-		ceiling = gc_split_char(config, ',');
+		ceiling = gc_split_char(colors, ',');
 		j = 0;
-		while (j < word_count(config, ','))
+		while (j < word_count(colors, ','))
 		{
 			if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
 				return (false);

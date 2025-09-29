@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:22 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 10:01:09 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 12:18:48 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ void	find_char_pos(int *pos_x, int *pos_y)
 		while (j < ft_strlen(data()->map[i]))
 		{
 			if (player_char(data()->map[i][j]))
+			{
+				*pos_x = j;
+				*pos_y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	find_char(int *pos_x, int *pos_y, char c)
+{
+	int			i;
+	size_t		j;
+
+	i = 0;
+	while (i < data()->height)
+	{
+		j = 0;
+		while (j < ft_strlen(data()->map[i]))
+		{
+			if (data()->map[i][j] == c)
 			{
 				*pos_x = j;
 				*pos_y = i;

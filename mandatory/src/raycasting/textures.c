@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:39:31 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/22 16:39:26 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 11:43:44 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 		offset = fmod(ray->hit.y, (double)TILE_SIZE);
 	else
 		offset = fmod(ray->hit.x, (double)TILE_SIZE);
-	tx = (int)(offset / (double)TILE_SIZE * (double)tex->width);
+	tx = (int)((offset / (double)TILE_SIZE) * (double)tex->width);
 	if (ray->was_vert && !ray->is_right)
-		tx = (int)tex->width - 1 - tx;
+		tx = (int)tex->width - tx;
 	else if (!ray->was_vert && ray->is_down)
-		tx = (int)tex->width - 1 - tx;
+		tx = (int)tex->width - tx;
 	if (tx < 0)
 		tx = 0;
 	if (tx >= (int)tex->width)
-		tx = (int)tex->width - 1;
+		tx = (int)tex->width;
 	return (tx);
 }
 
@@ -38,7 +38,7 @@ void	check_boundaries(void)
 	if (data()->ty < 0)
 		data()->ty = 0;
 	if (data()->ty >= (int)data()->tex->height)
-		data()->ty = (int)data()->tex->height - 1;
+		data()->ty = (int)data()->tex->height;
 }
 
 void	render_textured_column(t_ray *ray, int screen_x, double line_h)
@@ -65,6 +65,7 @@ void	render_textured_column(t_ray *ray, int screen_x, double line_h)
 		data()->ty = (int)(data()->v * (double)data()->tex->height);
 		check_boundaries();
 		data()->color = (int)sample_rgba(data()->tex, data()->tx, data()->ty);
-		draw_pixel(screen_x, data()->y, data()->color);
+		if ((data()->color & 0xFF) != 0)
+			draw_pixel(screen_x, data()->y, data()->color);
 	}
 }

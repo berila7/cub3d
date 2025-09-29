@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 15:43:30 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 12:08:20 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_map(char *filename)
 {
 	data()->map = NULL;
 	if (!valid_extension(filename))
-		return (printf("Invalid extension\n"), 0);
+		return (0);
 	data()->height = 0;
 	data()->width = 0;
 	data()->floor = -1;

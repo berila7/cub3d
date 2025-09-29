@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 15:36:48 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:31:32 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*create_frame_path(int frame_index)
 	return (path);
 }
 
-void	load_image(char *path, int i)
+int	load_image(char *path, int i)
 {
 	mlx_image_t	*tmp;
 
@@ -34,7 +34,7 @@ void	load_image(char *path, int i)
 	if (!data()->gun_tex[i])
 	{
 		perror("Failed to load weapon texture");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	tmp = mlx_texture_to_image(data()->mlx, data()->gun_tex[i]);
 	if (!tmp)
@@ -42,33 +42,39 @@ void	load_image(char *path, int i)
 		mlx_delete_texture(data()->gun_tex[i]);
 		data()->gun_tex[i] = NULL;
 		perror("Failed to convert weapon texture to image");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	data()->gun_img[i] = tmp;
+	return (1);
 }
 
-static void	load_single_frame(int i)
+static int	load_single_frame(int i)
 {
 	char		*gun_path;
 
 	gun_path = create_frame_path(i);
-	load_image(gun_path, i);
+	if (!load_image(gun_path, i))
+		return (0);
 	gc_free(gun_path);
+	return (1);
 }
 
-void	load_weapon(void)
+int	load_weapon(void)
 {
 	int	i;
 
 	i = 0;
 	while (i < FRAMES)
 	{
-		load_single_frame(i);
+		if (!load_single_frame(i))
+			return (0);
 		i++;
 	}
 	data()->current_frame = 0;
 	data()->animation_timer = 0;
-	data()->space_was_dow = false;
+	data()->open_door = false;
+	data()->close_door = false;
+	return (1);
 }
 
 void	update_animations(void)

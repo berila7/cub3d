@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 15:37:11 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:25:44 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ struct s_data
 	mlx_texture_t	*ea_tex;
 
 	mlx_texture_t	*door_tex;
-	bool			space_was_dow;
+	bool			open_door;
+	bool			close_door;
 
 	mlx_texture_t	*gun_tex[FRAMES];
 	mlx_image_t		*gun_img[FRAMES];
@@ -209,7 +210,7 @@ void			find_hit(t_ray *ray);
 void			render_wall_strip(t_ray *ray, double line_x);
 void			render_textured_column(t_ray *ray, int screen_x, double line_h);
 int				load_textures(void);
-void			load_weapon(void);
+int				load_weapon(void);
 void			update_animations(void);
 int				load_door_texture(void);
 uint32_t		pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
@@ -223,5 +224,6 @@ char			*pad_line(char *line);
 bool			handle_redir(char *line, char *config);
 bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
+void	find_char(int *pos_x, int *pos_y, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:44:35 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/25 13:49:49 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:27:39 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (!read_map(av[1]))
-			return (1);
+			return (printf("Invalid map"), 1);
 		if (!check_map())
 			printf("\nInvalid walls\n");
 		else
 		{
-			if (game())
+			if (!game())
 				return (printf("Error in the game\n"), 1);
 		}
 	}
