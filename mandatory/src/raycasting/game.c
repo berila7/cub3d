@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 15:25:48 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 16:06:29 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ int game(void)
 		mlx_terminate(data()->mlx);
 		return (0);
 	}
-	else
-		delet_text();
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);
@@ -100,6 +98,7 @@ int game(void)
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
+	delet_text();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);
