@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/27 14:41:29 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:43:25 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 			printf("\nInvalid walls\n");
 		else
 		{
-			if (game())
+			if (!game())
 				return (printf("Error in the game\n"), 1);
 		}
 	}

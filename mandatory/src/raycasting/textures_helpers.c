@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:51:28 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:31:14 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:46:15 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ int	load_textures(void)
 	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
 	{
 		perror("Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
-		return (1);
+		return (0);
 	}
 	d->no_tex = load_png(d->no_path);
 	d->so_tex = load_png(d->so_path);
 	d->we_tex = load_png(d->we_path);
 	d->ea_tex = load_png(d->ea_path);
 	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
-		return (1);
-	return (0);
+		return (0); // TODO: if one fails clear others
+	return (1);
 }
 
 mlx_texture_t	*pick_wall_texture(const t_ray *ray)
