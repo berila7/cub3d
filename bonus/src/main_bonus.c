@@ -6,11 +6,18 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:44:35 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:27:39 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:32:50 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+void	ft_exit()
+{
+	delet_text();
+	mlx_terminate(data()->mlx);
+	exit(EXIT_FAILURE);
+}
 
 t_data	**get_data(void)
 {

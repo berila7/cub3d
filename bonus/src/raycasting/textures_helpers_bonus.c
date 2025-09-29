@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:53 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:30:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:34:09 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ mlx_texture_t	*load_png(const char *path)
 	if (!t)
 	{
 		perror("Error: Failed to load texture\n");
-		return (NULL);
+		ft_exit();
 	}
 	return (t);
 }
@@ -33,15 +33,13 @@ int	load_textures(void)
 	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
 	{
 		perror("Error: Missing NO/SO/WE/EA texture paths in .cub file\n");
-		return (1);
+		return (0);
 	}
 	d->no_tex = load_png(d->no_path);
 	d->so_tex = load_png(d->so_path);
 	d->we_tex = load_png(d->we_path);
 	d->ea_tex = load_png(d->ea_path);
-	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
-		return (1);
-	return (0);
+	return (1);
 }
 
 int	map_cell(double x, double y)

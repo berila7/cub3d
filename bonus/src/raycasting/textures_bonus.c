@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:57 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 11:43:59 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:35:08 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	load_door_texture(void)
 	if (!data()->door_tex)
 	{
 		perror("Error: Failed to load texture: %s\n");
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

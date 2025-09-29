@@ -6,11 +6,23 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:39:31 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 11:43:44 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:24:00 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	delet_text(void)
+{
+	if (data()->no_tex)
+		mlx_delete_texture(data()->no_tex);
+	if (data()->ea_tex)
+		mlx_delete_texture(data()->ea_tex);
+	if (data()->so_tex)
+		mlx_delete_texture(data()->so_tex);
+	if (data()->we_tex)
+		mlx_delete_texture(data()->we_tex);
+}
 
 static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 {

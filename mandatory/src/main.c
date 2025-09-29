@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:43:25 by ayoub            ###   ########.fr       */
+/*   Updated: 2025/09/29 15:27:14 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_exit()
+{
+	delet_text();
+	mlx_terminate(data()->mlx);
+	exit(EXIT_FAILURE);
+}
 
 t_data	**get_data(void)
 {

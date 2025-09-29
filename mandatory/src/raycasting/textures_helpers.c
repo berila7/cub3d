@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:51:28 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:46:15 by ayoub            ###   ########.fr       */
+/*   Updated: 2025/09/29 15:30:33 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ mlx_texture_t	*load_png(const char *path)
 	if (!t)
 	{
 		perror("Error: Failed to load texture\n");
-		return (NULL);
+		ft_exit();
 	}
 	return (t);
 }
@@ -44,8 +44,6 @@ int	load_textures(void)
 	d->so_tex = load_png(d->so_path);
 	d->we_tex = load_png(d->we_path);
 	d->ea_tex = load_png(d->ea_path);
-	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
-		return (0); // TODO: if one fails clear others
 	return (1);
 }
 

@@ -6,11 +6,23 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:07:26 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 14:56:35 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+void	delet_text(void)
+{
+	if (data()->no_tex)
+		mlx_delete_texture(data()->no_tex);
+	if (data()->ea_tex)
+		mlx_delete_texture(data()->ea_tex);
+	if (data()->so_tex)
+		mlx_delete_texture(data()->so_tex);
+	if (data()->we_tex)
+		mlx_delete_texture(data()->we_tex);
+}
 
 // static void	check_door(void)
 // {

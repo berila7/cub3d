@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 14:25:44 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:33:51 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,8 @@ char			*pad_line(char *line);
 bool			handle_redir(char *line, char *config);
 bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
-void	find_char(int *pos_x, int *pos_y, char c);
+void			find_char(int *pos_x, int *pos_y, char c);
+void			delet_text(void);
+void			ft_exit();
 
 #endif

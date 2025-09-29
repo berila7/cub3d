@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 14:27:24 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:35:15 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ int	game(void)
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "Test Cub3d", false);
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
-	if (load_textures() != 0 || load_door_texture() != 0)
+	if (!load_textures() || !load_door_texture())
 	{
 		perror("Failed to load textures. Check your .cub paths.\n");
 		mlx_terminate(data()->mlx);
 		return (0);
 	}
+	else
+		delet_text();
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 14:49:41 by ayoub            ###   ########.fr       */
+/*   Updated: 2025/09/29 15:25:48 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,8 @@ int game(void)
 		mlx_terminate(data()->mlx);
 		return (0);
 	}
-	else {	
-		mlx_delete_texture(data()->no_tex);
-		mlx_delete_texture(data()->ea_tex);
-		mlx_delete_texture(data()->so_tex);
-		mlx_delete_texture(data()->we_tex);
-	}
-
+	else
+		delet_text();
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
 	data()->fov_angle = to_rad(FOV_ANGLE);

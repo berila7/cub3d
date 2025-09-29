@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 10:11:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 15:30:41 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,9 +188,8 @@ void			get_pl_pos(char **map);
 void			find_hit(t_ray *ray);
 void			render_wall_strip(t_ray *ray, double line_x);
 void			render_textured_column(t_ray *ray, int screen_x, double line_h);
-int				load_textures(void);
 uint32_t		pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
-mlx_texture_t	*load_png_or_die(const char *path);
+mlx_texture_t	*load_png(const char *path);
 int				load_textures(void);
 mlx_texture_t	*pick_wall_texture(const t_ray *ray);
 uint32_t		sample_rgba(mlx_texture_t *tex, int x, int y);
@@ -198,5 +197,7 @@ char			*pad_line(char *line);
 bool			txt_direction(char *line, char *config);
 bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
+void			delet_text(void);
+void			ft_exit();
 
 #endif
