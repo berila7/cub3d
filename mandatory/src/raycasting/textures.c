@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:39:31 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 15:24:00 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 17:50:25 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 void	delet_text(void)
 {
 	if (data()->no_tex)
+	{
 		mlx_delete_texture(data()->no_tex);
+		data()->no_tex = NULL;
+	}
 	if (data()->ea_tex)
+	{
 		mlx_delete_texture(data()->ea_tex);
+		data()->ea_tex = NULL;
+	}
 	if (data()->so_tex)
+	{
 		mlx_delete_texture(data()->so_tex);
+		data()->so_tex = NULL;
+	}
 	if (data()->we_tex)
+	{
 		mlx_delete_texture(data()->we_tex);
+		data()->we_tex = NULL;
+	}
 }
 
 static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
@@ -41,7 +53,7 @@ static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 	if (tx < 0)
 		tx = 0;
 	if (tx >= (int)tex->width)
-		tx = (int)tex->width;
+		tx = (int)tex->width - 1;
 	return (tx);
 }
 
@@ -50,7 +62,7 @@ void	check_boundaries(void)
 	if (data()->ty < 0)
 		data()->ty = 0;
 	if (data()->ty >= (int)data()->tex->height)
-		data()->ty = (int)data()->tex->height;
+		data()->ty = (int)data()->tex->height - 1;
 }
 
 void	render_textured_column(t_ray *ray, int screen_x, double line_h)

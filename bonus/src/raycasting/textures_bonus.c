@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:57 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 15:35:08 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 17:54:36 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 	if (tx < 0)
 		tx = 0;
 	if (tx >= (int)tex->width)
-		tx = (int)tex->width;
+		tx = (int)tex->width - 1;
 	return (tx);
 }
 
@@ -46,7 +46,7 @@ void	check_boundaries(void)
 	if (data()->ty < 0)
 		data()->ty = 0;
 	if (data()->ty >= (int)data()->tex->height)
-		data()->ty = (int)data()->tex->height;
+		data()->ty = (int)data()->tex->height - 1;
 }
 
 void	render_textured_column(t_ray *ray, int screen_x, double line_h)

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 16:06:29 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/29 17:47:16 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ int game(void)
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
-	delet_text();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);
+	delet_text();
 	return (1);
 }
