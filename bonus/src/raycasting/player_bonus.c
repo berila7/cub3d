@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 14:31:32 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 11:16:41 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,18 @@ int	load_image(char *path, int i)
 static int	load_single_frame(int i)
 {
 	char		*gun_path;
+	uint32_t	x;
+	uint32_t	y;
 
 	gun_path = create_frame_path(i);
 	if (!load_image(gun_path, i))
 		return (0);
+	x = ((WINDOW_W - data()->gun_img[data()->current_frame]->width) / 2);
+	y = (WINDOW_H - data()->gun_img[data()->current_frame]->height);
+	mlx_image_to_window(data()->mlx,
+		data()->gun_img[data()->current_frame], x, y);
+	if (i > 0)
+		data()->gun_img[i]->enabled = false;
 	gc_free(gun_path);
 	return (1);
 }
@@ -79,18 +87,11 @@ int	load_weapon(void)
 
 void	update_animations(void)
 {
-	uint32_t	x;
-	uint32_t	y;
-
 	data()->animation_timer++;
 	if (data()->animation_timer >= ANIMATION_SPEED)
 	{
 		data()->gun_img[data()->current_frame]->enabled = false;
 		data()->current_frame = (data()->current_frame + 1) % FRAMES;
-		x = ((WINDOW_W - data()->gun_img[data()->current_frame]->width) / 2);
-		y = (WINDOW_H - data()->gun_img[data()->current_frame]->height);
-		mlx_image_to_window(data()->mlx,
-			data()->gun_img[data()->current_frame], x, y);
 		data()->gun_img[data()->current_frame]->enabled = true;
 		data()->animation_timer = 0;
 	}
