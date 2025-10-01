@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/13 12:00:27 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:30:20 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,24 @@ void	draw_line(t_point p1, t_point p2, int color)
 		pos.x += step[0];
 		pos.y += step[1];
 	}
+}
+
+bool	has_door_at(double x, double y)
+{
+	int		fx;
+	int		fy;
+	char	cell;
+
+	if (!data())
+		return (false);
+	if (!in_map(x, y))
+		return (true);
+	fy = (int)(y / TILE_SIZE);
+	fx = (int)(x / TILE_SIZE);
+	if (fy >= data()->height || fx >= data()->width || fy < 0 || fx < 0)
+		return (true);
+	cell = data()->map[fy][fx];
+	if (cell == DOOR_CLOSED || cell == DOOR_OPEN)
+		return (true);
+	return (false);
 }

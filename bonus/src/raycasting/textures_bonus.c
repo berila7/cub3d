@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:57 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 17:54:36 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:14:26 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ uint32_t	sample_rgba(mlx_texture_t *tex, int x, int y)
 
 static int	compute_tex_x(t_ray *ray, mlx_texture_t *tex)
 {
-	double	offset;
+	double	offset;	
 	int		tx;
 
 	if (ray->was_vert)
@@ -69,8 +69,8 @@ void	render_textured_column(t_ray *ray, int screen_x, double line_h)
 	while (++data()->y < data()->wall_bottom)
 	{
 		data()->dist_from_top = (double)data()->y - data()->wall_top_f;
-		data()->v = data()->dist_from_top / line_h;
-		data()->ty = (int)(data()->v * (double)data()->tex->height);
+		data()->wall_yp = data()->dist_from_top / line_h;
+		data()->ty = (int)(data()->wall_yp * (double)data()->tex->height);
 		check_boundaries();
 		data()->color = (int)sample_rgba(data()->tex, data()->tx, data()->ty);
 		if ((data()->color & 0xFF) != 0)

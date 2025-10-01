@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 15:30:41 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:21:11 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ struct s_data
 	char					*so_path;
 	char					*we_path;
 	char					*ea_path;
-	int32_t				floor;
-	int32_t				ceiling;
+	int32_t					floor;
+	int32_t					ceiling;
 	char					**map;
 	mlx_texture_t			*no_tex;
 	mlx_texture_t			*so_tex;
@@ -198,6 +198,6 @@ bool			txt_direction(char *line, char *config);
 bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
 void			delet_text(void);
-void			ft_exit();
+void			ft_exit(void);
 
 #endif

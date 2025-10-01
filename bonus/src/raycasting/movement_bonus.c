@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:44:42 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/30 10:20:38 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 11:49:21 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	close_door(void)
 			while (j < data()->width)
 			{
 				closed = &data()->map[i][j];
-				if (*closed == DOOR_OPEN && !has_wall_at(i, j))
+				if (*closed == DOOR_OPEN
+					&& !has_door_at(data()->player->x, data()->player->y))
 					*closed = DOOR_CLOSED;
 				j++;
 			}

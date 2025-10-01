@@ -6,13 +6,13 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:53 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 15:34:09 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 16:24:55 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-mlx_texture_t	*load_png(const char *path)
+mlx_texture_t	*load_png(char *path)
 {
 	mlx_texture_t	*t;
 

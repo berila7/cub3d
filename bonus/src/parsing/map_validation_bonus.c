@@ -6,31 +6,11 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:22 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 12:18:48 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:29:48 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-char	**copy_map(void)
-{
-	int		i;
-	char	**copy;
-
-	copy = gc_malloc(sizeof(char *) * (data()->height + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < data()->height)
-	{
-		copy[i] = gc_strdup(data()->map[i]);
-		if (!copy[i])
-			return (NULL);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
 
 bool	player_char(char element)
 {
@@ -86,13 +66,12 @@ void	find_char(int *pos_x, int *pos_y, char c)
 	}
 }
 
-int	check_holes(char **filled_map)
+int	check_holes(void)
 {
 	int	h;
 	int	w;
 
 	h = 0;
-	(void)filled_map;
 	while (h < data()->height)
 	{
 		w = -1;
@@ -119,13 +98,9 @@ int	check_map(void)
 {
 	int		player_x;
 	int		player_y;
-	char	**temp_map;
 
-	temp_map = copy_map();
-	if (!temp_map)
-		return (0);
 	find_char_pos(&player_x, &player_y);
-	if (!check_holes(temp_map))
+	if (!check_holes())
 		return (0);
 	return (1);
 }

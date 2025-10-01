@@ -6,15 +6,15 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/29 17:47:16 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:25:38 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool game_input(mlx_t *mlx)
+static bool	game_input(mlx_t *mlx)
 {
-	t_player *pl;
+	t_player	*pl;
 
 	pl = data()->player;
 	pl->move_side = 0;
@@ -39,14 +39,16 @@ static bool game_input(mlx_t *mlx)
 	return (false);
 }
 
-void update_player(void)
+void	update_player(void)
 {
-	t_point new_p;
-	t_player *pl;
+	t_point		new_p;
+	t_player	*pl;
 
 	pl = data()->player;
-	new_p.x = pl->x + cos(pl->angle) * pl->move_forward * M_SPEED + cos(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
-	new_p.y = pl->y + sin(pl->angle) * pl->move_forward * M_SPEED + sin(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
+	new_p.x = pl->x + cos(pl->angle) * pl->move_forward
+		* M_SPEED + cos(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
+	new_p.y = pl->y + sin(pl->angle) * pl->move_forward
+		* M_SPEED + sin(pl->angle + M_PI_2) * pl->move_side * M_SPEED;
 	if (can_move(new_p.x, pl->y))
 		pl->x = new_p.x;
 	if (can_move(pl->x, new_p.y))
@@ -54,7 +56,7 @@ void update_player(void)
 	pl->angle = normalize_angle(pl->angle + (pl->rotation_inp * R_SPEED));
 }
 
-void render_game(void)
+void	render_game(void)
 {
 	if (data()->w_img)
 		mlx_delete_image(data()->mlx, data()->w_img);
@@ -62,15 +64,15 @@ void render_game(void)
 	mlx_image_to_window(data()->mlx, data()->w_img, 0, 0);
 	draw_rect(new_point(0, 0), WINDOW_W, WINDOW_H / 2, data()->ceiling);
 	draw_rect(new_point(0, WINDOW_H / 2),
-			  WINDOW_W, WINDOW_H / 2, data()->floor);
+		WINDOW_W, WINDOW_H / 2, data()->floor);
 	update_player();
 	cast_rays();
 }
 
-void game_loop(void *param)
+void	game_loop(void *param)
 {
-	mlx_t *mlx;
-	bool input_changed;
+	mlx_t	*mlx;
+	bool	input_changed;
 
 	mlx = (mlx_t *)param;
 	input_changed = game_input(mlx);
@@ -78,10 +80,10 @@ void game_loop(void *param)
 		render_game();
 }
 
-int game(void)
+int	game(void)
 {
 	data()->mlx = mlx_init((int32_t)WINDOW_W,
-						   (int32_t)WINDOW_H, "3arasia", false);
+		(int32_t)WINDOW_H, "3arasia", false);
 	if (!data()->mlx)
 		return (perror("Failed to init mlx"), 1);
 	if (!load_textures())

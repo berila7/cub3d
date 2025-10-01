@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/30 11:19:28 by mberila          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:21:18 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ struct s_data
 	int				wall_top;
 	int				wall_bottom;
 	double			dist_from_top;
-	double			v;
+	double			wall_yp;
 	int				ty;
 	int				color;
 };
@@ -226,6 +226,7 @@ bool			handle_floor(char *line, char *config);
 int				init_map(char *filename);
 void			find_char(int *pos_x, int *pos_y, char c);
 void			delet_text(void);
-void			ft_exit();
+void			ft_exit(void);
+bool			has_door_at(double x, double y);
 
 #endif
