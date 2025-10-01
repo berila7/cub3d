@@ -1,10 +1,10 @@
-NO ./textures/abcd.png
-SO ./textures/abcd.png
-WE ./textures/abcd.png
-EA ./textures/abcd.png
+NO ./textures/we_text.png
+SO ./textures/we_text.png
+WE ./textures/we_text.png
+EA ./textures/we_text.png
 
-F 255,0,0
-C 0,0,0
+F 150,75,20
+C 130,200,229
 
 11111111111111111111
 10000000100000000001
