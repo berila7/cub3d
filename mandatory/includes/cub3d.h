@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/30 17:21:11 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:39:15 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define WINDOW_W			1000
 # define WINDOW_H			500
-# define TILE_SIZE			80
+# define TILE_SIZE			64
 # define M_SPEED			5
 # define R_SPEED			0.06
 # define RAY_THICKNESS		1
