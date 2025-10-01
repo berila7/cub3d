@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 17:17:42 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 17:20:25 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ struct s_data
 	mlx_image_t		*gun_img[FRAMES];
 	int				current_frame;
 	int				animation_timer;
-	int				animate;
 
 	mlx_texture_t	*tex;
 	int				y;
