@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:57:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 12:08:20 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:43:33 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*parse_line(char *line)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n' && line[0] != '\n')
 		line[len - 1] = '\0';
-	result = gc_strdup(line);
+	result = ft_strdup(line);
 	return (result);
 }
 

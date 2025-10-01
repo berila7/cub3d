@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 14:39:15 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:44:03 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int				check_map(void);
 int				ft_isdigit(int c);
 char			**gc_split_char(char *s, char c);
 char			**gc_split(char *s);
-char			*gc_strdup(char *src);
 int				gc_word_count(char *s);
 void			handle_quote_char(char c, char *in_quote_char);
 int				find_word_end(char *s, int start, char *in_quote_char);
@@ -164,7 +163,6 @@ void			gc_free_all(void);
 int				equal(char *s1, char *s2);
 t_data			*data(void);
 int				word_count(char *str, char c);
-void			*ft_memset(void *b, int c, size_t len);
 void			gc_free(void *ptr);
 
 // Raycasting:

@@ -2,7 +2,7 @@ NAME			=	cub3D
 NAME_BONUS		=	cub3D_bonus
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS			=	-Wall -Wextra -Werror
 CFLAGS			=	$(FLAGS) -Imandatory/includes
 CFLAGS_B		=	$(FLAGS) -Ibonus/includes
 
@@ -18,7 +18,6 @@ MLX_DIR			=	lib/MLX42
 
 MLX_LIB			=	$(MLX_DIR)/build/libmlx42.a
 MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/mnt/homes/$(USER)/.brew/opt/glfw/lib/" -I"/mnt/homes/$(USER)/.brew/include"
-# MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
 
 
 RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c \
@@ -32,8 +31,8 @@ SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init
 					$(PARSING_DIR)/init_utils.c $(PARSING_DIR)/helpers.c\
 					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c\
-					$(UTILS_DIR)/ft_memset.c $(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
+					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c\
+					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
 					$(HELPERS_DIR)/gc.c $(HELPERS_DIR)/utils.c \
 					$(RC_SRCS) \
 					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
@@ -42,8 +41,8 @@ SRCS_B			=	bonus/$(SRC_DIR)/main_bonus.c $(PARSING_DIR_B)/parser_bonus.c $(PARSI
 					$(PARSING_DIR_B)/map_validation_bonus.c $(PARSING_DIR_B)/init_utils_bonus.c $(PARSING_DIR_B)/helpers_bonus.c\
 					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c $(UTILS_DIR)/ft_itoa.c\
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/gc_strdup.c $(UTILS_DIR)/ft_strncmp.c \
-					$(UTILS_DIR)/ft_memset.c $(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
+					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c \
+					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c \
 					$(HELPERS_DIR)/gc.c $(HELPERS_DIR)/utils.c \
 					$(RC_SRCS_B) \
 					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
