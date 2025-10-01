@@ -6,14 +6,12 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 16:44:03 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 17:15:31 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define _GNU_SOURCE
-# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -160,7 +158,6 @@ int				valid_char(char element);
 void			count_elements(char element);
 char			*parse_line(char *line);
 void			gc_free_all(void);
-int				equal(char *s1, char *s2);
 t_data			*data(void);
 int				word_count(char *str, char c);
 void			gc_free(void *ptr);

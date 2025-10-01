@@ -6,14 +6,12 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 16:44:10 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 17:17:42 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
-# define _GNU_SOURCE
-# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -179,7 +177,6 @@ int				valid_char(char element);
 void			count_elements(char element);
 char			*parse_line(char *line);
 void			gc_free_all(void);
-int				equal(char *s1, char *s2);
 t_data			*data(void);
 int				word_count(char *str, char c);
 void			gc_free(void *ptr);
@@ -212,9 +209,7 @@ int				load_weapon(void);
 void			update_animations(void);
 int				load_door_texture(void);
 uint32_t		pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
-mlx_texture_t	*load_png_or_die(const char *path);
 int				load_textures(void);
-int				map_cell_at_point(double x, double y);
 mlx_texture_t	*other_textures(t_ray *ray);
 mlx_texture_t	*pick_wall_texture(t_ray *ray);
 uint32_t		pack_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
