@@ -6,14 +6,30 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 17:44:52 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:41:43 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
+void	delet_images(void)
+{
+	int	i;
+
+	i = 0;
+	if (data()->door_tex)
+		mlx_delete_texture(data()->door_tex);
+	while (i < FRAMES)
+	{
+		if (data()->gun_tex[i])
+			mlx_delete_texture(data()->gun_tex[i]);
+		i++;
+	}
+}
+
 void	delet_text(void)
 {
+	delet_images();
 	if (data()->no_tex)
 	{
 		mlx_delete_texture(data()->no_tex);
@@ -35,35 +51,6 @@ void	delet_text(void)
 		data()->we_tex = NULL;
 	}
 }
-
-// static void	check_door(void)
-// {
-// 	bool	space_down;
-// 	t_point	check;
-// 	int		fx;
-// 	int		fy;
-// 	char	*cell;
-
-// 	space_down = mlx_is_key_down(data()->mlx, MLX_KEY_SPACE);
-// 	if (space_down && !data()->space_was_dow)
-// 	{
-// 		check = new_point(0, 0);
-// 		check.x = data()->player->x + cos(data()->player->angle) * DIST;
-// 		check.y = data()->player->y
-// 			+ sin(data()->player->angle) * DIST;
-// 		fx = (int)(check.x / TILE_SIZE);
-// 		fy = (int)(check.y / TILE_SIZE);
-// 		if (fy >= 0 && fx >= 0 && fy < data()->height && fx < data()->width)
-// 		{
-// 			cell = &data()->map[fy][fx];
-// 			if (*cell == DOOR_CLOSED)
-// 				*cell = DOOR_OPEN;
-// 			else if (*cell == DOOR_OPEN)
-// 				*cell = DOOR_CLOSED;
-// 		}
-// 	}
-// 	data()->space_was_dow = space_down;
-// }
 
 bool	handle_redir(char *line, char *config)
 {
