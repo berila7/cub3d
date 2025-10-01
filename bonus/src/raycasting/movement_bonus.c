@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:44:42 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/30 11:49:21 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 11:21:46 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,5 @@ bool	game_input(mlx_t *mlx)
 	open_door();
 	close_door();
 	track_mouse(&pl->rotation_inp);
-	if (pl->move_forward || pl->move_side || pl->rotation_inp)
-		return (true);
-	return (false);
+	return (pl->move_forward || pl->move_side || pl->rotation_inp);
 }

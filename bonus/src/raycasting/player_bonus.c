@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/30 11:23:43 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 11:20:59 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static int	load_single_frame(int i)
 	gun_path = create_frame_path(i);
 	if (!load_image(gun_path, i))
 		return (0);
-
 	x = ((WINDOW_W - data()->gun_img[i]->width) / 2);
 	y = (WINDOW_H - data()->gun_img[i]->height);
 	mlx_image_to_window(data()->mlx,

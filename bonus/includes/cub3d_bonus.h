@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/30 17:21:18 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 11:18:18 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ struct s_data
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
-	int				floor;
-	int				ceiling;
+	int32_t			floor;
+	int32_t			ceiling;
 	char			**map;
 
 	mlx_texture_t	*no_tex;
