@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/01 11:20:59 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:51:36 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	load_image(char *path, int i)
 	tmp = mlx_texture_to_image(data()->mlx, data()->gun_tex[i]);
 	if (!tmp)
 	{
-		mlx_delete_texture(data()->gun_tex[i]);
-		data()->gun_tex[i] = NULL;
 		perror("Failed to convert weapon texture to image");
 		return (0);
 	}

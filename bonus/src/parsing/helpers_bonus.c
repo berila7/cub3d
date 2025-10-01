@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/01 15:41:43 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:53:23 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,17 @@ void	delet_images(void)
 
 	i = 0;
 	if (data()->door_tex)
+	{
 		mlx_delete_texture(data()->door_tex);
+		data()->door_tex = NULL;
+	}
 	while (i < FRAMES)
 	{
 		if (data()->gun_tex[i])
+		{
 			mlx_delete_texture(data()->gun_tex[i]);
+			data()->gun_tex[i] = NULL;
+		}
 		i++;
 	}
 }

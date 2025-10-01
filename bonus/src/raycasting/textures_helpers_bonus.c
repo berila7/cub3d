@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:53 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/30 16:24:55 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:00:57 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ mlx_texture_t	*pick_wall_texture(t_ray *ray)
 	{
 		if (data()->door_tex)
 			return (data()->door_tex);
-		else
-			return (data()->we_tex);
 	}
 	return (other_textures(ray));
 }
