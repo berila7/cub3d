@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 15:57:36 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/07 18:20:38 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	game(void)
 		return (perror("Failed to init mlx"), 1);
 	if (!load_textures() || !load_door_texture())
 	{
-		perror("Failed to load textures. Check your .cub paths.\n");
+		perror("Error\nFailed to load textures. Check your .cub paths.\n");
 		mlx_terminate(data()->mlx);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:57 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/01 16:07:10 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/07 18:18:46 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	load_door_texture(void)
 	data()->door_tex = mlx_load_png(door_path);
 	if (!data()->door_tex)
 	{
-		perror("Error: Failed to load texture: %s\n");
+		perror("Error\nFailed to load texture: %s\n");
 		return (0);
 	}
 	return (1);
