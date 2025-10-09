@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:36:35 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:55:58 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 # define MINIMAP_W 160
 # define MINIMAP_SCALE 2
-# define WINDOW_W 1000
-# define WINDOW_H 500
+# define WINDOW_W 1000000
+# define WINDOW_H 5000
 # define TILE_SIZE 64
 # define M_SPEED 10
 # define R_SPEED 0.1

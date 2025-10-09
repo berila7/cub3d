@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:44:35 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 11:20:10 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:57:25 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ int	main(int ac, char **av)
 		if (!read_map(av[1]))
 			return (gc_free_all(), ft_error("Invalid map"), 1);
 		if (!check_map())
-			ft_error("Invalid walls");
+			return (gc_free_all(), ft_error("Invalid walls"), 1);
+		else if (WINDOW_H > 1440 || WINDOW_W > 2560)
+			return (gc_free_all(), ft_error("Window size is big"), 1);
 		else
 			game();
 	}
 	else
-		ft_error("Invalid args");
+		return (gc_free_all(), ft_error("Invalid args"), 1);
 	gc_free_all();
 	return (0);
 }
