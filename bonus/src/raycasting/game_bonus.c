@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 11:12:38 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 13:41:46 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ void	game_loop(void *param)
 
 int	game(void)
 {
+	data()->player = gc_malloc(sizeof(t_player));
+	data()->num_rays = WINDOW_W / RAY_THICKNESS;
+	data()->fov_angle = to_rad(FOV_ANGLE);
+	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
+	get_pl_pos(data()->map);
+	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
+	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "3arasia bonus", false);
 	if (!data()->mlx)
 		return (ft_error("Failed to init mlx"), ft_exit(), 1);
@@ -69,13 +76,6 @@ int	game(void)
 		ft_error("Failed to load textures. Check your .cub paths.");
 		ft_exit();
 	}
-	data()->player = gc_malloc(sizeof(t_player));
-	data()->num_rays = WINDOW_W / RAY_THICKNESS;
-	data()->fov_angle = to_rad(FOV_ANGLE);
-	data()->rays = gc_malloc(sizeof(t_ray) * data()->num_rays);
-	get_pl_pos(data()->map);
-	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
-	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
 	if (!load_weapon())
 		ft_exit();

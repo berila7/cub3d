@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:02 by mberila           #+#    #+#             */
-/*   Updated: 2025/09/29 11:51:22 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 13:41:03 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ bool	handle_ceiling(char *line, char *colors)
 		j = 0;
 		while (j < word_count(colors, ','))
 		{
-			if (ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
+			if (ft_strlen(ceiling[j]) > 3
+				|| ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
 				return (false);
 			j++;
 		}
