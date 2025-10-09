@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 16:18:17 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:36:35 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ struct s_data
 	double			wall_yp;
 	int				ty;
 	int				color;
+	bool			track_mouse;
+	bool			prev_mouse;
 };
 
 char			*ft_strrchr(const char *str, int c);

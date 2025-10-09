@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 13:41:46 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:21:17 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	game(void)
 	get_pl_pos(data()->map);
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
+	data()->track_mouse = true;
 	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "3arasia bonus", false);
 	if (!data()->mlx)
 		return (ft_error("Failed to init mlx"), ft_exit(), 1);
