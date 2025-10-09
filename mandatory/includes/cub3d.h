@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 16:31:50 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:21:53 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,6 @@ int				init_map(char *filename);
 void			delet_text(void);
 void			ft_exit(void);
 void			ft_error(char *msg);
+int				count_char(char *str, char c);
 
 #endif

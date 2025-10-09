@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:55:58 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:59:26 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,5 +224,6 @@ void			delet_text(void);
 void			ft_exit(void);
 bool			has_door_at(double x, double y);
 void			ft_error(char *msg);
+int				count_char(char *str, char c);
 
 #endif
