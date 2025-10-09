@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 15:02:36 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 16:31:50 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 
 # define FOV_ANGLE			60 
 
-# define WINDOW_W			2000
-# define WINDOW_H			1000
+# define WINDOW_W			1000
+# define WINDOW_H			500
 # define TILE_SIZE			64
 # define M_SPEED			5
 # define R_SPEED			0.06
