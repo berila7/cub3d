@@ -4,6 +4,8 @@
 		"stdlib.h": "c",
 		"stdbool.h": "c",
 		"stdio.h": "c",
-		"stdint.h": "c"
+		"stdint.h": "c",
+		"cub3d.h": "c",
+		"cub3d_bonus.h": "c"
 	}
 }

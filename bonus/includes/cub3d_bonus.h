@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/01 17:20:25 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:45:05 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,6 @@ void			find_char(int *pos_x, int *pos_y, char c);
 void			delet_text(void);
 void			ft_exit(void);
 bool			has_door_at(double x, double y);
+void			ft_error(char *msg);
 
 #endif

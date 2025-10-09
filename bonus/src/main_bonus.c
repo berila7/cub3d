@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:44:35 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/07 18:17:59 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:45:59 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@ void	ft_exit(void)
 {
 	delet_text();
 	mlx_terminate(data()->mlx);
+	gc_free_all();
 	exit(EXIT_FAILURE);
+}
+
+void	ft_error(char *msg)
+{
+	printf("Error\n%s\n", msg);
 }
 
 t_data	**get_data(void)
@@ -40,17 +46,14 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (!read_map(av[1]))
-			return (gc_free_all(), printf("Error\nInvalid map\n"), 1);
+			return (gc_free_all(), ft_error("Invalid map"), 1);
 		if (!check_map())
-			printf("Error\nInvalid walls\n");
+			ft_error("Invalid walls");
 		else
-		{
-			if (!game())
-				return (printf("Error\ngame failed\n"), 1);
-		}
+			game();
 	}
 	else
-		printf("Error\nInvalid args\n");
+		ft_error("Invalid args");
 	gc_free_all();
 	return (0);
 }

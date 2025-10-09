@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 12:54:14 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/07 18:20:01 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:39:19 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	load_image(char *path, int i)
 	data()->gun_tex[i] = mlx_load_png(path);
 	if (!data()->gun_tex[i])
 	{
-		perror("Error\nFailed to load weapon texture\n");
+		ft_error("Failed to load weapon texture");
 		return (0);
 	}
 	tmp = mlx_texture_to_image(data()->mlx, data()->gun_tex[i]);
 	if (!tmp)
 	{
-		perror("Error\nFailed to convert weapon texture to image\n");
+		ft_error("Failed to convert weapon texture to image");
 		return (0);
 	}
 	data()->gun_img[i] = tmp;

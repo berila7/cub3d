@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/07 18:20:38 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 11:12:38 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,13 @@ void	game_loop(void *param)
 
 int	game(void)
 {
-	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "Test Cub3d", false);
+	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "3arasia bonus", false);
 	if (!data()->mlx)
-		return (perror("Failed to init mlx"), 1);
+		return (ft_error("Failed to init mlx"), ft_exit(), 1);
 	if (!load_textures() || !load_door_texture())
 	{
-		perror("Error\nFailed to load textures. Check your .cub paths.\n");
-		mlx_terminate(data()->mlx);
-		return (0);
+		ft_error("Failed to load textures. Check your .cub paths.");
+		ft_exit();
 	}
 	data()->player = gc_malloc(sizeof(t_player));
 	data()->num_rays = WINDOW_W / RAY_THICKNESS;
@@ -79,10 +78,10 @@ int	game(void)
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	render_game();
 	if (!load_weapon())
-		return (0);
+		ft_exit();
 	mlx_loop_hook(data()->mlx, game_loop, data()->mlx);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);
 	delet_text();
-	return (1);
+	return (0);
 }

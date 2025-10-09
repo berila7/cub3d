@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_helpers_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:53 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/07 18:19:02 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:40:15 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ mlx_texture_t	*load_png(char *path)
 	t = mlx_load_png(path);
 	if (!t)
 	{
-		perror("Error\nFailed to load texture\n");
+		ft_error("Failed to load texture");
 		ft_exit();
 	}
 	return (t);
@@ -32,7 +32,7 @@ int	load_textures(void)
 	d = data();
 	if (!d->no_path || !d->so_path || !d->we_path || !d->ea_path)
 	{
-		perror("Error\nMissing NO/SO/WE/EA texture paths in .cub file\n");
+		ft_error("Missing NO/SO/WE/EA texture paths in .cub file");
 		return (0);
 	}
 	d->no_tex = load_png(d->no_path);

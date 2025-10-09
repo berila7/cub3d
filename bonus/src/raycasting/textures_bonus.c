@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:57 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/07 18:18:46 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:40:04 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	load_door_texture(void)
 	data()->door_tex = mlx_load_png(door_path);
 	if (!data()->door_tex)
 	{
-		perror("Error\nFailed to load texture: %s\n");
+		ft_error("Failed to load texture");
 		return (0);
 	}
 	return (1);
