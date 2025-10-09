@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 13:39:34 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 15:23:25 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	is_config(char *line)
 
 	i = 0;
 	newline = parse_line(line);
-	while (newline[i] && (newline[i] == ' ' || newline[i] == '\t'))
+	while (newline[i] && (newline[i] == ' '))
 		i++;
 	if (newline[i] == '\0' || newline[i] == '\n')
 		return (true);
