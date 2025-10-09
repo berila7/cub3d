@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:50:24 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/22 17:57:31 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 16:20:48 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	draw_player(t_point pos)
 	pl = data()->player;
 	draw_rect(new_point(pos.x - (size / 2), pos.y - (size / 2)),
 		size, size, 0xFF0000FF);
-	draw_line(new_point(pos.x, pos.y), new_point(pos.x + cos(pl->angle) * 50,
-			pos.y + sin(pl->angle) * 50), 0xFF0000FF);
+	draw_line(new_point(pos.x, pos.y), new_point(pos.x + cos(pl->angle) * 20,
+			pos.y + sin(pl->angle) * 20), 0xFF0000FF);
 }
 
 void	cast_rays(void)
@@ -87,7 +87,9 @@ int	get_px_color(double x, double y)
 	if (!(fx >= 0 && fx < data()->width
 			&& fy >= 0 && fy < data()->height))
 		return (0x1ca3ecFF);
-	if (map[fy][fx] == '1' || map[fy][fx] == ' ')
+	if (map[fy][fx] == '1')
+		color = 0x333634FF;
+	else if (map[fy][fx] == ' ')
 		color = 0x000000FF;
 	else if (map[fy][fx] == DOOR_CLOSED)
 		color = 0x8B4513FF;
@@ -100,27 +102,27 @@ int	get_px_color(double x, double y)
 
 void	render_minimap(void)
 {
-	int	starty;
-	int	startx;
-	int	x;
-	int	y;
+	int		starty;
+	int		startx;
+	int		x;
+	int		y;
 
-	starty = data()->player->y - (MINIMAP_W / 2);
-	startx = data()->player->x - (MINIMAP_W / 2);
-	x = startx;
-	y = starty;
+	starty = data()->player->y - (MINIMAP_W * MINIMAP_SCALE / 2);
+	startx = data()->player->x - (MINIMAP_W * MINIMAP_SCALE / 2);
 	draw_rect(new_point(WINDOW_W - (MINIMAP_W + 8), 0),
 		(MINIMAP_W + 8), (MINIMAP_W + 8), 0x474747FF);
-	while (y < starty + MINIMAP_W)
+	y = 0;
+	while (y < MINIMAP_W)
 	{
-		x = startx;
-		while (x < startx + MINIMAP_W)
+		x = 0;
+		while (x < MINIMAP_W)
 		{
-			draw_pixel((WINDOW_W - MINIMAP_W) + (x - startx),
-				(y - starty), get_px_color(x, y));
+			draw_pixel((WINDOW_W - MINIMAP_W) + x, y,
+				get_px_color(startx + (x * MINIMAP_SCALE),
+					starty + (y * MINIMAP_SCALE)));
 			x++;
 		}
 		y++;
 	}
-	draw_player(new_point(WINDOW_W - (MINIMAP_W / 2), MINIMAP_W / 2));
+	draw_player(new_point((WINDOW_W) - (MINIMAP_W / 2), MINIMAP_W / 2));
 }
