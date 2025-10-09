@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 10:54:14 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/09 11:18:52 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_exit(void)
 
 void	ft_error(char *msg)
 {
-	printf("Error\n%s\n", msg);
+	write(2, "Error\n", 6);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 }
 
 t_data	**get_data(void)
