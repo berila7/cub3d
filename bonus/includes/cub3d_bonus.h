@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:26:52 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:42:51 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ struct s_data
 	double			wall_yp;
 	int				ty;
 	int				color;
+	bool			track_mouse;
+	bool			prev_mouse;
 };
 
 char			*ft_strrchr(const char *str, int c);

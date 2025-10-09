@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:44:42 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 12:30:45 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:38:07 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,21 @@ static void	open_door(void)
 	data()->open_door = o_key_down;
 }
 
+static bool	should_track_mouse(void)
+{
+	bool	mouse_down;
+
+	mouse_down = mlx_is_mouse_down(data()->mlx, MLX_MOUSE_BUTTON_LEFT);
+	if (mouse_down && !data()->prev_mouse)
+		data()->track_mouse = !data()->track_mouse;
+	data()->prev_mouse = mouse_down;
+	if (data()->track_mouse)
+		mlx_set_cursor_mode(data()->mlx, MLX_MOUSE_HIDDEN);
+	else
+		mlx_set_cursor_mode(data()->mlx, MLX_MOUSE_NORMAL);
+	return (data()->track_mouse);
+}
+
 bool	game_input(mlx_t *mlx)
 {
 	t_player	*pl;
@@ -104,6 +119,7 @@ bool	game_input(mlx_t *mlx)
 		pl->rotation_inp = 1;
 	open_door();
 	close_door();
-	track_mouse(&pl->rotation_inp);
+	if (should_track_mouse())
+		track_mouse(&pl->rotation_inp);
 	return (pl->move_forward || pl->move_side || pl->rotation_inp);
 }
