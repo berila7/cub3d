@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_helpers_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:34:53 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 10:40:15 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 15:16:50 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ mlx_texture_t	*pick_wall_texture(t_ray *ray)
 		offset_y = 1;
 	cell = map_cell(ray->hit.x - offset_x, ray->hit.y - offset_y);
 	if (cell == DOOR_CLOSED || cell == DOOR_OPEN)
-	{
-		if (data()->door_tex)
-			return (data()->door_tex);
-	}
+		return (data()->door_tex);
 	return (other_textures(ray));
 }

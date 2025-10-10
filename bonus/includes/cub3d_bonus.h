@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:59:26 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 14:36:12 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 # define MINIMAP_W 160
 # define MINIMAP_SCALE 2
-# define WINDOW_W 1000000
-# define WINDOW_H 5000
+# define WINDOW_W 1000
+# define WINDOW_H 500
 # define TILE_SIZE 64
 # define M_SPEED 10
 # define R_SPEED 0.1
