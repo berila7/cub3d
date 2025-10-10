@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:21:53 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 16:29:21 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <limits.h>
 # include <math.h>
 # include "../../lib/gnl/get_next_line.h"
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
@@ -126,6 +127,7 @@ struct s_data
 	int						color;
 };
 
+int				ft_atoi_valid(const char *str);
 char			*ft_strrchr(const char *str, int c);
 int				read_map(char *filename);
 int				ft_strcmp(const char *s1, const char *s2);

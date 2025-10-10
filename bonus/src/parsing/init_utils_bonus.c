@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:35:02 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 17:28:45 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 17:08:08 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ bool	is_config(char *line)
 		i++;
 	if (newline[i] == '\0' || newline[i] == '\n')
 		return (true);
-	splited = gc_split(newline);
+	printf("Line: [%s]\n", newline);
+	splited = gc_split_char(newline, ' ');
 	if (gc_word_count(newline) == 2)
 	{
 		if (handle_redir(&newline[i], splited[1]))

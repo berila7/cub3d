@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 17:23:12 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 17:07:02 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	handle_ceiling(char *line, char *colors)
 		while (j < word_count(colors, ','))
 		{
 			if (ft_strlen(ceiling[j]) > 3
-				|| ft_atoi(ceiling[j]) > 255 || ft_atoi(ceiling[j]) < 0)
+				|| ft_atoi_valid(ceiling[j]) > 255 || ft_atoi_valid(ceiling[j]) < 0)
 				return (false);
 			j++;
 		}
@@ -51,7 +51,7 @@ bool	is_config(char *line)
 		i++;
 	if (newline[i] == '\0' || newline[i] == '\n')
 		return (true);
-	splited = gc_split(newline);
+	splited = gc_split_char(newline, ' ');
 	if (gc_word_count(newline) == 2)
 	{
 		if (txt_direction(&newline[i], splited[1]))

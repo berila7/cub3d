@@ -30,8 +30,9 @@ SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init
 					$(PARSING_DIR)/init_utils.c $(PARSING_DIR)/helpers.c\
 					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
 					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c\
-					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c $(UTILS_DIR)/gc.c $(UTILS_DIR)/count_char.c\
+					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c \
+					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c $(UTILS_DIR)/gc.c \
+					$(UTILS_DIR)/count_char.c $(UTILS_DIR)/atoi_valid.c \
 					$(RC_SRCS) \
 					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 
