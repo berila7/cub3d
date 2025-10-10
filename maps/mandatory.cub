@@ -3,8 +3,7 @@ SO ./textures/so_tex.png
 WE ./textures/we_tex.png
 EA ./textures/ea_tex.png
 
-C 5,150,2
-F 150,5,20
+C 5,150,222
 
 11111111111111111111
 10011100100000000001
