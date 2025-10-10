@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/09/25 11:34:22 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:11:59 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
 static t_gcnode	**get_gc(void)
 {
@@ -76,7 +76,7 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 	t_gcnode	*node;
 	t_gcnode	*last;
 
-	node = malloc(sizeof(t_gcnode));
+	node = gc_malloc(sizeof(t_gcnode));
 	if (!node)
 	{
 		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));

@@ -6,6 +6,10 @@ FLAGS			=	-Wall -Wextra -Werror
 CFLAGS			=	$(FLAGS) -Imandatory/includes
 CFLAGS_B		=	$(FLAGS) -Ibonus/includes
 
+
+LIBFT_DIR		=	lib/libft
+LIBFT			=	$(LIBFT_DIR)/libft.a
+
 SRC_DIR			=	src
 RC_DIR			=	mandatory/$(SRC_DIR)/raycasting
 PARSING_DIR		=	mandatory/$(SRC_DIR)/parsing
@@ -49,8 +53,11 @@ SRCS_B			=	bonus/$(SRC_DIR)/main_bonus.c $(PARSING_DIR_B)/parser_bonus.c $(PARSI
 OBJS			=	$(SRCS:.c=.o)
 OBJS_BONUS		=	$(SRCS_B:.c=.o)
 
-all: $(MLX_LIB) $(NAME)
-bonus: $(MLX_LIB) $(NAME_BONUS)
+all: $(LIBFT_DIR) $(MLX_LIB) $(NAME)
+bonus: $(LIBFT_DIR) $(MLX_LIB) $(NAME_BONUS)
+
+$(LIBFT_DIR):
+	@make -C $(LIBFT_DIR)
 
 $(MLX_DIR):
 	@echo "Cloning MLX Library"
@@ -75,9 +82,14 @@ bonus/src/%_bonus.o: bonus/src/%_bonus.c bonus/includes/cub3d_bonus.h
 clean:
 	rm -rf $(OBJS)
 	rm -rf $(OBJS_BONUS)
+	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(NAME_BONUS)
+	rm -rf ./lib/MLX42
+	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+.PHONY: $(LIBFT_DIR)
