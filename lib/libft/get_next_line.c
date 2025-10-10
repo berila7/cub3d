@@ -6,11 +6,25 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:02:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 20:03:51 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:28:07 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	find_new_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 static char	*configure_line(char *line)
 {

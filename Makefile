@@ -2,9 +2,9 @@ NAME			=	cub3D
 NAME_BONUS		=	cub3D_bonus
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror #-fsanitize=address
-CFLAGS			=	$(FLAGS) -Imandatory/includes
-CFLAGS_B		=	$(FLAGS) -Ibonus/includes
+CFLAGS			=	-Wall -Wextra -Werror #-fsanitize=address
+CFLAGS_M		=	$(CFLAGS) -Imandatory/includes
+CFLAGS_B		=	$(CFLAGS) -Ibonus/includes
 
 
 LIBFT_DIR		=	lib/libft
@@ -33,15 +33,13 @@ RC_SRCS_B		=	$(RC_DIR_B)/game_bonus.c $(RC_DIR_B)/movement_bonus.c $(RC_DIR_B)/h
 
 SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
 					$(PARSING_DIR)/init_utils.c $(PARSING_DIR)/helpers.c \
-					mandatory/$(UTILS_DIR)/gc_split.c mandatory/$(UTILS_DIR)/split_utils.c \
 					mandatory/$(UTILS_DIR)/gc_split_char.c \
 					mandatory/$(UTILS_DIR)/count_char.c mandatory/$(UTILS_DIR)/atoi_valid.c \
 					$(RC_SRCS)
 
 SRCS_B			=	bonus/$(SRC_DIR)/main_bonus.c $(PARSING_DIR_B)/parser_bonus.c $(PARSING_DIR_B)/init_map_bonus.c \
 					$(PARSING_DIR_B)/map_validation_bonus.c $(PARSING_DIR_B)/init_utils_bonus.c $(PARSING_DIR_B)/helpers_bonus.c \
-					bonus/$(UTILS_DIR)/gc_split.c bonus/$(UTILS_DIR)/split_utils.c bonus/$(UTILS_DIR)/count_char.c \
-					bonus/$(UTILS_DIR)/gc_split_char.c \
+					bonus/$(UTILS_DIR)/count_char_bonus.c bonus/$(UTILS_DIR)/gc_split_char_bonus.c bonus/$(UTILS_DIR)/atoi_valid_bonus.c \
 					$(RC_SRCS_B)
 
 OBJS			=	$(SRCS:.c=.o)
@@ -60,17 +58,17 @@ $(MLX_DIR):
 $(MLX_LIB): $(MLX_DIR)
 	cd $(MLX_DIR) && cmake -B build -Wno-dev && cmake --build build -j4
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS_M) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 
-mandatory/src/%.o: mandatory/src/%.c mandatory/includes/cub3d.h
-	$(CC) $(CFLAGS) -c $< -o $@
+mandatory/%.o: mandatory/%.c mandatory/includes/cub3d.h
+	$(CC) $(CFLAGS_M) -c $< -o $@
 
 
-$(NAME_BONUS): $(OBJS_BONUS)
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT)
 	$(CC) $(CFLAGS_B) $(OBJS_BONUS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
 
-bonus/src/%_bonus.o: bonus/src/%_bonus.c bonus/includes/cub3d_bonus.h
+bonus/%_bonus.o: bonus/%_bonus.c bonus/includes/cub3d_bonus.h
 	$(CC) $(CFLAGS_B) -c $< -o $@
 
 clean:

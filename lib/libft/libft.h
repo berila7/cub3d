@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:49:40 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 19:58:16 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:28:55 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-char	*get_next_line(int fd);
-int		find_new_line(char *str);
 
 typedef struct s_gcnode	t_gcnode;
 struct s_gcnode
@@ -65,7 +62,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	*gc_malloc(size_t size);
 char	*get_next_line(int fd);
-int		find_new_line(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 
 typedef struct s_list

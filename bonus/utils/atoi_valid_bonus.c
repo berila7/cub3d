@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   atoi_valid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:42:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 17:14:07 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:02:26 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	atoi_valid(const char *str)
 {

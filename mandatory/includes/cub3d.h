@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:51:44 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:17:23 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,6 @@ bool			valid_line(char *line);
 bool			valid_map(void);
 int				check_map(void);
 char			**gc_split_char(char *s, char c);
-char			**gc_split(char *s);
-int				gc_word_count(char *s);
-void			handle_quote_char(char c, char *in_quote_char);
-int				find_word_end(char *s, int start, char *in_quote_char);
-int				skip_word_end(char *s, int start, char *in_quote_char);
 int				is_map_line(char *line);
 bool			is_config(char *line);
 bool			player_char(char element);

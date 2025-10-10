@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 19:35:25 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:58:04 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	is_config(char *line)
 	if (newline[i] == '\0' || newline[i] == '\n')
 		return (true);
 	splited = gc_split_char(newline, ' ');
-	if (gc_word_count(newline) == 2)
+	if (word_count(newline, ' ') == 2)
 	{
 		if (txt_direction(&newline[i], splited[1]))
 			return (true);

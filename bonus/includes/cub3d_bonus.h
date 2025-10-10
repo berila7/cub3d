@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 19:34:04 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:15:56 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <limits.h>
 # include <math.h>
 # include "../../lib/libft/libft.h"
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
@@ -153,16 +154,9 @@ char			*ft_strdup(const char *src);
 void			*ft_calloc(size_t count, size_t size);
 void			ft_bzero(void *s, size_t n);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void			find_char_pos(int *pos_x, int *pos_y);
 int				check_map(void);
 int				ft_isdigit(int c);
 char			**gc_split_char(char *s, char c);
-char			**gc_split(char *s);
-int				gc_word_count(char *s);
-void			handle_quote_char(char c, char *in_quote_char);
-int				find_word_end(char *s, int start, char *in_quote_char);
-int				skip_word_end(char *s, int start, char *in_quote_char);
-char			*gc_substr(const char *s, unsigned int start, size_t len);
 void			*gc_malloc(size_t size);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				is_map_line(char *line);

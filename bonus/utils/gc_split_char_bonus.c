@@ -6,11 +6,11 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:30:29 by mberila           #+#    #+#             */
-/*   Updated: 2025/08/13 10:33:54 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:05:33 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	word_count(char *str, char c)
 {
