@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:02:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 18:31:38 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:03:51 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*configure_line(char *line)
 	new_remainder = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (*new_remainder == 0)
 	{
-		free(new_remainder);
+		gc_free(new_remainder);
 		new_remainder = NULL;
 	}
 	line[i + 1] = 0;
@@ -43,7 +43,7 @@ static char	*get_line(int fd, char *remainder, char *buffer)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
-			free(remainder);
+			gc_free(remainder);
 			return (NULL);
 		}
 		else if (bytes_read == 0)
@@ -53,7 +53,7 @@ static char	*get_line(int fd, char *remainder, char *buffer)
 			remainder = ft_strdup("");
 		tmp_remainder = remainder;
 		remainder = ft_strjoin(tmp_remainder, buffer);
-		free(tmp_remainder);
+		gc_free(tmp_remainder);
 		tmp_remainder = NULL;
 		if (find_new_line(buffer) != -1)
 			break ;
@@ -70,17 +70,17 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(remainder);
-		free(buffer);
+		gc_free(remainder);
+		gc_free(buffer);
 		remainder = NULL;
 		buffer = NULL;
 		return (NULL);
 	}
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = (char *)gc_malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	line = get_line(fd, remainder, buffer);
-	free(buffer);
+	gc_free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);

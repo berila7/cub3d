@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/09 17:08:15 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 19:54:20 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int ac, char **av)
 
 	game_data = get_data();
 	*game_data = gc_malloc(sizeof(t_data));
+	// return 0;
 	if (ac == 2)
 	{
 		if (!read_map(av[1]))

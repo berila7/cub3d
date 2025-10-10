@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:11:59 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 19:51:49 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 	t_gcnode	*node;
 	t_gcnode	*last;
 
-	node = gc_malloc(sizeof(t_gcnode));
+	node = malloc(sizeof(t_gcnode));
 	if (!node)
 	{
 		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));

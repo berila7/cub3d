@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:53:17 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 19:34:04 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,10 @@
 
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
-typedef struct s_gcnode		t_gcnode;
 typedef struct s_player		t_player;
 typedef struct s_point		t_point;
 typedef struct s_ray		t_ray;
 typedef struct s_ray_hit	t_ray_hit;
-
-struct s_gcnode
-{
-	void		*ptr;
-	t_gcnode	*next;
-};
 
 struct s_ray_hit
 {

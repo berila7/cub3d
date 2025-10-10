@@ -2,7 +2,7 @@ NAME			=	cub3D
 NAME_BONUS		=	cub3D_bonus
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 CFLAGS			=	$(FLAGS) -Imandatory/includes
 CFLAGS_B		=	$(FLAGS) -Ibonus/includes
 

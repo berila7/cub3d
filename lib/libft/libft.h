@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:49:40 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:42:17 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 19:58:16 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct s_gcnode
 	void				*ptr;
 	t_gcnode			*next;
 };
-
+void	gc_free(void *ptr);
 int		ft_atoi(const char *c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
