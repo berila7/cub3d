@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   count_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 13:13:20 by mberila           #+#    #+#             */
-/*   Updated: 2025/08/13 16:46:16 by mberila          ###   ########.fr       */
+/*   Created: 2025/10/09 17:26:16 by mberila           #+#    #+#             */
+/*   Updated: 2025/10/10 18:37:36 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-void	*ft_calloc(size_t count, size_t size)
+int	count_char(char *str, char c)
 {
-	unsigned char	*ptr;
+	int	i;
+	int	count;
 
-	if (size != 0 && count * size / size != count)
-		return (NULL);
-	ptr = gc_malloc(count * size);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return ((void *)ptr);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count += 1;
+		i++;
+	}
+	return (count);
 }

@@ -1,4 +1,4 @@
-NO ./textures/no_tex.png
+"NO ./textures/no_tex.png"
 SO ./textures/so_tex.png
 WE ./textures/we_tex.png
 EA ./textures/ea_tex.png

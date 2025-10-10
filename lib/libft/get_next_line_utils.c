@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 10:44:41 by mberila           #+#    #+#             */
-/*   Updated: 2025/08/13 10:44:44 by mberila          ###   ########.fr       */
+/*   Created: 2024/11/28 11:03:25 by mberila           #+#    #+#             */
+/*   Updated: 2025/10/10 18:34:11 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	ft_isdigit(int c)
+int	find_new_line(char *str)
 {
-	if (c >= '0' && c <= '9' )
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		return (1);
+		if (str[i] == '\n')
+			return (i);
+		i++;
 	}
-	return (0);
+	return (-1);
 }
+

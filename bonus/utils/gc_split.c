@@ -6,11 +6,12 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:07:55 by anachat           #+#    #+#             */
-/*   Updated: 2025/07/28 14:17:28 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:25:56 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+# include "../../lib/libft/libft.h"
 
 int	gc_word_count(char *s)
 {
@@ -52,7 +53,7 @@ static char	**gc_init_split_quoted(char *s, char **result_array)
 		{
 			word_start = i;
 			i = find_word_end(s, word_start, &in_quote_char);
-			result_array[j++] = gc_substr(s, word_start, i - word_start);
+			result_array[j++] = ft_substr(s, word_start, i - word_start);
 		}
 	}
 	return (result_array);

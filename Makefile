@@ -15,7 +15,7 @@ RC_DIR			=	mandatory/$(SRC_DIR)/raycasting
 PARSING_DIR		=	mandatory/$(SRC_DIR)/parsing
 RC_DIR_B		=	bonus/$(SRC_DIR)/raycasting
 PARSING_DIR_B	=	bonus/$(SRC_DIR)/parsing
-UTILS_DIR		=	lib/utils
+UTILS_DIR		=	utils
 GNL_DIR			=	lib/gnl
 MLX_DIR			=	lib/MLX42
 
@@ -32,23 +32,17 @@ RC_SRCS_B		=	$(RC_DIR_B)/game_bonus.c $(RC_DIR_B)/movement_bonus.c $(RC_DIR_B)/h
 					$(RC_DIR_B)/helpers2_bonus.c $(RC_DIR_B)/textures_bonus.c $(RC_DIR_B)/player_bonus.c $(RC_DIR_B)/textures_helpers_bonus.c
 
 SRCS			=	mandatory/$(SRC_DIR)/main.c $(PARSING_DIR)/parser.c $(PARSING_DIR)/init_map.c $(PARSING_DIR)/map_validation.c \
-					$(PARSING_DIR)/init_utils.c $(PARSING_DIR)/helpers.c\
-					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c \
-					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/ft_itoa.c \
-					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c $(UTILS_DIR)/gc.c \
-					$(UTILS_DIR)/count_char.c $(UTILS_DIR)/atoi_valid.c \
-					$(RC_SRCS) \
-					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+					$(PARSING_DIR)/init_utils.c $(PARSING_DIR)/helpers.c \
+					mandatory/$(UTILS_DIR)/gc_split.c mandatory/$(UTILS_DIR)/split_utils.c \
+					mandatory/$(UTILS_DIR)/gc_split_char.c \
+					mandatory/$(UTILS_DIR)/count_char.c mandatory/$(UTILS_DIR)/atoi_valid.c \
+					$(RC_SRCS)
 
 SRCS_B			=	bonus/$(SRC_DIR)/main_bonus.c $(PARSING_DIR_B)/parser_bonus.c $(PARSING_DIR_B)/init_map_bonus.c \
-					$(PARSING_DIR_B)/map_validation_bonus.c $(PARSING_DIR_B)/init_utils_bonus.c $(PARSING_DIR_B)/helpers_bonus.c\
-					$(UTILS_DIR)/ft_strrchr.c $(UTILS_DIR)/ft_strcmp.c $(UTILS_DIR)/ft_strlen.c $(UTILS_DIR)/gc_substr.c $(UTILS_DIR)/ft_itoa.c\
-					$(UTILS_DIR)/ft_strdup.c $(UTILS_DIR)/ft_calloc.c $(UTILS_DIR)/ft_bzero.c $(UTILS_DIR)/ft_strlcpy.c \
-					$(UTILS_DIR)/gc_split.c $(UTILS_DIR)/split_utils.c $(UTILS_DIR)/ft_strncmp.c $(UTILS_DIR)/count_char.c \
-					$(UTILS_DIR)/ft_atoi.c $(UTILS_DIR)/ft_isdigit.c $(UTILS_DIR)/gc_split_char.c $(UTILS_DIR)/gc.c \
-					$(RC_SRCS_B) \
-					$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+					$(PARSING_DIR_B)/map_validation_bonus.c $(PARSING_DIR_B)/init_utils_bonus.c $(PARSING_DIR_B)/helpers_bonus.c \
+					bonus/$(UTILS_DIR)/gc_split.c bonus/$(UTILS_DIR)/split_utils.c bonus/$(UTILS_DIR)/count_char.c \
+					bonus/$(UTILS_DIR)/gc_split_char.c \
+					$(RC_SRCS_B)
 
 OBJS			=	$(SRCS:.c=.o)
 OBJS_BONUS		=	$(SRCS_B:.c=.o)
@@ -67,14 +61,14 @@ $(MLX_LIB): $(MLX_DIR)
 	cd $(MLX_DIR) && cmake -B build -Wno-dev && cmake --build build -j4
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 
 mandatory/src/%.o: mandatory/src/%.c mandatory/includes/cub3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	$(CC) $(CFLAGS_B) $(OBJS_BONUS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS_B) $(OBJS_BONUS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
 
 bonus/src/%_bonus.o: bonus/src/%_bonus.c bonus/includes/cub3d_bonus.h
 	$(CC) $(CFLAGS_B) -c $< -o $@
@@ -87,7 +81,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(NAME_BONUS)
-	rm -rf ./lib/MLX42
 	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all

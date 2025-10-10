@@ -1,41 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   atoi_valid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:42:05 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 16:21:00 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 17:14:07 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_atoi(const char *str)
+int	atoi_valid(const char *str)
 {
-	int		sign;
-	long	num;
-	long	holder;
+	long	nb;
+	size_t	i;
 
-	holder = 0;
-	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
-		str++;
-	sign = 1;
-	if (*str == '-' || *str == '+')
+	if (!str || str[0] == '\0')
+		return (-1);
+	if (!(*str))
+		return (-1);
+	i = 0;
+	nb = 0;
+	while (str[i] == ' ')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		if (!ft_isdigit(str[i]))
+			return (-1);
+		nb = nb * 10 + (str[i++] - '0');
+		if (nb > INT_MAX)
+			return (-1);
 	}
-	num = 0;
-	while (ft_isdigit(*str))
-	{
-		num = num * 10 + (*str - '0');
-		if (num < holder)
-			return (-(sign + 1) / 2);
-		holder = num;
-		str++;
-	}
-	return (num * sign);
+	return (nb);
 }

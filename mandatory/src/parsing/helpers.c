@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:54 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 16:30:23 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:52:00 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ bool	handle_floor(char *line, char *colors)
 		j = 0;
 		while (j < word_count(colors, ','))
 		{
-			if (ft_strlen(floor[j]) > 3 || ft_atoi_valid(floor[j]) > 255
-				|| ft_atoi_valid(floor[j]) < 0)
+			if (ft_strlen(floor[j]) > 3 || atoi_valid(floor[j]) > 255
+				|| atoi_valid(floor[j]) < 0)
 				return (false);
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 14:36:12 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:53:17 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <math.h>
-# include "../../lib/gnl/get_next_line.h"
+# include "../../lib/libft/libft.h"
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
 
 # define MAX_DOUBLE 1.7976931348623157e+308	

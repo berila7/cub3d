@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:49:40 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:10:35 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:42:17 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H 
-# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+char	*get_next_line(int fd);
+int		find_new_line(char *str);
 
 typedef struct s_gcnode	t_gcnode;
 struct s_gcnode
@@ -57,6 +64,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	*gc_malloc(size_t size);
+char	*get_next_line(int fd);
+int		find_new_line(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
 
 typedef struct s_list
 {

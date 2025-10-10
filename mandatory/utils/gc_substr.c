@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   gc_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 13:13:11 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/01 16:48:43 by mberila          ###   ########.fr       */
+/*   Created: 2025/05/18 18:13:47 by mberila           #+#    #+#             */
+/*   Updated: 2025/10/01 16:43:41 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_bzero(void *s, size_t n)
+char	*gc_substr(const char *s, unsigned int start, size_t len)
 {
-	unsigned char	*ptr;
-	size_t			i;
+	size_t	i;
+	char	*str;
 
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = gc_malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
 	i = 0;
-	ptr = (unsigned char *) s;
-	while (n > 0)
+	while (i < len)
 	{
-		ptr[i] = 0;
+		str[i] = s[start + i];
 		i++;
-		n--;
 	}
+	return (str);
 }

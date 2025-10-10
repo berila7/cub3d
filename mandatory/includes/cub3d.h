@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 18:00:11 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/10 18:51:44 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <math.h>
-# include "../../lib/gnl/get_next_line.h"
+# include "../../lib/libft/libft.h"
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
 
 # define MAX_DOUBLE			1.7976931348623157e+308
@@ -120,32 +120,18 @@ struct s_data
 	int						color;
 };
 
-int				ft_atoi_valid(const char *str);
-// char			*ft_strrchr(const char *str, int c);
 int				read_map(char *filename);
-// int				ft_strcmp(const char *s1, const char *s2);
+int				ft_strcmp(const char *s1, const char *s2);
 int				valid_extension(char *filename);
-// char			*get_next_line(int fd);
 bool			valid_line(char *line);
 bool			valid_map(void);
-// int				ft_atoi(const char *str);
-// size_t			ft_strlen(const char *str);
-// char			*ft_strdup(const char *src);
-// void			*ft_calloc(size_t count, size_t size);
-// void			ft_bzero(void *s, size_t n);
-// size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void			find_char_pos(int *pos_x, int *pos_y);
 int				check_map(void);
-// int				ft_isdigit(int c);
 char			**gc_split_char(char *s, char c);
 char			**gc_split(char *s);
 int				gc_word_count(char *s);
 void			handle_quote_char(char c, char *in_quote_char);
 int				find_word_end(char *s, int start, char *in_quote_char);
 int				skip_word_end(char *s, int start, char *in_quote_char);
-// char			*gc_substr(const char *s, unsigned int start, size_t len);
-// void			*gc_malloc(size_t size);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				is_map_line(char *line);
 bool			is_config(char *line);
 bool			player_char(char element);
@@ -191,5 +177,6 @@ void			delet_text(void);
 void			ft_exit(void);
 void			ft_error(char *msg);
 int				count_char(char *str, char c);
+int				atoi_valid(const char *str);
 
 #endif
