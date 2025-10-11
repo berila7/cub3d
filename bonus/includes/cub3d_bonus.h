@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 21:15:56 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 15:31:41 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,5 +212,6 @@ void			ft_exit(void);
 bool			has_door_at(double x, double y);
 void			ft_error(char *msg);
 int				count_char(char *str, char c);
+int				atoi_valid(const char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 13:57:06 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 15:19:46 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	game(void)
 	get_pl_pos(data()->map);
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
-	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "3arasia", false);
+	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "cub3D", false);
 	if (!data()->mlx)
 		return (ft_error("Failed to init mlx"), ft_exit(), 1);
 	if (!load_textures())

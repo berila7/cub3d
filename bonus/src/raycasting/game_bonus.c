@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:58:49 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/09 17:21:17 by anachat          ###   ########.fr       */
+/*   Updated: 2025/10/11 15:20:04 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	game(void)
 	data()->player->x = data()->player_x * TILE_SIZE + (TILE_SIZE / 2);
 	data()->player->y = data()->player_y * TILE_SIZE + (TILE_SIZE / 2);
 	data()->track_mouse = true;
-	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "3arasia bonus", false);
+	data()->mlx = mlx_init(WINDOW_W, WINDOW_H, "cub3D bonus", false);
 	if (!data()->mlx)
 		return (ft_error("Failed to init mlx"), ft_exit(), 1);
 	if (!load_textures() || !load_door_texture())
