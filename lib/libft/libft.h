@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:49:40 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 20:28:55 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 14:42:44 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 # include <fcntl.h>
 
 typedef struct s_gcnode	t_gcnode;
+
 struct s_gcnode
 {
 	void				*ptr;
 	t_gcnode			*next;
 };
+
 void	gc_free(void *ptr);
 int		ft_atoi(const char *c);
 int		ft_isalnum(int c);

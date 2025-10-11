@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:01:58 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/10 19:51:49 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 14:41:32 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 {
 	t_gcnode	*node;
 	t_gcnode	*last;
+	char		*err;
 
 	node = malloc(sizeof(t_gcnode));
 	if (!node)
 	{
-		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));
+		err = "Error\nAllocation Error\n";
+		write(2, err, ft_strlen(err));
 		gc_free_all();
 		exit(1);
 	}
@@ -99,11 +101,13 @@ static void	append_gc(t_gcnode **gc, void *ptr)
 void	*gc_malloc(size_t size)
 {
 	void	*ptr;
+	char	*err;
 
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		write(2, "Allocation Error\n", ft_strlen("Allocation Error\n"));
+		err = "Error\nAllocation Error\n";
+		write(2, err, ft_strlen(err));
 		gc_free_all();
 		exit(1);
 	}
