@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:32:42 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/10 20:58:04 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 18:52:37 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	read_map(char *filename)
 	if (data()->map_fd < 0)
 		return (0);
 	if (!init_map(filename))
-		return (0);
+		return (close(data()->map_fd), 0);
 	close(data()->map_fd);
 	data()->map_fd = open(filename, O_RDONLY);
 	if (data()->map_fd < 0)

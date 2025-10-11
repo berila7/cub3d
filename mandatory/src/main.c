@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:38:07 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/11 15:38:37 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/11 18:49:46 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ t_data	*data(void)
 	return (*get_data());
 }
 
+void	f() { system("lsof -c cub3D"); }
+
 int	main(int ac, char **av)
 {
 	t_data	**game_data;
 
+	atexit(f);
 	game_data = get_data();
 	*game_data = gc_malloc(sizeof(t_data));
 	if (ac == 2)
