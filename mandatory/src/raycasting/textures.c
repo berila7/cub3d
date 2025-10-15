@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:39:31 by mberila           #+#    #+#             */
-/*   Updated: 2025/10/01 14:36:33 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/15 15:15:32 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	render_textured_column(t_ray *ray, int screen_x, double line_h)
 		data()->v = data()->dist_from_top / line_h;
 		data()->ty = (int)(data()->v * (double)data()->tex->height);
 		check_boundaries();
-		data()->color = (int)sample_rgba(data()->tex, data()->tx, data()->ty);
+		data()->color = sample_rgba(data()->tex, data()->tx, data()->ty);
 		if ((data()->color & 0xFF) != 0)
 			draw_pixel(screen_x, data()->y, data()->color);
 	}

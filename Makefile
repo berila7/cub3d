@@ -2,7 +2,7 @@ NAME			=	cub3D
 NAME_BONUS		=	cub3D_bonus
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror #-fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS_M		=	$(CFLAGS) -Imandatory/includes
 CFLAGS_B		=	$(CFLAGS) -Ibonus/includes
 
@@ -21,8 +21,6 @@ MLX_DIR			=	lib/MLX42
 
 MLX_LIB			=	$(MLX_DIR)/build/libmlx42.a
 MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/mnt/homes/$(USER)/.brew/opt/glfw/lib/" -I"/mnt/homes/$(USER)/.brew/include"
-# MLX_FLAGS		=	-I$(MLX_DIR)/include/MLX42 -lm -lGL -lglfw
-
 
 RC_SRCS			=	$(RC_DIR)/game.c $(RC_DIR)/helpers.c $(RC_DIR)/point.c $(RC_DIR)/draw.c $(RC_DIR)/raycast.c \
 					$(RC_DIR)/render_walls.c $(RC_DIR)/draw_utils.c $(RC_DIR)/helpers2.c $(RC_DIR)/textures.c $(RC_DIR)/textures_helpers.c

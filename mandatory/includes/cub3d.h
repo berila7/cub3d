@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:22:22 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/11 14:38:17 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/15 15:17:42 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ struct s_data
 	double					dist_from_top;
 	double					v;
 	int						ty;
-	int						color;
+	uint32_t				color;
 };
 
 int				read_map(char *filename);

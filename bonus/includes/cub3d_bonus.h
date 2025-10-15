@@ -6,7 +6,7 @@
 /*   By: mberila <mberila@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:28:50 by anachat           #+#    #+#             */
-/*   Updated: 2025/10/11 15:31:41 by mberila          ###   ########.fr       */
+/*   Updated: 2025/10/15 15:18:41 by mberila          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ struct s_data
 	double			dist_from_top;
 	double			wall_yp;
 	int				ty;
-	int				color;
+	uint32_t		color;
 	bool			track_mouse;
 	bool			prev_mouse;
 };
